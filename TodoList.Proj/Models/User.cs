@@ -1,4 +1,6 @@
-﻿namespace TodoList.Proj.Models;
+﻿using TodoList.Proj.Models.Roles;
+
+namespace TodoList.Proj.Models;
 // represent user
 public class User
 {
@@ -12,5 +14,5 @@ public class User
     public List<Todo> Todos { get; set; } = new();
 
     public int RoleId { get; set; }
-    public List<Role> Roles { get; set; } = new();
+    public List<Role> Roles { get; set; }
 }

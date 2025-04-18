@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models;
+using TodoList.Proj.Models.Roles;
 
 namespace Apicontext.File;
 

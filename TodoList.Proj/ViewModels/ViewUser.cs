@@ -2,7 +2,7 @@ using System.Collections.Frozen;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace ResultViews.User;
+namespace ViewModels.User;
 
 // class that work  to padronize errors and  forms
 public class ViewUser

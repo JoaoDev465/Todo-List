@@ -1,4 +1,6 @@
+using Apicontext.File.FluentApi;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using TodoList.Proj.Models;
 using TodoList.Proj.Models.Roles;
 
@@ -15,4 +17,11 @@ public class  Context:DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Todo> Todos { get; set; }
     public DbSet<Role> Roles { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new UserMap());
+        modelBuilder.ApplyConfiguration(new RoleMap());
+        modelBuilder.ApplyConfiguration(new TodoMap());
+    }
 }

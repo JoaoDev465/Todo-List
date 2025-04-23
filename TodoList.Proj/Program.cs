@@ -3,6 +3,7 @@ using Apicontext.File;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj;
 using TodoList.Proj.TokenGenerator;
@@ -15,15 +16,16 @@ tokenConf(builder);
 // the configure method work for configure smtp,string connections and others
 void Configure(WebApplicationBuilder builder)
 {
-    builder.Configuration.GetConnectionString("connection");
+   
 }
 
 void Services(WebApplicationBuilder builder)
 {
+    var connectionString =  builder.Configuration.GetConnectionString("connection");
     builder.Services.AddOptions();
     builder.Services.AddControllers().ConfigureApiBehaviorOptions(
         x => { x.SuppressModelStateInvalidFilter = true;});
-    builder.Services.AddDbContext<Context>();
+    builder.Services.AddDbContext<Context>(x => x.UseSqlServer(connectionString));
     builder.Services.AddSingleton<TokenService>();
 }
 

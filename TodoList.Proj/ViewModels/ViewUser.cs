@@ -1,6 +1,8 @@
 using System.Collections.Frozen;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using ViewModels.Role;
+using static TodoList.Proj.Models.Roles.Role;
 
 namespace ViewModels.User;
 
@@ -18,6 +20,7 @@ public class ViewUser
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%&])[A-Za-z\d!@#$%&]{12,}$")]
     public string  Password { get; set; } = String.Empty;
     public bool IsOnline { get; set; }
+   
 }
 
 public class EmailValidation : ValidationAttribute

@@ -4,7 +4,7 @@ using TodoList.Proj.Models.Roles;
 
 namespace Apicontext.File;
 
-class  Context:DbContext
+public class  Context:DbContext
 {
     public Context(DbContextOptions<Context> options)
         : base(options)

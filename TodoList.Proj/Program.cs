@@ -1,6 +1,7 @@
 using System.Text;
 using Apicontext.File;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj;
@@ -16,10 +17,12 @@ void Configure(WebApplicationBuilder builder)
 {
     builder.Configuration.GetConnectionString("connection");
 }
-var app = builder.Build();
 
 void Services(WebApplicationBuilder builder)
 {
+    builder.Services.AddOptions();
+    builder.Services.AddControllers().ConfigureApiBehaviorOptions(
+        x => { x.SuppressModelStateInvalidFilter = true;});
     builder.Services.AddDbContext<Context>();
     builder.Services.AddSingleton<TokenService>();
 }
@@ -40,8 +43,11 @@ void tokenConf(WebApplicationBuilder builder)
             ValidateIssuerSigningKey = true
         });
 }
- 
 
+
+var app = builder.Build();
+
+app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
 app.Run();

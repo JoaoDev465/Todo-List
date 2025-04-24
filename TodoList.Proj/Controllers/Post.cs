@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Models;
 using TodoList.Proj.Models.Roles;
+using TodoList.Proj.Models.user;
 using TodoList.Proj.TokenGenerator;
 using ViewModels.ResultViews;
 using ViewModels.User;
@@ -14,37 +15,29 @@ namespace TodoList.Proj.Controllers;
 [ApiController]
 public class PostController : ControllerBase
 {
-    [HttpPost("v1/post/login")]
-    public async Task<IActionResult> Post_Login(
-        [FromServices] Context context,
-        [FromServices] TokenService token
-        )
-    {
-        var Token = token.GenerateToken(null);
-        return Ok(Token);
-    }
+   
 
-    [HttpPost("v1/user/login")]
+    [HttpPost("v1/user")]
     public async Task<IActionResult> Post_User(
         [FromServices] Context context,
-        [FromBody] User user)
+        [FromBody] ViewUser Users)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ResultViews<User>(ModelState.GetErrors()));
+            return BadRequest(new ResultViews<ViewUser>(ModelState.GetErrors()));
 
-        user = new User()
+        User user = new User()
         {
-            Name = user.Name,
-            Email = user.Email,
-            PasswordHash = user.PasswordHash
+            Name = Users.Name,
+            Email = Users.Email,
+            PasswordHash = Users.Password
             
         };
 
         try
         {
             await context.AddAsync(user);
-            await context.SaveChangesAsync();
-            return Ok(new ResultViews<User>(user));
+            
+            return Ok(new ResultViews<ViewUser>(Users));
         }
         catch (Exception e)
         {

@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj.Models;
+using TodoList.Proj.Models.user;
 
 namespace TodoList.Proj.TokenGenerator;
 // this class configure token to user

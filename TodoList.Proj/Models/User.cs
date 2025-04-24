@@ -1,6 +1,6 @@
 ﻿using TodoList.Proj.Models.Roles;
 
-namespace TodoList.Proj.Models;
+namespace TodoList.Proj.Models.user;
 // represent user
 public class User
 {

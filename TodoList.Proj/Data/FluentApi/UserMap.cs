@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TodoList.Proj.Models;
 using TodoList.Proj.Models.Roles;
+using TodoList.Proj.Models.user;
 
 namespace Apicontext.File.FluentApi;
 

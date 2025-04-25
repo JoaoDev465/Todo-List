@@ -8,28 +8,33 @@ using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj;
 using TodoList.Proj.TokenGenerator;
 
-var builder = WebApplication.CreateBuilder(args);
-Configure(builder);
-Services(builder);
-tokenConf(builder);
+var builder = WebApplication.CreateBuilder(args); 
+DbContextServices(builder);
+ControllerServicesAndBehavior(builder);
+TokenService(builder);
+TokenConfiguration(builder);
 
-// the configure method work for configure smtp,string connections and others
-void Configure(WebApplicationBuilder builder)
+
+void DbContextServices(WebApplicationBuilder builder)
 {
-   
+    var DbContextConnectionString =  builder.Configuration.GetConnectionString("connection");
+      builder.Services.AddDbContext<Context>(x => x.UseSqlServer(DbContextConnectionString));
+  
 }
 
-void Services(WebApplicationBuilder builder)
+void ControllerServicesAndBehavior(WebApplicationBuilder builder)
 {
-    var connectionString =  builder.Configuration.GetConnectionString("connection");
-    builder.Services.AddOptions();
     builder.Services.AddControllers().ConfigureApiBehaviorOptions(
         x => { x.SuppressModelStateInvalidFilter = true;});
-    builder.Services.AddDbContext<Context>(x => x.UseSqlServer(connectionString));
+
+}
+
+void TokenService(WebApplicationBuilder builder)
+{
     builder.Services.AddSingleton<TokenService>();
 }
 
-void tokenConf(WebApplicationBuilder builder)
+void TokenConfiguration(WebApplicationBuilder builder)
 {
     var key = Encoding.ASCII.GetBytes(Configuration.JWTKey);
     builder.Services.AddAuthentication(options =>
@@ -48,8 +53,15 @@ void tokenConf(WebApplicationBuilder builder)
 
 
 var app = builder.Build();
+SettingsToStartApplicationAndItsServices(app);
 
-app.MapControllers();
-app.UseAuthentication();
-app.UseAuthorization();
-app.Run();
+
+
+void SettingsToStartApplicationAndItsServices(WebApplication app)
+{
+    app.MapControllers();
+    app.UseAuthentication();
+    app.UseAuthorization(); 
+    app.Run();
+}
+

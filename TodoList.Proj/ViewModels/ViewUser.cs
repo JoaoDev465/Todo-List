@@ -7,19 +7,19 @@ using static TodoList.Proj.Models.Roles.Role;
 namespace ViewModels.User;
 
 // class that work  to padronize errors and  forms
-public class ViewUser
+public class ViewDataUser
 {
     [Required(ErrorMessage = "O campo é obrigatório")]
     [MinLength(12,ErrorMessage = "esse campo precisa de no mínimo 12 caracteres"),MaxLength(50)]
-    public string Name { get; set; } = string.Empty;
+    public string UserName { get; set; } = string.Empty;
     [Required]
     [EmailValidation]
-    public string Email { get; set; } = String.Empty;
+    public string UserEmail { get; set; } = String.Empty;
     [Required(ErrorMessage = "o campo senha é obrigatório")]
     // used patterns and regular expression for padronize passowords
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%&])[A-Za-z\d!@#$%&]{12,}$")]
-    public string  Password { get; set; } = String.Empty;
-    public bool IsOnline { get; set; }
+    public string  UserPassword { get; set; } = String.Empty;
+    public bool UserAreOnline { get; set; }
    
 }
 

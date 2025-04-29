@@ -18,11 +18,11 @@ public class GenerateEmailService
 
    public SmtpClient _SmtpClient()
    {
-      _smtpClientConfigurations.Port = Configuration.SmTpService.Port;
-      _smtpClientConfigurations.Host = Configuration.SmTpService.Host;
+      _smtpClientConfigurations.Port = Configuration._SmTpService.Port;
+      _smtpClientConfigurations.Host = Configuration._SmTpService.Host;
       _smtpClientConfigurations.EnableSsl = true;
       _smtpClientConfigurations.DeliveryMethod = SmtpDeliveryMethod.Network;
-      _smtpClientConfigurations.Credentials = new NetworkCredential(Configuration.SmTpService.Username,Configuration.SmTpService.Password);
+      _smtpClientConfigurations.Credentials = new NetworkCredential(Configuration._SmTpService.Username,Configuration._SmTpService.Password);
 
       return _SmtpClient();
    }

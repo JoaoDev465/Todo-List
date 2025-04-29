@@ -59,15 +59,30 @@ void TokenConfiguration(WebApplicationBuilder builder)
 
 
 var app = builder.Build();
-SettingsToStartApplicationAndItsServices(app);
 
+InitializedAppRun(app);
+AuthenticantionAndAuthorization(app);
+AppStatrtupRun(app);
+ConfigurationsJSONSmtp_Jwt_ApiKey(app);
 
-
-void SettingsToStartApplicationAndItsServices(WebApplication app)
+void InitializedAppRun(WebApplication builder)
 {
     app.MapControllers();
+}
+
+void AuthenticantionAndAuthorization(WebApplication builder)
+{
     app.UseAuthentication();
     app.UseAuthorization(); 
+}
+
+void AppStatrtupRun(WebApplication builder)
+{
     app.Run();
 }
 
+void ConfigurationsJSONSmtp_Jwt_ApiKey(WebApplication builder)
+{
+    var smtp = new SmTpService();
+    app.Configuration.GetSection("ConfigurationSMTP").Bind(smtp);
+}

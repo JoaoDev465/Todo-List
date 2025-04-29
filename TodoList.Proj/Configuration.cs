@@ -4,7 +4,7 @@ public static class Configuration
 {
     public static string JWTKey { get; set; } = Guid.NewGuid().ToString();
 
-    public static SmTpService SmTpService;
+    public static SmTpService _SmTpService;
 }
 
 public class SmTpService()

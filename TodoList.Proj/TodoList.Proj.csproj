@@ -21,9 +21,4 @@
     <PackageReference Include="SecureIdentity" Version="1.0.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\DeleteControllers\" />
-    <Folder Include="Controllers\UpdateControllers\" />
-  </ItemGroup>
-
 </Project>

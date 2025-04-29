@@ -1,25 +1,24 @@
 namespace ViewModels.ResultViews;
 
-// class that work this to generate a easy Data output 
 
-public class ResultViews<T>
+public class ResultViewsDataAndErrorsInJSON<T>
 {
-    public ResultViews(T data)
+    public ResultViewsDataAndErrorsInJSON(T data)
     {
         Data = data;
     }
 
-    public ResultViews(string errors)
+    public ResultViewsDataAndErrorsInJSON(string errors)
     {
         Errors.Add(errors);
     }
 
-    public ResultViews(List<string> errors)
+    public ResultViewsDataAndErrorsInJSON(List<string> errors)
     {
         Errors = errors;
     }
 
-    public ResultViews(T data, List<string> errors)
+    public ResultViewsDataAndErrorsInJSON(T data, List<string> errors)
     {
         Errors = errors;
         Data = data;

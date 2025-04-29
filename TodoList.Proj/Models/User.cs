@@ -1,7 +1,7 @@
 ﻿using TodoList.Proj.Models.Roles;
 
 namespace TodoList.Proj.Models.user;
-// represent user
+
 public class User
 {
     public int Id { get; set; }

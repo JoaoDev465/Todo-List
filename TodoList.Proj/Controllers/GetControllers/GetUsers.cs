@@ -21,10 +21,10 @@ public class GetController:ControllerBase
             var OneUser = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
             if (OneUser == null)
-                return NotFound(new ResultViews<User>(OneUser));
-            else
+                return NotFound(new ResultViewsDataAndErrorsInJSON<User>(OneUser));
+            
             {
-                return Ok(new ResultViews<User>(OneUser));
+                return Ok(new ResultViewsDataAndErrorsInJSON<User>(OneUser));
             }
         }
         catch
@@ -42,7 +42,7 @@ public class GetController:ControllerBase
         try
         {
             if (Userlist == null)
-                return NotFound(new ResultViews<List<User>>(Userlist));
+                return NotFound(new ResultViewsDataAndErrorsInJSON<List<User>>(Userlist));
             else
             {
                 return Ok(new List<User>());

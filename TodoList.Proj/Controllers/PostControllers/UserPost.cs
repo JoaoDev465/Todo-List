@@ -28,7 +28,7 @@ public class PostController : ControllerBase
         [FromBody] ViewDataUser Users)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ResultViews<ViewDataUser>(ModelState.GetErrors()));
+            return BadRequest(new ResultViewsDataAndErrorsInJSON<ViewDataUser>(ModelState.GetErrors()));
 
         User user = new User()
         {
@@ -43,11 +43,11 @@ public class PostController : ControllerBase
         {
             await context.AddAsync(user);
             await context.SaveChangesAsync();
-            return Ok(new ResultViews<ViewDataUser>(Users));
+            return Ok(new ResultViewsDataAndErrorsInJSON<ViewDataUser>(Users));
         }
         catch (DbException e)
         {
-            return BadRequest(StatusCode(200,new ResultViews<string>("falha interna no servidor")));
+            return BadRequest(StatusCode(200,new ResultViewsDataAndErrorsInJSON<string>("falha interna no servidor")));
         }
         
        

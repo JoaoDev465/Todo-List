@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj;
-using TodoList.Proj.TokenGenerator;
+using TodoList.Proj.Services.EmailService;
+using TodoList.Proj.Services.TokenService;
 
 var builder = WebApplication.CreateBuilder(args); 
 DbContextServices(builder);
 ControllerServicesAndBehavior(builder);
 TokenService(builder);
 TokenConfiguration(builder);
-
+EmailService(builder);
 
 void DbContextServices(WebApplicationBuilder builder)
 {
@@ -31,7 +32,12 @@ void ControllerServicesAndBehavior(WebApplicationBuilder builder)
 
 void TokenService(WebApplicationBuilder builder)
 {
-    builder.Services.AddSingleton<TokenService>();
+    builder.Services.AddSingleton<GenerateTokenService>();
+}
+
+void EmailService(WebApplicationBuilder builder)
+{
+    builder.Services.AddTransient<GenerateEmailService>();
 }
 
 void TokenConfiguration(WebApplicationBuilder builder)

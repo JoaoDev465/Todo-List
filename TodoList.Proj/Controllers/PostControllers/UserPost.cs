@@ -1,5 +1,7 @@
 ﻿using System.Data.Common;
 using SecureIdentity.Password;
+using TodoList.Proj.Services.EmailService;
+using TodoList.Proj.Services.TokenService;
 
 namespace TodoList.Proj.Controllers.PostControllers;
 
@@ -10,7 +12,6 @@ using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Models;
 using TodoList.Proj.Models.Roles;
 using TodoList.Proj.Models.user;
-using TodoList.Proj.TokenGenerator;
 using ViewModels.ResultViews;
 using ViewModels.User;
 
@@ -54,10 +55,11 @@ public class PostController : ControllerBase
 
     [HttpPost("v1/login")]
     public async Task<IActionResult> Login(
-        [FromServices] TokenService token,
+        [FromServices] GenerateTokenService token,
         [FromServices] Context context)
     {
         var EncryptationToken = token.GenerateToken(null);
+
         return Ok(EncryptationToken);
     }
 }

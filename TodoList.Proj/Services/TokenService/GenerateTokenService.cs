@@ -1,21 +1,19 @@
-﻿using System.ComponentModel;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj.ExtensionMethods;
-using TodoList.Proj.Models;
 using TodoList.Proj.Models.user;
 
-namespace TodoList.Proj.TokenGenerator;
-// this class configure token to user
-public class TokenService
+namespace TodoList.Proj.Services.TokenService;
+
+public class GenerateTokenService
 {
+    private readonly JwtSecurityTokenHandler _securityTokenHandler = new JwtSecurityTokenHandler();
+    
     public string GenerateToken(User user)
     {
         var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-        // the key need be transleet to bytes 
         var claim = user.GetClaim();
         var key = Encoding.ASCII.GetBytes(Configuration.JWTKey);
         var securityTokenDescriptor = new SecurityTokenDescriptor
@@ -30,4 +28,11 @@ public class TokenService
         var token = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
         return jwtSecurityTokenHandler.WriteToken(token);
     }
+
+    private SymmetricSecurityKey _symmetricSecurityKey()
+    {
+        var securityKey = Encoding.ASCII.GetBytes(Configuration.JWTKey);
+        return new SymmetricSecurityKey(securityKey);
+    }
+    
 }

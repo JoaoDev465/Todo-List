@@ -3,4 +3,14 @@
 public static class Configuration
 {
     public static string JWTKey { get; set; } = Guid.NewGuid().ToString();
+
+    public static SmTpService SmTpService;
+}
+
+public class SmTpService()
+{
+    public int Port { get; set; }
+    public string Host { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
 }

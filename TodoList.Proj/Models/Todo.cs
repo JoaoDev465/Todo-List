@@ -9,10 +9,10 @@ public class Todo
     public DateTime Initialized { get; set; }
     public string Task { get; set; } = String.Empty;
     public string? Description { get; set; }
-    // this row , work for define the time by remeber some Task that you bookmarked to later
-    public DateTime Alert { get; set; }
-    public bool finalized{ get; set; }
+   
+    public DateTime? Alert { get; set; }
+    public bool Finalized{ get; set; }
 
     public int UserId { get; set; }
-    public User User { get; set; } = new();
+    public User User { get; set; } 
 }

@@ -67,14 +67,19 @@ namespace TodoList.Proj.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Alert")
-                        .HasColumnType("GETDATE()")
-                        .HasColumnName("Alert_Conclusion");
+                    b.Property<DateTime?>("Alert")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(2500)
                         .HasColumnType("Nvarchar")
                         .HasColumnName("DEscription_Task");
+
+                    b.Property<bool>("Finalized")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("Finalized_Time");
 
                     b.Property<DateTime>("Initialized")
                         .ValueGeneratedOnAdd()
@@ -97,12 +102,6 @@ namespace TodoList.Proj.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("finalized")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("Finalized_Time");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -110,7 +109,7 @@ namespace TodoList.Proj.Migrations
                     b.ToTable("Tasks", (string)null);
                 });
 
-            modelBuilder.Entity("TodoList.Proj.Models.User", b =>
+            modelBuilder.Entity("TodoList.Proj.Models.user.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -149,12 +148,12 @@ namespace TodoList.Proj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.HasOne("TodoList.Proj.Models.User", null)
+                    b.HasOne("TodoList.Proj.Models.user.User", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -171,7 +170,7 @@ namespace TodoList.Proj.Migrations
 
             modelBuilder.Entity("TodoList.Proj.Models.Todo", b =>
                 {
-                    b.HasOne("TodoList.Proj.Models.User", "User")
+                    b.HasOne("TodoList.Proj.Models.user.User", "User")
                         .WithMany("Todos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -181,7 +180,7 @@ namespace TodoList.Proj.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TodoList.Proj.Models.User", b =>
+            modelBuilder.Entity("TodoList.Proj.Models.user.User", b =>
                 {
                     b.Navigation("Todos");
                 });

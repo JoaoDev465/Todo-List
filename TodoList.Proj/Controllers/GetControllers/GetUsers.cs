@@ -3,55 +3,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models.user;
 using ViewModels.ResultViews;
+using ViewModels.User;
 
 namespace TodoList.Proj.Controllers.GetControllers;
 
 [ApiController]
-
 public class GetController:ControllerBase
 {
-    [HttpGet("v1/GetOne/{id}")]
-    public async Task<IActionResult> GetOneUser(
-        [FromRoute] int id,
-        [FromServices] Context context)
+    [HttpGet("v1/user/{id:int}")]
+    public async Task<IActionResult> Get_OneUser(
+      [FromServices] Context context ,
+        [FromRoute] int id)
     {
-        try
-        {
-
-            var OneUser = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (OneUser == null)
-                return NotFound(new ResultViewsDataAndErrorsInJSON<User>(OneUser));
-            
+        var user = await context.Users
+            .Where(x => x.Id == id).
+            Select(x => new ViewDataUser()
             {
-                return Ok(new ResultViewsDataAndErrorsInJSON<User>(OneUser));
-            }
-        }
-        catch
-        {
-            return BadRequest();
-        }
-    }
+                Id = x.Id,
+                UserEmail = x.Email,
+                UserName = x.Name,
+                UserPassword = x.PasswordHash
+            }).FirstOrDefaultAsync();
 
-    [HttpGet]
-    public async Task<IActionResult> GetListUsers(
-        [FromServices] Context context)
-    {
-        var Userlist = await context.Users.ToListAsync();
+        if (user == null)
+            return NotFound(
+                new ResultViewsDataAndErrorsInJSON<string>
+                    ("usuário não encontrado"));
 
-        try
-        {
-            if (Userlist == null)
-                return NotFound(new ResultViewsDataAndErrorsInJSON<List<User>>(Userlist));
-            else
-            {
-                return Ok(new List<User>());
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        return Ok(user);
     }
 }

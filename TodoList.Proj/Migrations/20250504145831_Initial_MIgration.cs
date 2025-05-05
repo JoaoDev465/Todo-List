@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TodoList.Proj.Migrations
 {
     /// <inheritdoc />
-    public partial class primarymigration : Migration
+    public partial class Initial_MIgration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,7 +26,7 @@ namespace TodoList.Proj.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -40,7 +40,7 @@ namespace TodoList.Proj.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,7 +56,7 @@ namespace TodoList.Proj.Migrations
                     table.ForeignKey(
                         name: "FK_RoleUser_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -77,7 +77,7 @@ namespace TodoList.Proj.Migrations
                     initialized_time = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     Task = table.Column<string>(type: "Nvarchar(1000)", maxLength: 1000, nullable: false),
                     DEscription_Task = table.Column<string>(type: "Nvarchar(2500)", maxLength: 2500, nullable: true),
-                    Alert_Conclusion = table.Column<DateTime>(type: "GETDATE()", nullable: false),
+                    Alert = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Finalized_Time = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -87,7 +87,7 @@ namespace TodoList.Proj.Migrations
                     table.ForeignKey(
                         name: "FK_TodoUser",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -116,7 +116,7 @@ namespace TodoList.Proj.Migrations
                 name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

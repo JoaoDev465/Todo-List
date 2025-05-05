@@ -9,6 +9,7 @@ namespace ViewModels.User;
 // class that work  to padronize errors and  forms
 public class ViewDataUser
 {
+    public int? Id { get; set; }
     [Required(ErrorMessage = "O campo é obrigatório")]
     [MinLength(12,ErrorMessage = "esse campo precisa de no mínimo 12 caracteres"),MaxLength(50)]
     public string UserName { get; set; } = string.Empty;

@@ -11,28 +11,28 @@ public class GenerateTokenService
 {
     private readonly JwtSecurityTokenHandler _securityTokenHandler = new JwtSecurityTokenHandler();
     
-    public string GenerateToken(User user)
+    public string TokenGenerator(User user)
     {
-        var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-        var claim = user.GetClaim();
-        var key = Encoding.ASCII.GetBytes(Configuration.JWTKey);
-        var securityTokenDescriptor = new SecurityTokenDescriptor
+        var securitySymmetricKey = _SymmetricSecurityKey();
+        var tokenDescriptorConf = new SecurityTokenDescriptor()
         {
-            Subject = new ClaimsIdentity(claim),
+           
             Expires = DateTime.UtcNow.AddHours(8),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key)
-                ,SecurityAlgorithms.HmacSha256Signature)
-            
+            SigningCredentials = new SigningCredentials(securitySymmetricKey, SecurityAlgorithms.HmacSha256Signature)
         };
-        var token = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
-        return jwtSecurityTokenHandler.WriteToken(token);
+
+        var token = _securityTokenHandler.CreateToken(tokenDescriptorConf);
+
+        return _securityTokenHandler.WriteToken(token);
     }
 
-    private SymmetricSecurityKey _symmetricSecurityKey()
+    public SymmetricSecurityKey _SymmetricSecurityKey()
     {
-        var securityKey = Encoding.ASCII.GetBytes(Configuration.JWTKey);
-        return new SymmetricSecurityKey(securityKey);
+        var key = Encoding.ASCII.GetBytes(Configuration.JWTKey);
+        return new SymmetricSecurityKey(key);
     }
     
+    
+    
+
 }

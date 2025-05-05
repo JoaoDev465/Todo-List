@@ -1,7 +1,13 @@
 ﻿using System.Data.Common;
+using ApiKeyatributte.Usage;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
 using TodoList.Proj.Services.EmailService;
 using TodoList.Proj.Services.TokenService;
+using View.ViewModels;
+using ViewModels.ResultViews;
+using ViewModels.User;
 
 namespace TodoList.Proj.Controllers.PostControllers;
 
@@ -25,42 +31,81 @@ public class PostController : ControllerBase
     [HttpPost("v1/user")]
     public async Task<IActionResult> Post_User(
         [FromServices] Context context,
-        [FromBody] ViewDataUser Users)
+        [FromBody] ViewDataUser users)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ResultViewsDataAndErrorsInJSON<ViewDataUser>(ModelState.GetErrors()));
+            return BadRequest(
+                new ResultViewsDataAndErrorsInJSON<ViewDataUser>
+                    (ModelState.GetErrors()));
 
-        User user = new User()
+        var user = new User
         {
-            Name = Users.UserName,
-            Email = Users.UserEmail,
-            PasswordHash = Users.UserPassword
+            Name = users.UserName,
+            Email = users.UserEmail
         };
 
-        PasswordHasher.Hash(user.PasswordHash);
+        users.UserPassword = PasswordGenerator.
+            Generate(16);
+        user.PasswordHash = PasswordHasher.
+            Hash(users.UserPassword);
         
         try
         {
             await context.AddAsync(user);
             await context.SaveChangesAsync();
-            return Ok(new ResultViewsDataAndErrorsInJSON<ViewDataUser>(Users));
+            return Ok(new ResultViewsDataAndErrorsInJSON<dynamic>(new
+            {
+                user = users.UserEmail,users.UserPassword,user.PasswordHash
+            }));
         }
         catch (DbException e)
         {
-            return BadRequest(StatusCode(200,new ResultViewsDataAndErrorsInJSON<string>("falha interna no servidor")));
+            return BadRequest(StatusCode
+                (200,new ResultViewsDataAndErrorsInJSON<string>
+                    ("falha interna no servidor")));
         }
         
        
     }
-
-    [HttpPost("v1/login")]
+    
+    
+    [HttpPost("V1/Login")]
     public async Task<IActionResult> Login(
         [FromServices] GenerateTokenService token,
+        [FromBody] ViewLogin view,
         [FromServices] Context context)
     {
-        var EncryptationToken = token.GenerateToken(null);
+        if (!ModelState.IsValid)
+            return BadRequest(
+                new ResultViewsDataAndErrorsInJSON<string>
+                    (ModelState.GetErrors()));
 
-        return Ok(EncryptationToken);
+        var user = context.Users
+            .AsNoTracking().FirstOrDefault
+                (x => x.Email == view.UserEmail);
+        if (user == null)
+            return StatusCode(403,new 
+                ResultViewsDataAndErrorsInJSON<String>
+                ( "não foi possível encontrar o usuário"));
+
+        if (!PasswordHasher.Verify(user.PasswordHash, view.UserPassword))
+        {
+            return StatusCode(400, 
+                new ResultViewsDataAndErrorsInJSON<string>
+                    ("senha inválida, tente novamente"));
+        }
+
+        try
+        {
+            var securityToken = token.TokenGenerator(user);
+            return Ok(new ResultViewsDataAndErrorsInJSON<string>(securityToken,null));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new
+                ResultViewsDataAndErrorsInJSON<string>
+                ("falha ao tentar gerar o token"));
+        }
     }
 }
 

@@ -35,11 +35,7 @@ public class TodoMap:IEntityTypeConfiguration<Todo>
             .HasColumnType("Nvarchar")
             .HasMaxLength(2500);
 
-        builder.Property(x => x.Alert)
-            .HasColumnName("Alert_Conclusion")
-            .HasColumnType("GETDATE()");
-
-        builder.Property(x => x.finalized)
+        builder.Property(x => x.Finalized)
             .HasColumnName("Finalized_Time")
             .HasDefaultValue(false);
     }

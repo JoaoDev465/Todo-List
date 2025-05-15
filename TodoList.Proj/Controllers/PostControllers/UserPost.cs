@@ -1,4 +1,5 @@
 ﻿using System.Data.Common;
+using System.Net.Mail;
 using ApiKeyatributte.Usage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ using ViewModels.ResultViews;
 using ViewModels.User;
 
 
-
+[AttributeKey]
 [ApiController]
 public class PostController : ControllerBase
 {
@@ -31,6 +32,7 @@ public class PostController : ControllerBase
     [HttpPost("v1/user")]
     public async Task<IActionResult> Post_User(
         [FromServices] Context context,
+        [FromServices] GenerateEmailService email,
         [FromBody] ViewDataUser users)
     {
         if (!ModelState.IsValid)
@@ -41,16 +43,26 @@ public class PostController : ControllerBase
         var user = new User
         {
             Name = users.UserName,
-            Email = users.UserEmail
+            Email = users.UserEmail,
+           Roles = new List<Role>
+           {
+               new Role()
+               {
+                   Name = "user"
+               }
+           }
         };
 
-        users.UserPassword = PasswordGenerator.
+      var password =  users.UserPassword = PasswordGenerator.
             Generate(16);
         user.PasswordHash = PasswordHasher.
             Hash(users.UserPassword);
-        
+     
         try
         {
+            email.SendEmailusingConfigurationsSMTP
+                ("sua senha", $"a sua senha é {password}", users.UserEmail);
+            
             await context.AddAsync(user);
             await context.SaveChangesAsync();
             return Ok(new ResultViewsDataAndErrorsInJSON<dynamic>(new

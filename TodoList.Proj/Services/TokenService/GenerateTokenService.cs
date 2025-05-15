@@ -13,10 +13,11 @@ public class GenerateTokenService
     
     public string TokenGenerator(User user)
     {
+        var roleClaim = user.GetClaim();
         var securitySymmetricKey = _SymmetricSecurityKey();
         var tokenDescriptorConf = new SecurityTokenDescriptor()
         {
-           
+            Subject = new  ClaimsIdentity(roleClaim),
             Expires = DateTime.UtcNow.AddHours(8),
             SigningCredentials = new SigningCredentials(securitySymmetricKey, SecurityAlgorithms.HmacSha256Signature)
         };

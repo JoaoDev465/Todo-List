@@ -1,4 +1,5 @@
-﻿using Apicontext.File;
+﻿using System.Data;
+using Apicontext.File;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.ExtensionMethods;
@@ -12,23 +13,28 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 [ApiController]
 public class UpdateController : ControllerBase
 {
-   [HttpPut("v1/update/user/{id}")]
+   [HttpPut("v1/update/user/{id:int}")]
    public async Task<IActionResult> UpdateUser(
       [FromServices] Context context,
       [FromRoute] int id,
       [FromBody] ViewDataUser newuser)
    {
       if (!ModelState.IsValid)
-         return BadRequest(new ResultViewsDataAndErrorsInJSON<string>(ModelState.GetErrors()));
-      var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+         return BadRequest(new ResultViewsDataAndErrorsInJSON
+            <string>(ModelState.GetErrors()));
+      
+      var user = await context.
+         Users.FirstOrDefaultAsync(x => x.Id == id);
 
       if (user == null)
       {
-         return NotFound(new ResultViewsDataAndErrorsInJSON<User>(user));
+         return NotFound(new ResultViewsDataAndErrorsInJSON
+            <User>(user));
       }
 
-      newuser.UserName = user.Name;
-      newuser.UserEmail = user.Email;
+      user.Name = newuser.UserName;
+      user.Email = newuser.UserEmail;
+      user.PasswordHash = newuser.UserPassword;
 
       try
       {
@@ -37,9 +43,11 @@ public class UpdateController : ControllerBase
       }
       catch (Exception e)
       {
-         return BadRequest(new ResultViewsDataAndErrorsInJSON<User>(user));
+         return BadRequest(new ResultViewsDataAndErrorsInJSON
+            <User>(user));
       }
 
-      return Ok(new ResultViewsDataAndErrorsInJSON<User>(user));
+      return Ok(new ResultViewsDataAndErrorsInJSON
+         <User>(user));
    }
 }

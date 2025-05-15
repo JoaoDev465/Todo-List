@@ -8,12 +8,15 @@ namespace ApiKeyatributte.Usage;
 [AttributeUsage(validOn: AttributeTargets.Class|AttributeTargets.Method)]
 public class AttributeKey: Attribute,IAsyncActionFilter
 {
-    public async Task OnActionExecutionAsync(
-        ActionExecutingContext context,
+    private const string APiHeaderKey = "x-api-key";
+    private readonly string? _apikey;
+
+
+    public async Task OnActionExecutionAsync(ActionExecutingContext context,
         ActionExecutionDelegate next)
     {
-        if (!context.HttpContext.Request.Query.TryGetValue(
-                Configuration.ApiKey, out var extracedkey))
+        var request = context.HttpContext.Request;
+        if (!request.Headers.TryGetValue(APiHeaderKey, out var extracedkey))
         {
             context.Result = new ContentResult()
             {
@@ -23,7 +26,7 @@ public class AttributeKey: Attribute,IAsyncActionFilter
             return;
         }
 
-        if (!Configuration.ApiKey.Equals(extracedkey))
+        if (string.Equals(extracedkey, _apikey))
         {
             context.Result = new ContentResult()
             {
@@ -35,4 +38,5 @@ public class AttributeKey: Attribute,IAsyncActionFilter
 
         await next();
     }
+    
 }

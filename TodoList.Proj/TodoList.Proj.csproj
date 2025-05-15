@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="jsonSubtypes" Version="2.0.1" />
     <PackageReference Include="microsoft.aspnetcore.authentication.jwtbearer" Version="9.0.4" />
     <PackageReference Include="Microsoft.entityframeworkcore.design" Version="9.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -18,7 +19,15 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="newtonsoft.json" Version="13.0.3" />
+    <PackageReference Include="resend" Version="0.1.1" />
+    <PackageReference Include="restSharp" Version="112.1.0" />
     <PackageReference Include="SecureIdentity" Version="1.0.4" />
+    <PackageReference Include="SwashBuckle.aspnetcore" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="p.cs" />
   </ItemGroup>
 
 </Project>

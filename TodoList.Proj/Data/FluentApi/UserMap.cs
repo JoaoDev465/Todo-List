@@ -44,7 +44,7 @@ public class UserMap: IEntityTypeConfiguration<User>
         // relationship many for many
         builder
             .HasMany(x => x.Roles)
-            .WithMany(x => x.Users)
+            .WithMany(x => x.users)
             .UsingEntity<Dictionary<string, object>>(
                 "RoleUser",
                 role => role

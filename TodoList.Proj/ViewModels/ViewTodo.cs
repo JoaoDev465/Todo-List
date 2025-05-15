@@ -11,4 +11,5 @@ public class ViewTodo
     public string DescriptionOfTask { get; set; } = string.Empty;
     public DateTime AlertForDateTask { get; set; }
     public bool FinalizedTimeTask { get; set; }
+    public int userId { get; set; }
 }

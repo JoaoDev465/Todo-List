@@ -1,55 +1,53 @@
-﻿using System.Net;
+﻿using System.Linq.Expressions;
+using System.Net;
 using System.Net.Mail;
+using Resend;
 
 namespace TodoList.Proj.Services.EmailService;
 
 
 
-public class GenerateEmailService
+public class GenerateEmailService 
 {
-    private readonly MailMessage _mailMessageService = new MailMessage();
-   private readonly SmtpClient _smtpClientConfigurations = new SmtpClient();
-   public string ToName { get; set; }
-   public string ToEmail { get; set; }
-   public string Fromname { get; set; }
-   public string FromEmail { get; set; }
-   public string Subject { get; set; }
-   public string Body { get; set; }
+    private readonly SmtpClient? _smtpClient;
 
-   public SmtpClient _SmtpClient()
-   {
-      _smtpClientConfigurations.Port = Configuration._SmTpService.Port;
-      _smtpClientConfigurations.Host = Configuration._SmTpService.Host;
-      _smtpClientConfigurations.EnableSsl = true;
-      _smtpClientConfigurations.DeliveryMethod = SmtpDeliveryMethod.Network;
-      _smtpClientConfigurations.Credentials = new NetworkCredential(Configuration._SmTpService.Username,Configuration._SmTpService.Password);
+    public GenerateEmailService()
+    {
+        _smtpClient = new SmtpClient(Configuration._SmTpService.Host,
+            Configuration._SmTpService.Port);
 
-      return _SmtpClient();
-   }
+        _smtpClient.Credentials = new NetworkCredential(
+            Configuration._SmTpService.Username,
+            Configuration._SmTpService.Password);
 
-   public void _MailMessage()
-   {
-       _mailMessageService.From = new MailAddress(Fromname, FromEmail);
-       _mailMessageService.To.Add(new MailAddress(ToEmail,ToName));
-       _mailMessageService.Subject = Subject;
-       _mailMessageService.Body = Body;
-   }
+        _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+        _smtpClient.EnableSsl = true;
+    }
+    
+    public bool SendEmailusingConfigurationsSMTP(string Subject,
+        string Body,
+        string ToEmail, 
+        string FromEmail = "joaodev465@gmail.com")
+    {
 
-   public bool Send()
-   {
-       try
-       {
-           _MailMessage();
-       
-           var smtpClient = new SmtpClient();
-           smtpClient.Send(_mailMessageService);
+        MailMessage mail = new MailMessage()
+        {
+            From = new MailAddress(FromEmail),
+            Subject = Subject,
+            Body = Body
+        }; mail.To.Add(new MailAddress(ToEmail));
+        
+        try
+        {
+            _smtpClient.Send(mail);
+            Console.WriteLine("Email enviado com sucesso");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
-           return true;
-       }
-       catch (Exception e)
-       {
-           Console.WriteLine(e);
-           return false;
-       }
-   }
+    }
 }

@@ -1,7 +1,9 @@
+using System.IO.Compression;
 using System.Text;
 using Apicontext.File;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -15,6 +17,8 @@ ControllerServicesAndBehavior(builder);
 TokenService(builder);
 TokenConfiguration(builder);
 EmailService(builder);
+SwaggerAplicationService(builder);
+PerformaceServices(builder);
 
 void DbContextServices(WebApplicationBuilder builder)
 {
@@ -57,10 +61,35 @@ void TokenConfiguration(WebApplicationBuilder builder)
         });
 }
 
+void SwaggerAplicationService(WebApplicationBuilder builder)
+{
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+}
+
+void PerformaceServices(WebApplicationBuilder builder)
+{
+    builder.Services.AddMemoryCache();
+    builder.Services.AddResponseCompression
+    (options =>
+        options.Providers.Add<GzipCompressionProvider>()
+    );
+    builder.Services.Configure<GzipCompressionProviderOptions>(
+        x =>
+        {
+            x.Level = CompressionLevel.Optimal;
+        });
+}
 
 var app = builder.Build();
 
-
+if(app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    Console.WriteLine("este é o ambiente de desenvovimento");
+}
+   
 
 AuthenticantionAndAuthorization(app);
 ConfigurationsJSONSmtp_Jwt_ApiKey(app);
@@ -75,10 +104,17 @@ void AuthenticantionAndAuthorization(WebApplication builder)
     app.UseAuthorization(); 
 }
 
-
 void ConfigurationsJSONSmtp_Jwt_ApiKey(WebApplication builder)
 {
     app.Configuration.GetValue<string>("apikey");
+    
     var smtp = new SmTpService();
-    app.Configuration.GetSection("ConfigurationSMTP").Bind(smtp);
+    app.Configuration.GetSection("ConfSMTP").Bind(smtp);
+    Configuration._SmTpService = smtp;
+    if (string.IsNullOrEmpty(smtp.ToString()))
+    {
+        Console.WriteLine("falha ao gerar o smtp, está nulo");
+    }
+    
 }
+

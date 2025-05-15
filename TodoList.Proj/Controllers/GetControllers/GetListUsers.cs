@@ -25,6 +25,7 @@ public class GetListController: ControllerBase
             Todos = new List<Todo>()
         }).ToListAsync();
 
-        return Ok(new ResultViewsDataAndErrorsInJSON<List<User>>(users));
+        return Ok(new ResultViewsDataAndErrorsInJSON
+            <List<User>>(users));
     }
 }

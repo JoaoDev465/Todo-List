@@ -6,28 +6,25 @@ using ViewModels.ResultViews;
 
 namespace TodoList.Proj.Controllers.DeleteControllers;
 
-
-[ApiController]
-public class DeleteController : ControllerBase
+public class DeleteTodoController : ControllerBase
 {
     [HttpDelete("v1/Delete/user/{id:int}")]
     public async Task<IActionResult> DeleteUSers(
         [FromServices] Context context,
         [FromRoute] int id )
     {
-        var user = await context.
-            Users.FirstOrDefaultAsync(x => x.Id == id);
+        var task = await context.Todos.FirstOrDefaultAsync(x => x.Id == id);
 
-        if (user.Id == null)
+        if (task.Id == null)
         {
             return StatusCode(404,
                 new ResultViewsDataAndErrorsInJSON<User>
-                    ("usuário não encontrado"));
+                    ("tarefa não encontrada"));
         }
 
         try
         {
-            context.Remove(user);
+            context.Remove(task);
             await context.SaveChangesAsync();
         }
         catch (Exception e)
@@ -35,6 +32,6 @@ public class DeleteController : ControllerBase
             return BadRequest();
         }
 
-        return Ok($"Usuário de Id {user.Id} removido com sucesso");
+        return Ok($"Usuário de Id {task.Id} removido com sucesso");
     }
 }

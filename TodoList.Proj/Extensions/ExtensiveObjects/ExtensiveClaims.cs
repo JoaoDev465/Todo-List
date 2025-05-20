@@ -3,7 +3,7 @@ using TodoList.Proj.Models.user;
 
 namespace TodoList.Proj.ExtensionMethods;
 
-public static class ExtenseClaims
+public static class ExtensiveClaims
 {
    public static IEnumerable<Claim> GetClaim(this User user)
     {

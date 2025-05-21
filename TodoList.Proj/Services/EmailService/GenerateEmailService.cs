@@ -1,18 +1,23 @@
 ﻿using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
+using Moq;
 using Resend;
+using TodoList.Proj.InterfaceModel;
 
 namespace TodoList.Proj.Services.EmailService;
 
 
 
-public class GenerateEmailService 
-{
-    private readonly SmtpClient? _smtpClient;
 
-    public GenerateEmailService()
+public class GenerateEmailService : IGenerateEmailService
+{
+   
+    private readonly SmtpClient? _smtpClient;
+    public void SendEmail(EmailModel model){}
+    public GenerateEmailService(IConfiguration configuration)
     {
+      
         _smtpClient = new SmtpClient(Configuration._SmTpService.Host,
             Configuration._SmTpService.Port);
 
@@ -26,7 +31,7 @@ public class GenerateEmailService
     
     public bool SendEmailusingConfigurationsSMTP(string Subject,
         string Body,
-        string ToEmail, 
+        string ToEmail = "joaodev465@gmail.com", 
         string FromEmail = "joaodev465@gmail.com")
     {
 
@@ -49,5 +54,11 @@ public class GenerateEmailService
             throw;
         }
 
+    }
+
+
+    public void IsendEmail(EmailModel model)
+    {
+        throw new NotImplementedException();
     }
 }

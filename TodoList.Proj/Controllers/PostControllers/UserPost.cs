@@ -28,8 +28,8 @@ using ViewModels.User;
 public class PostController : ControllerBase
 {
    
-
-    [HttpPost("v1/user")]
+    
+    [HttpPost("v1/post/user")]
     public async Task<IActionResult> Post_User(
         [FromServices] Context context,
         [FromServices] GenerateEmailService email,

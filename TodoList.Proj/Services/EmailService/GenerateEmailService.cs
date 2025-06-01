@@ -14,7 +14,7 @@ public class GenerateEmailService : IGenerateEmailService
 {
    
     private readonly SmtpClient? _smtpClient;
-    public void SendEmail(EmailModel model){}
+    
     public GenerateEmailService(IConfiguration configuration)
     {
       

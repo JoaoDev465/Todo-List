@@ -1,4 +1,5 @@
 ﻿using Apicontext.File;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models.user;
@@ -10,6 +11,7 @@ namespace TodoList.Proj.Controllers.GetControllers;
 [ApiController]
 public class GetController:ControllerBase
 {
+    [Authorize]
     [HttpGet("v1/user/{id:int}")]
     public async Task<IActionResult> Get_OneUser(
       [FromServices] Context context ,

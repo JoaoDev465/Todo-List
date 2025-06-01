@@ -3,12 +3,18 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj.ExtensionMethods;
+using TodoList.Proj.InterfaceModel;
 using TodoList.Proj.Models.user;
 
 namespace TodoList.Proj.Services.TokenService;
 
-public class GenerateTokenService
+public class GenerateTokenService:IGenerateTokenService
 {
+    public string returnToken(TokenModel model)
+    {
+        throw new NotImplementedException();
+    }
+    
     private readonly JwtSecurityTokenHandler _securityTokenHandler = new JwtSecurityTokenHandler();
     
     public string TokenGenerator(User user)
@@ -32,8 +38,7 @@ public class GenerateTokenService
         var key = Encoding.ASCII.GetBytes(Configuration.JWTKey);
         return new SymmetricSecurityKey(key);
     }
-    
-    
-    
 
+
+ 
 }

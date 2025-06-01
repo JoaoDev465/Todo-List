@@ -18,9 +18,11 @@ builder.DbContextServices();
 builder.TokenService();
 builder.EmailService();
 builder.PerformaceServices();
-builder.SwaggerAplicationService();
+builder.SwaggerApplicationService();
 builder.ControllerServicesAndBehavior();
 builder.TokenServiceConfiguration();
+builder.TestAuthenticationEscheme();
+builder.TestAuthenticationSchemeAddChallengeAuth();
 
 
 var app = builder.Build();
@@ -29,7 +31,6 @@ app.AuthenticantionAndAuthorization();
 app.SmtpConfigurationsGetvalues();
 app.ConfigurationsJSONSApiKey();
 app.MapControllers();
-app.Run();
 
 if(app.Environment.IsDevelopment())
 {
@@ -38,7 +39,11 @@ if(app.Environment.IsDevelopment())
     Console.WriteLine("este é o ambiente de desenvovimento");
 }
 
+app.Run();
 
+
+
+public partial class Program {}
 
     
     

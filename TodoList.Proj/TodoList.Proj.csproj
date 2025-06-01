@@ -24,11 +24,24 @@
     <PackageReference Include="resend" Version="0.1.1" />
     <PackageReference Include="restSharp" Version="112.1.0" />
     <PackageReference Include="SecureIdentity" Version="1.0.4" />
-    <PackageReference Include="SwashBuckle.aspnetcore" Version="8.1.1" />
+    <PackageReference Include="swashbuckle.aspnetcore" Version="8.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="p.cs" />
+    <Compile Remove="Services\FalseTokenServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Services\FalseTokenServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Services\FalseTokenServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Services\FalseTokenServices\**" />
   </ItemGroup>
 
 </Project>

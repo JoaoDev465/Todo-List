@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
 using Apicontext.File;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Models;
@@ -11,6 +12,7 @@ namespace TodoList.Proj.Controllers.PostControllers;
 [ApiController]
 public class PostTodoController: ControllerBase
 {
+    [Authorize]
     [HttpPost("v1/post/task")]
     public async Task<IActionResult> Post_Tasks(
         [FromServices] Context context,

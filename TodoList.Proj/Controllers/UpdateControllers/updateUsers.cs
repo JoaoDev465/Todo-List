@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Apicontext.File;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.ExtensionMethods;
@@ -13,6 +14,7 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 [ApiController]
 public class UpdateController : ControllerBase
 {
+   [Authorize]
    [HttpPut("v1/update/user/{id:int}")]
    public async Task<IActionResult> UpdateUser(
       [FromServices] Context context,

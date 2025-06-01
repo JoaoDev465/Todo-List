@@ -1,4 +1,5 @@
 ﻿using Apicontext.File;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models.user;
@@ -8,8 +9,9 @@ namespace TodoList.Proj.Controllers.DeleteControllers;
 
 public class DeleteTodoController : ControllerBase
 {
-    [HttpDelete("v1/Delete/user/{id:int}")]
-    public async Task<IActionResult> DeleteUSers(
+    [Authorize]
+    [HttpDelete("v1/Delete/Todos/{id:int}")]
+    public async Task<IActionResult> DeleteTodos(
         [FromServices] Context context,
         [FromRoute] int id )
     {

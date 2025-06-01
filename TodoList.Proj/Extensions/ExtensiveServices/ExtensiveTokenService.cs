@@ -1,4 +1,5 @@
-﻿using TodoList.Proj.Services.TokenService;
+﻿using TodoList.Proj.InterfaceModel;
+using TodoList.Proj.Services.TokenService;
 
 namespace TodoList.Proj.ExtensionMethods;
 
@@ -6,7 +7,7 @@ public static class ExtensiveTokenService
 {
     public static void TokenService(this WebApplicationBuilder builder)
     {
-        builder.Services.AddSingleton<GenerateTokenService>();
+        builder.Services.AddSingleton<IGenerateTokenService,GenerateTokenService>();
     }
 
 }

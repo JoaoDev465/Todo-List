@@ -1,4 +1,5 @@
 ﻿using Apicontext.File;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.ExtensionMethods;
@@ -11,8 +12,9 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 
 public class UpdateTodosController : ControllerBase
 {
-    [HttpPut("v1/update/user/{id:int}")]
-    public async Task<IActionResult> UpdateUser(
+    [Authorize]
+    [HttpPut("v1/update/Todos/{id:int}")]
+    public async Task<IActionResult> UpdateTodos(
         [FromServices] Context context,
         [FromRoute] int id,
         [FromBody] ViewTodo todo)

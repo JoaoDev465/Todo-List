@@ -12,7 +12,6 @@ public class User
 
     public int TodoId{ get; set; }
     public List<Todo> Todos { get; set; } = new();
-
-    public int RoleId { get; set; }
+    
     public List<Role> Roles { get; set; }
 }

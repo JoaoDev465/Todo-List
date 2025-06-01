@@ -1,4 +1,5 @@
 ﻿using Apicontext.File;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models;
@@ -7,11 +8,12 @@ using TodoList.Proj.Models.user;
 using ViewModels.ResultViews;
 
 namespace TodoList.Proj.Controllers.GetControllers;
-
+[Route("/v1/list/user")]
 [ApiController]
 public class GetListController: ControllerBase
 {
-    [HttpGet("v1/list/user")]
+    [Authorize]
+    [HttpGet("/v1/list/user")]
     public async Task<IActionResult> Get_List_User(
         [FromServices] Context context)
     {

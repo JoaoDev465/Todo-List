@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TodoList.Proj.Models.user;
+using TodoList.Proj.Models;
 using ViewModels.ResultViews;
 
 namespace TodoList.Proj.Controllers.DeleteControllers;

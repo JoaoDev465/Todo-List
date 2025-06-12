@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using TodoList.Proj.Models.user;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 

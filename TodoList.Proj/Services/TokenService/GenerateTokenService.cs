@@ -3,27 +3,33 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj.ExtensionMethods;
+using TodoList.Proj.Extensions.ExtensiveObjects;
 using TodoList.Proj.InterfaceModel;
-using TodoList.Proj.Models.user;
+using TodoList.Proj.Models;
 
 namespace TodoList.Proj.Services.TokenService;
 
-public class GenerateTokenService:IGenerateTokenService
+public class GenerateTokenService
 {
-    public string returnToken(TokenModel model)
+  
+
+    private readonly JwtSecurityTokenHandler _securityTokenHandler;
+
+    public GenerateTokenService(JwtSecurityTokenHandler securityTokenHandler)
     {
-        throw new NotImplementedException();
+        _securityTokenHandler = securityTokenHandler;
     }
     
-    private readonly JwtSecurityTokenHandler _securityTokenHandler = new JwtSecurityTokenHandler();
-    
-    public string TokenGenerator(User user)
+    public  string TokenGenerator(User user)
     {
-        var roleClaim = user.GetClaim();
+        
         var securitySymmetricKey = _SymmetricSecurityKey();
         var tokenDescriptorConf = new SecurityTokenDescriptor()
         {
-            Subject = new  ClaimsIdentity(roleClaim),
+            Subject = new ClaimsIdentity(new Claim[]
+            {
+                new Claim("banana","user")
+            }),
             Expires = DateTime.UtcNow.AddHours(8),
             SigningCredentials = new SigningCredentials(securitySymmetricKey, SecurityAlgorithms.HmacSha256Signature)
         };
@@ -33,7 +39,7 @@ public class GenerateTokenService:IGenerateTokenService
         return _securityTokenHandler.WriteToken(token);
     }
 
-    public SymmetricSecurityKey _SymmetricSecurityKey()
+    public  SymmetricSecurityKey _SymmetricSecurityKey()
     {
         var key = Encoding.ASCII.GetBytes(Configuration.JWTKey);
         return new SymmetricSecurityKey(key);

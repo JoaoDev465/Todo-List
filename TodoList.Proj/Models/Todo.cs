@@ -1,6 +1,4 @@
-﻿using TodoList.Proj.Models.user;
-
-namespace TodoList.Proj.Models;
+﻿namespace TodoList.Proj.Models;
 // class for represent users tasks
 public class Todo
 {

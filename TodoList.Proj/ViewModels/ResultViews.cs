@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+
 namespace ViewModels.ResultViews;
 
 
@@ -10,7 +12,7 @@ public class ResultViewsDataAndErrorsInJSON<T>
 
     public ResultViewsDataAndErrorsInJSON(string errors)
     {
-        Errors.Add(errors);
+         Errors.Add(errors);
     }
 
     public ResultViewsDataAndErrorsInJSON(List<string> errors)
@@ -25,5 +27,5 @@ public class ResultViewsDataAndErrorsInJSON<T>
     }
     
     public T Data { get; set; }
-    public List<string> Errors { get; set; }
+    public List<string> Errors { get; set; } = new();
 }

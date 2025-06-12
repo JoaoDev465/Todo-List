@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models;
-using TodoList.Proj.Models.Roles;
-using TodoList.Proj.Models.user;
 using ViewModels.ResultViews;
 using ViewModels.Todo;
 

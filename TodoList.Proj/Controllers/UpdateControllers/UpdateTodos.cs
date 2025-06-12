@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Models;
-using TodoList.Proj.Models.user;
 using ViewModels.ResultViews;
 using ViewModels.Todo;
 

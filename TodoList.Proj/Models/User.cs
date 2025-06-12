@@ -1,9 +1,8 @@
-﻿using TodoList.Proj.Models.Roles;
-
-namespace TodoList.Proj.Models.user;
+﻿namespace TodoList.Proj.Models;
 
 public class User
 {
+   
     public int Id { get; set; }
     public string Name { get; set; } = String.Empty;
     public string Email { get; set; } = String.Empty;
@@ -13,5 +12,5 @@ public class User
     public int TodoId{ get; set; }
     public List<Todo> Todos { get; set; } = new();
     
-    public List<Role> Roles { get; set; }
+    public IList<Role> Roles { get; set; } 
 }

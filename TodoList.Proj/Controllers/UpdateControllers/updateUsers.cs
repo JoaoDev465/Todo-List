@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.ExtensionMethods;
-using TodoList.Proj.Models.user;
+using TodoList.Proj.Models;
 using ViewModels.ResultViews;
 using ViewModels.User;
 

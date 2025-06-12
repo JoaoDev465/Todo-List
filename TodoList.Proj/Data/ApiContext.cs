@@ -1,9 +1,8 @@
 using Apicontext.File.FluentApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using TodoList.Proj.Data.FluentApi;
 using TodoList.Proj.Models;
-using TodoList.Proj.Models.Roles;
-using TodoList.Proj.Models.user;
 
 namespace Apicontext.File;
 

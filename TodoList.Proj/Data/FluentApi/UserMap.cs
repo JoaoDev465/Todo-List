@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TodoList.Proj.Models;
-using TodoList.Proj.Models.Roles;
-using TodoList.Proj.Models.user;
 
-namespace Apicontext.File.FluentApi;
+namespace TodoList.Proj.Data.FluentApi;
 
 // this is class for User maps statements to Data Base
 public class UserMap: IEntityTypeConfiguration<User>
@@ -46,18 +43,18 @@ public class UserMap: IEntityTypeConfiguration<User>
             .HasMany(x => x.Roles)
             .WithMany(x => x.Users)
             .UsingEntity<Dictionary<string, object>>(
-                "RoleUser",
-                role => role
+                "UserRole",
+                join => join
                     .HasOne<Role>()
                     .WithMany()
-                    .HasForeignKey("UserId")
-                    .HasConstraintName("FK_RoleUser_UserId")
+                    .HasForeignKey("RoleId")
+                    .HasConstraintName("FK_UserRole_RoleId")
                     .OnDelete(DeleteBehavior.Cascade),
                 tag => tag
                     .HasOne<User>()
                     .WithMany()
-                    .HasForeignKey("RoleId")
-                    .HasConstraintName("FK_RoleUser_RoleId")
+                    .HasForeignKey("UserId")
+                    .HasConstraintName("FK_UserRole_UserId")
                     .OnDelete(DeleteBehavior.Cascade));
 
         // relationship many for one

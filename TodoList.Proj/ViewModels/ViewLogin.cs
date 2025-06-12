@@ -9,4 +9,6 @@ public class ViewLogin
     
     [Required(ErrorMessage = "o campo é obrigatório")]
     public string UserEmail { get; set; }
+
+    public List<int> Roles { get; set; }
 }

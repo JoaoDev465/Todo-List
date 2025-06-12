@@ -4,6 +4,7 @@ using Apicontext.File;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TodoList.Proj.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250604180515_ConfigurandoRelaçoesEntreUSerRoles")]
+    partial class ConfigurandoRelaçoesEntreUSerRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace TodoList.Proj.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TodoList.Proj.Models.Role", b =>
+            modelBuilder.Entity("TodoList.Proj.Models.Roles.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,12 +38,6 @@ namespace TodoList.Proj.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("Nvarchar")
                         .HasColumnName("Role_Name");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("Nvarchar")
-                        .HasColumnName("Slug");
 
                     b.HasKey("Id");
 
@@ -97,7 +94,7 @@ namespace TodoList.Proj.Migrations
                     b.ToTable("Tasks", (string)null);
                 });
 
-            modelBuilder.Entity("TodoList.Proj.Models.User", b =>
+            modelBuilder.Entity("TodoList.Proj.Models.user.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,7 +150,7 @@ namespace TodoList.Proj.Migrations
 
             modelBuilder.Entity("TodoList.Proj.Models.Todo", b =>
                 {
-                    b.HasOne("TodoList.Proj.Models.User", "User")
+                    b.HasOne("TodoList.Proj.Models.user.User", "User")
                         .WithMany("Todos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -165,14 +162,14 @@ namespace TodoList.Proj.Migrations
 
             modelBuilder.Entity("UserRole", b =>
                 {
-                    b.HasOne("TodoList.Proj.Models.Role", null)
+                    b.HasOne("TodoList.Proj.Models.Roles.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_UserRole_RoleId");
 
-                    b.HasOne("TodoList.Proj.Models.User", null)
+                    b.HasOne("TodoList.Proj.Models.user.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -180,7 +177,7 @@ namespace TodoList.Proj.Migrations
                         .HasConstraintName("FK_UserRole_UserId");
                 });
 
-            modelBuilder.Entity("TodoList.Proj.Models.User", b =>
+            modelBuilder.Entity("TodoList.Proj.Models.user.User", b =>
                 {
                     b.Navigation("Todos");
                 });

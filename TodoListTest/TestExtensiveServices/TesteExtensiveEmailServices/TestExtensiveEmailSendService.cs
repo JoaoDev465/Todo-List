@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using Moq;
 using TodoList.Proj;
 using TodoList.Proj.InterfaceModel;
-using TodoList.Proj.Models.user;
 using TodoList.Proj.Services.EmailService;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;

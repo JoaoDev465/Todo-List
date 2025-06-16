@@ -19,17 +19,14 @@ public class GenerateTokenService
     {
         _securityTokenHandler = securityTokenHandler;
     }
-    
+
     public  string TokenGenerator(User user)
     {
-        
+        var claimfromuser = user.GetClaim();
         var securitySymmetricKey = _SymmetricSecurityKey();
-        var tokenDescriptorConf = new SecurityTokenDescriptor()
+        var tokenDescriptorConf = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim("banana","user")
-            }),
+            Subject = new ClaimsIdentity(claimfromuser),
             Expires = DateTime.UtcNow.AddHours(8),
             SigningCredentials = new SigningCredentials(securitySymmetricKey, SecurityAlgorithms.HmacSha256Signature)
         };

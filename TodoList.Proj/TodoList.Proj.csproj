@@ -10,22 +10,20 @@
   <ItemGroup>
     <PackageReference Include="jsonSubtypes" Version="2.0.1" />
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.22.0" />
-    <PackageReference Include="microsoft.aspnetcore.authentication.jwtbearer" Version="9.0.4" />
-    <PackageReference Include="Microsoft.entityframeworkcore.design" Version="9.0.4">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
     <PackageReference Include="Microsoft.entityframeworkcore.sqlserver" Version="9.0.4" />
     <PackageReference Include="Microsoft.entityframeworkcore.tools" Version="9.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.12.0" />
     <PackageReference Include="moq" Version="4.20.72" />
     <PackageReference Include="newtonsoft.json" Version="13.0.3" />
     <PackageReference Include="resend" Version="0.1.1" />
     <PackageReference Include="restSharp" Version="112.1.0" />
     <PackageReference Include="SecureIdentity" Version="1.0.4" />
     <PackageReference Include="swashbuckle.aspnetcore" Version="8.1.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.12.0" />
   </ItemGroup>
 
   <ItemGroup>

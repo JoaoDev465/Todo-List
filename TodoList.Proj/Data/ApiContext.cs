@@ -24,4 +24,6 @@ public class  Context:DbContext
         modelBuilder.ApplyConfiguration(new RoleMap());
         modelBuilder.ApplyConfiguration(new TodoMap());
     }
+
+   
 }

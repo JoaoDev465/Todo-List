@@ -29,6 +29,11 @@ public class UserMap: IEntityTypeConfiguration<User>
             .HasColumnType("Nvarchar")
             .HasMaxLength(200);
 
+        builder.Property(x => x.Slug)
+            .HasColumnName("Slug")
+            .HasColumnType("Nvarchar")
+            .HasMaxLength(100);
+
         builder.Property(x => x.PasswordHash)
             .IsRequired()
             .HasColumnName("PasswordHash")

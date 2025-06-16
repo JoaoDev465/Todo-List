@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using TodoList.Proj;
 
-namespace ApiKeyatributte.Usage;
+namespace TodoList.Proj.Atributtes.ApiKeyAtributte;
 
 [AttributeUsage(validOn: AttributeTargets.Class|AttributeTargets.Method)]
 public class AttributeKey: Attribute,IAsyncActionFilter

@@ -10,11 +10,13 @@ using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj;
 using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Extensions.ExtensiveAppConfigurations;
+using TodoList.Proj.Extensions.ExtensiveServices;
 using TodoList.Proj.Services.EmailService;
 using TodoList.Proj.Services.TokenService;
 
 var builder = WebApplication.CreateBuilder(args); 
 builder.DbContextServices();
+builder.TokenGenerateServicInteface();
 builder.TokenService();
 builder.EmailService();
 builder.PerformaceServices();
@@ -23,7 +25,6 @@ builder.ControllerServicesAndBehavior();
 builder.TokenServiceConfiguration();
 builder.TestAuthenticationEscheme();
 builder.TestAuthenticationSchemeAddChallengeAuth();
-
 
 var app = builder.Build();
 

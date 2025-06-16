@@ -16,7 +16,7 @@ public static class ExtensiveClaims
 
         if (user?.Roles != null && user.Roles.Any())
         {
-            result.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role,role.Name)));
+            result.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role,role.Slug)));
 
         }
         

@@ -10,6 +10,7 @@ public class User
     public bool IsOnline{ get; set; }
 
     public int TodoId{ get; set; }
+    public string Slug { get; set; }
     public List<Todo> Todos { get; set; } = new();
     
     public IList<Role> Roles { get; set; } 

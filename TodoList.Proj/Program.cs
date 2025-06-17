@@ -16,7 +16,6 @@ using TodoList.Proj.Services.TokenService;
 
 var builder = WebApplication.CreateBuilder(args); 
 builder.DbContextServices();
-builder.TokenGenerateServicInteface();
 builder.TokenService();
 builder.EmailService();
 builder.PerformaceServices();

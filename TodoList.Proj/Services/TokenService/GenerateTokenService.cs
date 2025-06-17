@@ -9,7 +9,7 @@ using TodoList.Proj.Models;
 
 namespace TodoList.Proj.Services.TokenService;
 
-public class GenerateTokenService
+public class GenerateTokenService: IGenerateTokenService
 {
   
 
@@ -42,6 +42,5 @@ public class GenerateTokenService
         return new SymmetricSecurityKey(key);
     }
 
-
- 
+    
 }

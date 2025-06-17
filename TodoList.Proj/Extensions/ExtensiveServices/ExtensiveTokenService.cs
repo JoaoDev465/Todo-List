@@ -6,14 +6,11 @@ namespace TodoList.Proj.Extensions.ExtensiveServices;
 
 public static class ExtensiveTokenService
 {
-    public static void TokenGenerateServicInteface(this WebApplicationBuilder builder)
-    {
-        builder.Services.AddSingleton<IGenerateTokenService>();
-    }
+  
     public static void TokenService(this WebApplicationBuilder builder)
     {
-        builder.Services.AddSingleton<JwtSecurityTokenHandler>();
-        builder.Services.AddSingleton<GenerateTokenService>();
+        builder.Services.AddTransient<JwtSecurityTokenHandler>();
+        builder.Services.AddTransient<IGenerateTokenService,GenerateTokenService>();
     }
 
 }

@@ -28,10 +28,8 @@ using static Models.Role;
 [AttributeKey]
 [ApiController]
 [Route("V1")]
-public class PostController : ControllerBase
+public class PostController(IGenerateTokenService tokenService) : ControllerBase
 {
-   
-    
     [HttpPost("post/user")]
     public async Task<IActionResult> Post_User(
         [FromServices] Context context,
@@ -74,8 +72,8 @@ public class PostController : ControllerBase
     }
 
 
-    [HttpPost("login")]
-    public async Task< ActionResult> Login([FromServices] GenerateTokenService tokenService,
+    [HttpPost("userlogin")]
+    public async Task< ActionResult> Login(
         [FromServices] Context context,
         [FromBody] ViewLogin viewLogin)
     {
@@ -97,6 +95,7 @@ public class PostController : ControllerBase
 
         try
         {
+            
             string security = tokenService.TokenGenerator(userInDatabase);
             return Ok(security);
         }

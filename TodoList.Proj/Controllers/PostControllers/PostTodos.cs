@@ -12,31 +12,35 @@ namespace TodoList.Proj.Controllers.PostControllers;
 [ApiController]
 public class PostTodoController: ControllerBase
 {
-    [Authorize]
+    private readonly Context _context;
+    public PostTodoController(Context context)
+    {
+        _context = context;
+    }
+   
     [HttpPost("v1/post/task")]
     public async Task<IActionResult> Post_Tasks(
-        [FromServices] Context context,
         [FromBody] ViewTodo todo)
     {
         if (!ModelState.IsValid)
             return BadRequest(new ResultViewsDataAndErrorsInJSON
                 <string>(ModelState.GetErrors()));
 
-        var userTodo = new Todo()
+        var userTodo = new Todo
         {
             Start = todo.Start_Task,
-            Initialized = new DateTime(),
+            Initialized = DateTime.Now,
             Task = todo.Task,
             Description = todo.DescriptionOfTask,
-            Alert = new DateTime(),
+            Alert = DateTime.Now,
             Finalized = todo.FinalizedTimeTask,
             UserId = todo.userId
         };
 
         try
         {
-            await context.AddAsync(userTodo);
-            
+            await _context.AddAsync(userTodo);
+            await _context.SaveChangesAsync();
         }
         catch (Exception e)
         {

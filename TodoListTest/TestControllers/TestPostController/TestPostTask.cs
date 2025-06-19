@@ -12,7 +12,7 @@ namespace TodoListTest.TestControllers.TestPostController;
 
 public class TestPostTask : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _factory;
+   
     private readonly ITestOutputHelper _helper;
     private readonly HttpClient _client;
 

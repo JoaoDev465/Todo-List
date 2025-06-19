@@ -16,14 +16,14 @@ public class GetTaskController:ControllerBase
     {
         _context = context;
     }
-    [Authorize]
+   
     [HttpGet("v1/user/{id:int}")]
     public async Task<IActionResult> Get_OneUser(
         [FromRoute] int id)
     {
         var user = await _context.Users
             .Where(x => x.Id == id).
-            Select(x => new ViewDataUser()
+            Select(x => new UserDto()
             {
                 Id = x.Id,
                 UserEmail = x.Email,

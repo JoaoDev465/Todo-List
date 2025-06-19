@@ -7,7 +7,7 @@ using static TodoList.Proj.Models.Role;
 namespace ViewModels.User;
 
 // class that work  to padronize errors and  forms
-public class ViewDataUser
+public class UserDto
 {
     public int? Id { get; set; }
     [Required(ErrorMessage = "O campo é obrigatório")]
@@ -21,6 +21,8 @@ public class ViewDataUser
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%&])[A-Za-z\d!@#$%&]{12,}$")]
     public string  UserPassword { get; set; } = String.Empty;
     public bool UserAreOnline { get; set; }
+    
+    public string Slug { get; set; } = string.Empty;
     
 }
 

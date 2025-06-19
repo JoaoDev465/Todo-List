@@ -24,7 +24,7 @@ public class UpdateUserController : ControllerBase
    [HttpPut("v1/update/user/{id:int}")]
    public async Task<IActionResult> UpdateUser(
       [FromRoute] int id,
-      [FromBody] ViewDataUser newuser)
+      [FromBody] UserDto newuser)
    {
       if (!ModelState.IsValid)
          return BadRequest(new ResultViewsDataAndErrorsInJSON

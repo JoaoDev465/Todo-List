@@ -21,11 +21,11 @@ public class UserController : ControllerBase
   
     [HttpPost("post/user")]
     public async Task<IActionResult> Post_User(
-        [FromBody] ViewDataUser users)
+        [FromBody] UserDto users)
     {
         if (!ModelState.IsValid)
             return BadRequest(
-                new ResultViewsDataAndErrorsInJSON<ViewDataUser>
+                new ResultViewsDataAndErrorsInJSON<UserDto>
                     (ModelState.GetErrors()));
 
         var user = new User

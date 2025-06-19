@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.DTOview;
 using TodoList.Proj.Models;
 using ViewModels.ResultViews;
+using ViewModels.User;
 
 namespace TodoList.Proj.Controllers.GetControllers;
 [Route("/v1/list/user")]
@@ -18,20 +20,29 @@ public class GetListUserController: ControllerBase
     
     [HttpGet("/v1/list/user")]
     public async Task<IActionResult> Get_List_User(
-        [FromQuery] int page )
+        QueryPagination query )
     {
-        
-        var users = await _context.Users.Select(x => new User()
-        {
-            Id = x.Id,
-            Name = x.Name,
-            Email = x.Email,
-            PasswordHash = x.PasswordHash,
-            Roles = new List<Role>(),
-            Todos = new List<Todo>()
-        }).ToListAsync();
+        var totalUsers = await _context.Users.CountAsync();
+        var users = await _context.Users.AsNoTracking().Skip((query.Page - 1) * query.PageSize).Take(query.PageSize)
+            .Select(x => new UserDto
+            {
+                Id = x.Id,
+                UserEmail = x.Email,
+                UserPassword = x.Email,
+                UserAreOnline = x.IsOnline,
+                UserName = x.Name
+            }).ToListAsync();
 
+        var result = new
+        {
+            TotalUser = totalUsers,
+            Pages = query.Page,
+            PageSizes = query.PageSize,
+            Users = users
+
+        };
+        
         return Ok(new ResultViewsDataAndErrorsInJSON
-            <List<User>>(users));
+            <dynamic>(result));
     }
 }

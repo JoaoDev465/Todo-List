@@ -26,7 +26,7 @@ public class TestPostTask : IClassFixture<WebApplicationFactory<Program>>
     [Fact]
     public async Task TestReturnOkFromPostTask()
     {
-        var newpost = new ViewTodo
+        var newpost = new TodoDTO
         {
             InitializeDateTimeTask = DateTime.Now,
             AlertForDateTask = DateTime.Now,
@@ -44,7 +44,7 @@ public class TestPostTask : IClassFixture<WebApplicationFactory<Program>>
         response.EnsureSuccessStatusCode();
 
         var responseJson = await response.Content.ReadAsStringAsync();
-        var taskCreated = JsonSerializer.Deserialize<ViewTodo>
+        var taskCreated = JsonSerializer.Deserialize<TodoDTO>
         (responseJson, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true

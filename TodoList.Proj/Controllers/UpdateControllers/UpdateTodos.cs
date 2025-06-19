@@ -11,18 +11,23 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 
 public class UpdateTodosController : ControllerBase
 {
+    private readonly Context _context;
+    public UpdateTodosController(Context context)
+    {
+        _context = context;
+    }
+    
     [Authorize]
     [HttpPut("v1/update/Todos/{id:int}")]
     public async Task<IActionResult> UpdateTodos(
-        [FromServices] Context context,
         [FromRoute] int id,
-        [FromBody] ViewTodo todo)
+        [FromBody] TodoDTO todoDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(new ResultViewsDataAndErrorsInJSON
                 <string>(ModelState.GetErrors()));
       
-        var tasks = await context.Todos
+        var tasks = await _context.Todos
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (tasks == null)
@@ -31,17 +36,17 @@ public class UpdateTodosController : ControllerBase
                 <Todo>(tasks));
         }
 
-        tasks.Start = todo.Start_Task;
-        tasks.Initialized = todo.InitializeDateTimeTask;
-        tasks.Task = todo.Task;
-        tasks.Description = todo.DescriptionOfTask;
-        tasks.Alert = todo.AlertForDateTask;
-        tasks.Finalized = todo.FinalizedTimeTask;
+        tasks.Start = todoDto.Start_Task;
+        tasks.Initialized = todoDto.InitializeDateTimeTask;
+        tasks.Task = todoDto.Task;
+        tasks.Description = todoDto.DescriptionOfTask;
+        tasks.Alert = todoDto.AlertForDateTask;
+        tasks.Finalized = todoDto.FinalizedTimeTask;
 
         try
         {
-            context.Update(tasks);
-            await context.SaveChangesAsync();
+            _context.Update(tasks);
+            await _context.SaveChangesAsync();
         }
         catch (Exception e)
         {

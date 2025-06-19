@@ -12,12 +12,17 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 
 
 [ApiController]
-public class UpdateController : ControllerBase
+public class UpdateUserController : ControllerBase
 {
+   private readonly Context _context;
+   public UpdateUserController(Context context)
+   {
+      _context = context;
+   }
+   
    [Authorize]
    [HttpPut("v1/update/user/{id:int}")]
    public async Task<IActionResult> UpdateUser(
-      [FromServices] Context context,
       [FromRoute] int id,
       [FromBody] ViewDataUser newuser)
    {
@@ -25,7 +30,7 @@ public class UpdateController : ControllerBase
          return BadRequest(new ResultViewsDataAndErrorsInJSON
             <string>(ModelState.GetErrors()));
       
-      var user = await context.
+      var user = await _context.
          Users.FirstOrDefaultAsync(x => x.Id == id);
 
       if (user == null)
@@ -40,8 +45,8 @@ public class UpdateController : ControllerBase
 
       try
       {
-         context.Update(user);
-         await context.SaveChangesAsync();
+         _context.Update(user);
+         await _context.SaveChangesAsync();
       }
       catch (Exception e)
       {

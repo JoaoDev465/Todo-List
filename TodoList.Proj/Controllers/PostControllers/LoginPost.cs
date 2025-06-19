@@ -43,11 +43,11 @@ public class LoginController : ControllerBase
 
     [HttpPost("userlogin")]
     public async Task< ActionResult> Login(
-        [FromBody] ViewLogin viewLogin)
+        [FromBody] LoginDTO loginDto)
     {
 
         var userInDatabase = await _context.Users.Include(x=>x.Roles).
-            FirstOrDefaultAsync(x => x.Email == viewLogin.UserEmail);
+            FirstOrDefaultAsync(x => x.Email == loginDto.UserEmail);
        
         if (userInDatabase == null)
         {
@@ -55,7 +55,7 @@ public class LoginController : ControllerBase
                 ("usuário não encontrado no servidor"));
         }
 
-        if (!PasswordHasher.Verify(userInDatabase.PasswordHash, viewLogin.UserPassword))
+        if (!PasswordHasher.Verify(userInDatabase.PasswordHash, loginDto.UserPassword))
         {
             return BadRequest(new ResultViewsDataAndErrorsInJSON<string>("a senha está incorreta"));
         }

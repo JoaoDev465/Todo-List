@@ -8,15 +8,20 @@ using ViewModels.User;
 namespace TodoList.Proj.Controllers.GetControllers;
 
 [ApiController]
-public class GetController:ControllerBase
+public class GetTaskController:ControllerBase
 {
+    private readonly Context _context;
+
+    public GetTaskController(Context context)
+    {
+        _context = context;
+    }
     [Authorize]
     [HttpGet("v1/user/{id:int}")]
     public async Task<IActionResult> Get_OneUser(
-      [FromServices] Context context ,
         [FromRoute] int id)
     {
-        var user = await context.Users
+        var user = await _context.Users
             .Where(x => x.Id == id).
             Select(x => new ViewDataUser()
             {

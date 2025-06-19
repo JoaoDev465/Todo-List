@@ -20,7 +20,7 @@ public class PostTodoController: ControllerBase
    
     [HttpPost("v1/post/task")]
     public async Task<IActionResult> Post_Tasks(
-        [FromBody] ViewTodo todo)
+        [FromBody] TodoDTO todoDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(new ResultViewsDataAndErrorsInJSON
@@ -28,13 +28,13 @@ public class PostTodoController: ControllerBase
 
         var userTodo = new Todo
         {
-            Start = todo.Start_Task,
+            Start = todoDto.Start_Task,
             Initialized = DateTime.Now,
-            Task = todo.Task,
-            Description = todo.DescriptionOfTask,
+            Task = todoDto.Task,
+            Description = todoDto.DescriptionOfTask,
             Alert = DateTime.Now,
-            Finalized = todo.FinalizedTimeTask,
-            UserId = todo.userId
+            Finalized = todoDto.FinalizedTimeTask,
+            UserId = todoDto.userId
         };
 
         try

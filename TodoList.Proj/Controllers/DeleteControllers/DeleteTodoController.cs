@@ -9,13 +9,19 @@ namespace TodoList.Proj.Controllers.DeleteControllers;
 
 public class DeleteTodoController : ControllerBase
 {
+    private readonly Context _context;
+
+    public DeleteTodoController(Context context)
+    {
+        _context = context;
+    }
+    
     [Authorize]
     [HttpDelete("v1/Delete/Todos/{id:int}")]
     public async Task<IActionResult> DeleteTodos(
-        [FromServices] Context context,
         [FromRoute] int id )
     {
-        var task = await context.Todos.FirstOrDefaultAsync(x => x.Id == id);
+        var task = await _context.Todos.FirstOrDefaultAsync(x => x.Id == id);
 
         if (task.Id == null)
         {
@@ -26,8 +32,8 @@ public class DeleteTodoController : ControllerBase
 
         try
         {
-            context.Remove(task);
-            await context.SaveChangesAsync();
+            _context.Remove(task);
+            await _context.SaveChangesAsync();
         }
         catch (Exception e)
         {

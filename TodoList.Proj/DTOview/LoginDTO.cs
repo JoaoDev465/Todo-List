@@ -2,7 +2,7 @@
 
 namespace View.ViewModels;
 
-public class ViewLogin
+public class LoginDTO
 {
     [Required(ErrorMessage = "o campo é obrigatório")]
     public string UserPassword { get; set; }

@@ -10,14 +10,19 @@ namespace TodoList.Proj.Controllers.GetControllers;
 
 public class GetTodoController : ControllerBase
 {
+    private readonly Context _context;
+
+    public GetTodoController(Context context)
+    {
+        _context = context;
+    }
     [Authorize]
     [HttpGet("v1/todo/{id:int}")]
     public async Task<IActionResult> Get_OneUser(
-        [FromServices] Context context ,
         [FromRoute] int id)
     {
-        var task = await context.Todos
-            .Where(x => x.Id == id).Select(x => new ViewTodo()
+        var task = await _context.Todos
+            .Where(x => x.Id == id).Select(x => new TodoDTO()
             {
                 userId = x.Id,
                 Start_Task = x.Start,

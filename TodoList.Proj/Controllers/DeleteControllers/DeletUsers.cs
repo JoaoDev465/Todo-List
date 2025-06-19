@@ -9,15 +9,21 @@ namespace TodoList.Proj.Controllers.DeleteControllers;
 
 
 [ApiController]
-public class DeleteController : ControllerBase
+public class DeleteUserController : ControllerBase
 {
+    private readonly Context _context;
+
+    public DeleteUserController(Context context)
+    {
+        _context = context;
+    }
+    
     [Authorize]
     [HttpDelete("v1/Delete/user/{id:int}")]
     public async Task<IActionResult> DeleteUSers(
-        [FromServices] Context context,
         [FromRoute] int id )
     {
-        var user = await context.
+        var user = await _context.
             Users.FirstOrDefaultAsync(x => x.Id == id);
 
         if (user.Id == null)
@@ -29,8 +35,8 @@ public class DeleteController : ControllerBase
 
         try
         {
-            context.Remove(user);
-            await context.SaveChangesAsync();
+            _context.Remove(user);
+            await _context.SaveChangesAsync();
         }
         catch (Exception e)
         {

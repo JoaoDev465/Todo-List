@@ -8,14 +8,20 @@ using ViewModels.ResultViews;
 namespace TodoList.Proj.Controllers.GetControllers;
 [Route("/v1/list/user")]
 [ApiController]
-public class GetListController: ControllerBase
+public class GetListUserController: ControllerBase
 {
+    private readonly Context _context;
+    public GetListUserController(Context context)
+    {
+        _context = context;
+    }
     
     [HttpGet("/v1/list/user")]
     public async Task<IActionResult> Get_List_User(
-        [FromServices] Context context)
+        [FromQuery] int page )
     {
-        var users = await context.Users.Select(x => new User()
+        
+        var users = await _context.Users.Select(x => new User()
         {
             Id = x.Id,
             Name = x.Name,

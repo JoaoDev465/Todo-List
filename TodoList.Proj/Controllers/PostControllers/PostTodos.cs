@@ -10,15 +10,18 @@ using ViewModels.Todo;
 namespace TodoList.Proj.Controllers.PostControllers;
 
 [ApiController]
+[Route("api/v1/task")]
+
 public class PostTodoController: ControllerBase
 {
+    
     private readonly Context _context;
     public PostTodoController(Context context)
     {
         _context = context;
     }
    
-    [HttpPost("v1/post/task")]
+    [HttpPost]
     public async Task<IActionResult> Post_Tasks(
         [FromBody] TodoDTO todoDto)
     {

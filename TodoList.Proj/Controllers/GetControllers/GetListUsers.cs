@@ -8,8 +8,10 @@ using ViewModels.ResultViews;
 using ViewModels.User;
 
 namespace TodoList.Proj.Controllers.GetControllers;
-[Route("/v1/list/user")]
+
 [ApiController]
+[Route("v1/user")]
+
 public class GetListUserController: ControllerBase
 {
     private readonly Context _context;
@@ -18,7 +20,7 @@ public class GetListUserController: ControllerBase
         _context = context;
     }
     
-    [HttpGet("/v1/list/user")]
+    [HttpGet]
     public async Task<IActionResult> Get_List_User(
         QueryPagination query )
     {

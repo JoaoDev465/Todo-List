@@ -9,6 +9,8 @@ namespace TodoList.Proj.Controllers.DeleteControllers;
 
 
 [ApiController]
+[Route("v1/user/{id:int}")]
+
 public class DeleteUserController : ControllerBase
 {
     private readonly Context _context;
@@ -18,7 +20,7 @@ public class DeleteUserController : ControllerBase
         _context = context;
     }
     
-    [HttpDelete("v1/Delete/user/{id:int}")]
+    [HttpDelete]
     public async Task<IActionResult> DeleteUSers(
         [FromRoute] int id )
     {

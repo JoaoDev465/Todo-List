@@ -12,6 +12,8 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 
 
 [ApiController]
+[Route("v1/user/{id:int}")]
+
 public class UpdateUserController : ControllerBase
 {
    private readonly Context _context;
@@ -21,7 +23,7 @@ public class UpdateUserController : ControllerBase
    }
    
   
-   [HttpPut("v1/update/user/{id:int}")]
+   [HttpPut]
    public async Task<IActionResult> UpdateUser(
       [FromRoute] int id,
       [FromBody] UserDto newuser)

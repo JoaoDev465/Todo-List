@@ -7,6 +7,9 @@ using ViewModels.ResultViews;
 
 namespace TodoList.Proj.Controllers.DeleteControllers;
 
+[ApiController]
+[Route("v1/todos/{id:int}")]
+
 public class DeleteTodoController : ControllerBase
 {
     private readonly Context _context;
@@ -17,7 +20,7 @@ public class DeleteTodoController : ControllerBase
     }
     
     [Authorize]
-    [HttpDelete("v1/Delete/Todos/{id:int}")]
+    [HttpDelete]
     public async Task<IActionResult> DeleteTodos(
         [FromRoute] int id )
     {

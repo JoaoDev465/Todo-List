@@ -9,7 +9,8 @@ using ViewModels.User;
 namespace TodoList.Proj.Controllers.PostControllers;
 
 [ApiController]
-[Route("V1")]
+[Route("v1/post/user")]
+
 public class UserController : ControllerBase
 {
     private readonly Context _context;
@@ -19,7 +20,7 @@ public class UserController : ControllerBase
         _context = context;
     }
   
-    [HttpPost("post/user")]
+    [HttpPost]
     public async Task<IActionResult> Post_User(
         [FromBody] UserDto users)
     {

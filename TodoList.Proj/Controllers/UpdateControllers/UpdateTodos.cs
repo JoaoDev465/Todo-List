@@ -9,6 +9,9 @@ using ViewModels.Todo;
 
 namespace TodoList.Proj.Controllers.UpdateControllers;
 
+[ApiController]
+[Route("v1/todos/{id:int}")]
+
 public class UpdateTodosController : ControllerBase
 {
     private readonly Context _context;
@@ -18,7 +21,7 @@ public class UpdateTodosController : ControllerBase
     }
     
     [Authorize]
-    [HttpPut("v1/update/Todos/{id:int}")]
+    [HttpPut]
     public async Task<IActionResult> UpdateTodos(
         [FromRoute] int id,
         [FromBody] TodoDTO todoDto)

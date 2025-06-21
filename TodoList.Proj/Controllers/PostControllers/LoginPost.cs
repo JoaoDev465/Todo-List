@@ -27,7 +27,8 @@ using static Models.Role;
 
 [AttributeKey]
 [ApiController]
-[Route("V1")]
+[Route("api/v1/login")]
+
 public class LoginController : ControllerBase
 {
     private readonly IGenerateTokenService _tokenService;
@@ -40,8 +41,7 @@ public class LoginController : ControllerBase
         _context = context;
        
     }
-
-    [HttpPost("userlogin")]
+    [HttpPost]
     public async Task< ActionResult> Login(
         [FromBody] LoginDTO loginDto)
     {

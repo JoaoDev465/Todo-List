@@ -8,6 +8,8 @@ using ViewModels.User;
 namespace TodoList.Proj.Controllers.GetControllers;
 
 [ApiController]
+[Route("v1/user/{id:int}")]
+
 public class GetTaskController:ControllerBase
 {
     private readonly Context _context;
@@ -17,7 +19,7 @@ public class GetTaskController:ControllerBase
         _context = context;
     }
    
-    [HttpGet("v1/user/{id:int}")]
+    [HttpGet]
     public async Task<IActionResult> Get_OneUser(
         [FromRoute] int id)
     {

@@ -18,7 +18,6 @@ public class DeleteUserController : ControllerBase
         _context = context;
     }
     
-    [Authorize]
     [HttpDelete("v1/Delete/user/{id:int}")]
     public async Task<IActionResult> DeleteUSers(
         [FromRoute] int id )

@@ -20,7 +20,7 @@ public class UpdateUserController : ControllerBase
       _context = context;
    }
    
-   [Authorize]
+  
    [HttpPut("v1/update/user/{id:int}")]
    public async Task<IActionResult> UpdateUser(
       [FromRoute] int id,

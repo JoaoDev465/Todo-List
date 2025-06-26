@@ -43,7 +43,7 @@ public class TestPostUser: IClassFixture<WebApplicationFactory<Program>>
         try
         {
             
-            var response = await _client.PostAsync("V1/post/user", content);
+            var response = await _client.PostAsync("api/v1/user", content);
             response.EnsureSuccessStatusCode();
 
             var responseJson = await content.ReadAsStringAsync();

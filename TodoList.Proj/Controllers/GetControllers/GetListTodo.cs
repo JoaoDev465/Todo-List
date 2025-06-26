@@ -10,7 +10,7 @@ using ViewModels.Todo;
 namespace TodoList.Proj.Controllers.GetControllers;
 
 [ApiController]
-[Route("v1/task")]
+[Route("api/v1/task")]
 
 public class GetListTodoController : ControllerBase
 {

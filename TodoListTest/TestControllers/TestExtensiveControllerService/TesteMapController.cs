@@ -18,7 +18,7 @@ public class TestMapController:IClassFixture<WebApplicationFactory<Program>>
     public TestMapController(WebApplicationFactory<Program> factory, 
         ITestOutputHelper testOutputHelper,
         HttpContent content,
-        string url = "/v1/list/user")
+        string url = "api/v1/user")
     {
         _httpContent = content;
         _factory = factory;

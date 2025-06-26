@@ -9,7 +9,7 @@ using ViewModels.User;
 namespace TodoList.Proj.Controllers.PostControllers;
 
 [ApiController]
-[Route("v1/post/user")]
+[Route("api/v1/user")]
 
 public class UserController : ControllerBase
 {

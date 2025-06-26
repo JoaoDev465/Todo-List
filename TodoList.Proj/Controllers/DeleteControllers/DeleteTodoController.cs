@@ -8,7 +8,7 @@ using ViewModels.ResultViews;
 namespace TodoList.Proj.Controllers.DeleteControllers;
 
 [ApiController]
-[Route("v1/todos/{id:int}")]
+[Route("api/v1/todos/{id:int}")]
 
 public class DeleteTodoController : ControllerBase
 {

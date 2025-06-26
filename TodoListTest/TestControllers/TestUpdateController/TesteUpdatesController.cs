@@ -36,7 +36,7 @@ public class TestUpdatesController: IClassFixture<WebApplicationFactory<Program>
         var json = JsonSerializer.Serialize(newuser);
         var contentHttp = new StringContent(json, Encoding.UTF8, "application/json");
         
-        var UserHttpResponse = await _client.PutAsync($"v1/update/user/{id}",contentHttp);
+        var UserHttpResponse = await _client.PutAsync($"api/v1/user/{id}",contentHttp);
         UserHttpResponse.EnsureSuccessStatusCode();
 
         var responseJson =await  UserHttpResponse.Content.ReadAsStringAsync();

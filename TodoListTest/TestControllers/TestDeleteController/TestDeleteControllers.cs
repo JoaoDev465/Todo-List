@@ -24,7 +24,7 @@ public class TestDeleteControllers: IClassFixture<WebApplicationFactory<Program>
     {
         int id = 12;
         var USerHttpDelete =
-            _client.DeleteAsync($"v1/Delete/user/{id}");
+            _client.DeleteAsync($"api/v1/user/{id}");
         
         _helper.WriteLine(USerHttpDelete.Result.ReasonPhrase);
         _helper.WriteLine(USerHttpDelete.Result.Content.ToString());

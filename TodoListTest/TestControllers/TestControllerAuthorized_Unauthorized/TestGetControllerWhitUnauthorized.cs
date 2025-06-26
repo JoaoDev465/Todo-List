@@ -16,7 +16,7 @@ public class TestGetControllerWhitUnauthorized:IClassFixture<WebApplicationFacto
     
     public TestGetControllerWhitUnauthorized(WebApplicationFactory<Program> factory,
         ITestOutputHelper testOutputHelper,
-        string url = "/v1/list/task")
+        string url = "api/v1/task")
     {
         _factory = factory;
         _httpClient = new HttpClient();
@@ -26,7 +26,7 @@ public class TestGetControllerWhitUnauthorized:IClassFixture<WebApplicationFacto
 
 
     [Theory]
-    [InlineData("/v1/list/task")]
+    [InlineData("api/v1/task")]
     public async Task TestGetControllerWhitResult_401(string url)
     {
         var client = _factory.CreateClient();

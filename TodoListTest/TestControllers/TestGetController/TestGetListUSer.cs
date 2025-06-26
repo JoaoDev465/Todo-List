@@ -24,7 +24,7 @@ public class TestGetListUSer:IClassFixture<WebApplicationFactory<Program>>
     public async Task TestGetController_IfReturnContent()
     {
         var httpClient = _factory
-            .CreateClient().GetAsync("v1/list/user");
+            .CreateClient().GetAsync("api/v1/user");
         
         var content = await httpClient.
             Result.Content.ReadAsStringAsync();

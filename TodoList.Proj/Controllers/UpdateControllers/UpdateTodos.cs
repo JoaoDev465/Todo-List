@@ -10,7 +10,7 @@ using ViewModels.Todo;
 namespace TodoList.Proj.Controllers.UpdateControllers;
 
 [ApiController]
-[Route("v1/todos/{id:int}")]
+[Route("api/v1/todos/{id:int}")]
 
 public class UpdateTodosController : ControllerBase
 {

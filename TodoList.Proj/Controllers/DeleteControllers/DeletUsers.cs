@@ -9,7 +9,7 @@ namespace TodoList.Proj.Controllers.DeleteControllers;
 
 
 [ApiController]
-[Route("v1/user/{id:int}")]
+[Route("api/v1/user/{id:int}")]
 
 public class DeleteUserController : ControllerBase
 {

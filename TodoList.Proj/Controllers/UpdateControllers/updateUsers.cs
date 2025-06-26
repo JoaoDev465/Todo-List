@@ -12,7 +12,7 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 
 
 [ApiController]
-[Route("v1/user/{id:int}")]
+[Route("api/v1/user/{id:int}")]
 
 public class UpdateUserController : ControllerBase
 {

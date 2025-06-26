@@ -20,7 +20,7 @@ public class TestGetControllerWhitAuthorized:IClassFixture<WebApplicationFactory
     }
 
     [Theory]
-    [InlineData("/v1/list/task")]
+    [InlineData("api/v1/task")]
     public async Task TestController_StatusAuthorized_403(string url)
     {
         var client = _factory.CreateClient();

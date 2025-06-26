@@ -21,7 +21,7 @@ public class TestGetOneUser: IClassFixture<WebApplicationFactory<Program>>
     public async Task TestReturnOneClientInGetController()
     {
         int id = 12;
-      var USer =  await _client.GetAsync($"v1/user/{id}");
+      var USer =  await _client.GetAsync($"api/v1/user/{id}");
       
       _helper.WriteLine(USer.ReasonPhrase);
       _helper.WriteLine(USer.Content.ReadAsStringAsync().Result);

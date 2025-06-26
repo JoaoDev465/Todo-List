@@ -40,7 +40,7 @@ public class TestPostTask : IClassFixture<WebApplicationFactory<Program>>
         var json = JsonSerializer.Serialize(newpost);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var response = await _client.PostAsync("V1/post/task", content);
+        var response = await _client.PostAsync("api/v1/task", content);
         response.EnsureSuccessStatusCode();
 
         var responseJson = await response.Content.ReadAsStringAsync();

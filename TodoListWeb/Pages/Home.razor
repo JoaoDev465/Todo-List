@@ -1,0 +1,27 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<div class="style_top" >
+    <MudPaper  Elevation="4" Class="pa-6">
+        <MudText Typo="Typo.h4" Align="Align.Center">welcome</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center">
+            welcome to your task manager app, you can start by here, clicking on little button bellow to write down tour first task
+        </MudText>
+    </MudPaper>
+</div>
+<div class="style_top">
+    <MudPaper Elevation="4" Class="pa-6 paperTop">
+        <MudIcon  Size="Size.Large" Icon="@Icons.Material.Filled.Assessment"></MudIcon>
+        <MudText Typo="Typo.body1" Align="Align.Center">you can click on here to write your tasks, let's go</MudText>
+        <div  style="height:6cm " class=" d-flex justify-center pt-5 pb-6">
+            <img
+                width="300"
+                src="ImgCheckList.png"/>
+            <div class=" mt-5">
+                <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">start</MudButton>
+            </div>
+        </div>
+       
+    </MudPaper>
+</div>

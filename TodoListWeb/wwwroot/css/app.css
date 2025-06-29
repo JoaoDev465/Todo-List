@@ -1,16 +1,62 @@
-.size-Logins{
-    flex: content;
-    display: flex;
-   align-content: center;
-    align-items: center;
-    justify-content: center;
+.style_top{
+    height: 50vh; display: flex; align-items: center; justify-content: center
 }
+.animation_top{
+    cursor: pointer; transition: 0.3s; &:hover{box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+}
+.paperTop{
+    cursor: pointer; padding-bottom:500px;padding-top:100px;width: 40%; height: 55vh
+}
+.Card-hover{
+    transition: transform 0.3s ease , box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+.Card-hover:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1:focus {
+    outline: none;
+}
+
+a, .btn-link {
+    color: #0071c1;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
 #blazor-error-ui {
-    color-scheme: light only;
     background: lightyellow;
     bottom: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
     display: none;
     left: 0;
     padding: 0.6rem 1.25rem 0.7rem 1.25rem;
@@ -71,13 +117,4 @@
 
 code {
     color: #c02d76;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
-    text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-    text-align: start;
 }

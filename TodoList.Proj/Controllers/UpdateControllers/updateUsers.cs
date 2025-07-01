@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Models;
+using TodoListCore.Response;
 using ViewModels.ResultViews;
 using ViewModels.User;
 
@@ -24,26 +25,20 @@ public class UpdateUserController : ControllerBase
    
   
    [HttpPut]
-   public async Task<IActionResult> UpdateUser(
-      [FromRoute] int id,
-      [FromBody] UserDto newuser)
+   public async Task<Responses<User?>> Updateasync(UserDto request)
    {
-      if (!ModelState.IsValid)
-         return BadRequest(new ResultViewsDataAndErrorsInJSON
-            <string>(ModelState.GetErrors()));
-      
+     
       var user = await _context.
-         Users.FirstOrDefaultAsync(x => x.Id == id);
+         Users.FirstOrDefaultAsync(x => x.Id == request.Id);
 
       if (user == null)
       {
-         return NotFound(new ResultViewsDataAndErrorsInJSON
-            <User>(user));
+         return new Responses<User?>(null, 404, "Usuário Não Encontrado");
       }
 
-      user.Name = newuser.UserName;
-      user.Email = newuser.UserEmail;
-      user.PasswordHash = newuser.UserPassword;
+      user.Name = request.UserName;
+      user.Email = request.UserEmail;
+      user.PasswordHash = request.UserPassword;
 
       try
       {
@@ -52,11 +47,9 @@ public class UpdateUserController : ControllerBase
       }
       catch (Exception e)
       {
-         return BadRequest(new ResultViewsDataAndErrorsInJSON
-            <User>(user));
+         return new Responses<User?>(null, 500, "Falha Interna No Servidor");
       }
 
-      return Ok(new ResultViewsDataAndErrorsInJSON
-         <User>(user));
+      return new Responses<User?>(user, 200, "Usuário Atualizado com sucesso");
    }
 }

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ControllersHandlers\IUserHandler.cs" />
+  </ItemGroup>
+
 </Project>

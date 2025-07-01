@@ -42,5 +42,9 @@ public class GenerateTokenService: IGenerateTokenService
         return new SymmetricSecurityKey(key);
     }
 
-    
+
+    public string TokenGenerator()
+    {
+        throw new NotImplementedException();
+    }
 }

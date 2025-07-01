@@ -1,8 +1,7 @@
 using System.Collections.Frozen;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 using ViewModels.Role;
-using static TodoList.Proj.Models.Role;
+
 
 namespace ViewModels.User;
 

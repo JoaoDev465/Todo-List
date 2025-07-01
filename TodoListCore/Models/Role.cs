@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.ApplicationInsights;
 
 namespace TodoList.Proj.Models;
 // this class define the role user,simple and easy by implement in Db

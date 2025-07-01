@@ -31,10 +31,10 @@ using static Models.Role;
 
 public class LoginController : ControllerBase
 {
-    private readonly IGenerateTokenService _tokenService;
+    private readonly GenerateTokenService _tokenService;
     private readonly Context _context;
    
-    public LoginController(IGenerateTokenService tokenService,
+    public LoginController(GenerateTokenService tokenService,
         Context context)
     {
         _tokenService = tokenService;
@@ -63,7 +63,7 @@ public class LoginController : ControllerBase
         try
         {
             
-            string security = _tokenService.TokenGenerator(userInDatabase);
+            string security =  _tokenService.TokenGenerator();
             return Ok(security);
         }
         catch (Exception e)

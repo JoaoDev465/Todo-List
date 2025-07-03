@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Models;
+using TodoListCore.Interfaces;
+using TodoListCore.Response;
 using ViewModels.ResultViews;
 using ViewModels.Todo;
 using ViewModels.User;
@@ -11,7 +14,7 @@ namespace TodoList.Proj.Controllers.GetControllers;
 [ApiController]
 [Route("api/v1/todo/{id:int}")]
 
-public class GetTodoController : ControllerBase
+public class GetTodoController : IUserPost
 {
     private readonly Context _context;
 
@@ -19,27 +22,26 @@ public class GetTodoController : ControllerBase
     {
         _context = context;
     }
-    [Authorize]
+    
     [HttpGet]
-    public async Task<IActionResult> Get_OneUser(
-        [FromRoute] int id)
+    public async Task<Responses<Todo>> Getasync(
+        TodoDTO request
+       )
     {
-        var task = await _context.Todos
-            .Where(x => x.Id == id).Select(x => new TodoDTO()
-            {
-                userId = x.Id,
-                Start_Task = x.Start,
-                InitializeDateTimeTask = x.Initialized,
-                Task = x.Task,
-                DescriptionOfTask = x.Description,
-                FinalizedTimeTask = x.Finalized
-            }).FirstAsync();
+        try
+        {
+             
+            var tasks = await _context
+                .Todos
+                .Where(x => x.Id == request.TaskId)
+                .FirstOrDefaultAsync();
 
-        if (task == null)
-            return NotFound(
-                new ResultViewsDataAndErrorsInJSON<string>
-                    ("usuário não encontrado"));
-
-        return Ok(task);
+            return tasks is null ? new Responses<Todo>(tasks, 404, "Task Não Encontrada")
+                :  new Responses<Todo>(tasks);
+        }
+        catch (Exception e)
+        {
+            return new Responses<Todo>(null, 500, "Falha Interna No Servidor");
+        }
     }
 }

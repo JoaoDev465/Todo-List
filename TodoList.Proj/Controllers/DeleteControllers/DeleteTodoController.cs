@@ -3,14 +3,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models;
+using TodoListCore.Interfaces;
+using TodoListCore.Response;
 using ViewModels.ResultViews;
+using ViewModels.Todo;
 
 namespace TodoList.Proj.Controllers.DeleteControllers;
 
 [ApiController]
 [Route("api/v1/todos/{id:int}")]
 
-public class DeleteTodoController : ControllerBase
+public class DeleteTodoController : ITaskPost
 {
     private readonly Context _context;
 
@@ -21,16 +24,15 @@ public class DeleteTodoController : ControllerBase
     
     [Authorize]
     [HttpDelete]
-    public async Task<IActionResult> DeleteTodos(
-        [FromRoute] int id )
+    public async Task<Responses<Todo>> Deleteasync(
+        TodoDTO request
+        )
     {
-        var task = await _context.Todos.FirstOrDefaultAsync(x => x.Id == id);
+        var task = await _context.Todos.FirstOrDefaultAsync(x => x.Id == request.TaskId);
 
         if (task.Id == null)
         {
-            return StatusCode(404,
-                new ResultViewsDataAndErrorsInJSON<User>
-                    ("tarefa não encontrada"));
+            return new Responses<Todo>(null, 404, "Tarefa Não Encontrata");
         }
 
         try
@@ -40,9 +42,10 @@ public class DeleteTodoController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest();
+            return new Responses<Todo>(null, 500, "Falha Interna No Servidor");
         }
 
-        return Ok($"Usuário de Id {task.Id} removido com sucesso");
+        return new Responses<Todo>(task, 200, "Tarefa Excluida Com Sucesso");
+
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TodoListCore;
 
 namespace View.ViewModels;
 
-public class LoginDTO
+public class LoginDTO : Request
 {
     [Required(ErrorMessage = "o campo é obrigatório")]
     public string UserPassword { get; set; }

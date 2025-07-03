@@ -1,11 +1,12 @@
 ﻿using System.Text.Json.Serialization;
+using TodoList.Proj.Models;
 
 namespace TodoListCore.Response;
 
 public class PageResponse<TData>: Responses<TData>
 {
     [JsonConstructor]
-    PageResponse(
+   public  PageResponse(
         TData data,
         int totalcount,
         int currentCount = 1,
@@ -23,9 +24,11 @@ public class PageResponse<TData>: Responses<TData>
         TData? data,
         int code = Configurations.DefaultStatusCode,
         string? message = null
-        ):base(data,code,message)
+        ):base(data)
     {
     }
+
+ 
 
     public int PageSize { get; set; } = Configurations.defaultpagesize;
     

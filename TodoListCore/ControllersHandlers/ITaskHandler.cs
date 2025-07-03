@@ -11,4 +11,6 @@ public interface ITaskHandler
     Task<Responses<Todo?>> DeleteAsync(TodoDTO request);
     Task<Responses<Todo?>> GetteAsync(TodoDTO request);
     
+    Task<PageResponse<List<Todo?>>> GetAlleAsync(TodoDTO request);
+    
 }

@@ -10,6 +10,8 @@ using TodoList.Proj.Extensions.ExtensiveObjects;
 using TodoList.Proj.InterfaceModel;
 using TodoList.Proj.Services.EmailService;
 using TodoList.Proj.Services.TokenService;
+using TodoListCore.Interfaces;
+using TodoListCore.Response;
 using View.ViewModels;
 using ViewModels.ResultViews;
 using ViewModels.User;
@@ -29,7 +31,7 @@ using static Models.Role;
 [ApiController]
 [Route("api/v1/login")]
 
-public class LoginController : ControllerBase
+public class LoginController : ILoginPost
 {
     private readonly GenerateTokenService _tokenService;
     private readonly Context _context;
@@ -42,33 +44,33 @@ public class LoginController : ControllerBase
        
     }
     [HttpPost]
-    public async Task< ActionResult> Login(
-        [FromBody] LoginDTO loginDto)
+    public async Task<Responses<string>> Loginasync(
+         LoginDTO request)
     {
 
         var userInDatabase = await _context.Users.Include(x=>x.Roles).
-            FirstOrDefaultAsync(x => x.Email == loginDto.UserEmail);
+            FirstOrDefaultAsync(x => x.Email == request.UserEmail);
        
         if (userInDatabase == null)
         {
-            return StatusCode(404, new ResultViewsDataAndErrorsInJSON<string>
+            return new Responses<string>(null, 404,
                 ("usuário não encontrado no servidor"));
         }
 
-        if (!PasswordHasher.Verify(userInDatabase.PasswordHash, loginDto.UserPassword))
+        if (!PasswordHasher.Verify(userInDatabase.PasswordHash, request.UserPassword))
         {
-            return BadRequest(new ResultViewsDataAndErrorsInJSON<string>("a senha está incorreta"));
+            return new Responses<string>(null,404,"a senha está incorreta");
         }
 
         try
         {
             
             string security =  _tokenService.TokenGenerator();
-            return Ok(security);
+            return new Responses<string>(security,200,"Ok");
         }
         catch (Exception e)
         {
-            return BadRequest(new ResultViewsDataAndErrorsInJSON<string>("falha ao gerar o token"));
+            return new Responses<string>(null,500,("falha ao gerar o token"));
         }
     }
 }

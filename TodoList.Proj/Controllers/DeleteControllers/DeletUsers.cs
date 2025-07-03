@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models;
+using TodoListCore.Interfaces;
+using TodoListCore.Response;
 using ViewModels.ResultViews;
+using ViewModels.User;
 
 namespace TodoList.Proj.Controllers.DeleteControllers;
 
@@ -11,7 +14,7 @@ namespace TodoList.Proj.Controllers.DeleteControllers;
 [ApiController]
 [Route("api/v1/user/{id:int}")]
 
-public class DeleteUserController : ControllerBase
+public class DeleteUserController : IUserPost
 {
     private readonly Context _context;
 
@@ -21,17 +24,16 @@ public class DeleteUserController : ControllerBase
     }
     
     [HttpDelete]
-    public async Task<IActionResult> DeleteUSers(
-        [FromRoute] int id )
+    public async Task<Responses<User>> Deleteasync(
+      UserDto request )
     {
         var user = await _context.
-            Users.FirstOrDefaultAsync(x => x.Id == id);
+            Users.FirstOrDefaultAsync(x => x.Id == request.Id);
 
         if (user.Id == null)
         {
-            return StatusCode(404,
-                new ResultViewsDataAndErrorsInJSON<User>
-                    ("usuário não encontrado"));
+            return new Responses<User>(null,404,
+                    "Usuário Não Encontrado");
         }
 
         try
@@ -41,9 +43,9 @@ public class DeleteUserController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest();
+            return new Responses<User>(null,500,"Falha Interna No Servidor");
         }
 
-        return Ok($"Usuário de Id {user.Id} removido com sucesso");
+        return new Responses<User>(user,200,"Usuário Excluido Com Sucesso");
     }
 }

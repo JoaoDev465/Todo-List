@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Models;
+using TodoListCore.Interfaces;
 using TodoListCore.Response;
 using ViewModels.ResultViews;
 using ViewModels.User;
@@ -15,7 +16,7 @@ namespace TodoList.Proj.Controllers.UpdateControllers;
 [ApiController]
 [Route("api/v1/user/{id:int}")]
 
-public class UpdateUserController : ControllerBase
+public class UpdateUserController : IUserPost
 {
    private readonly Context _context;
    public UpdateUserController(Context context)

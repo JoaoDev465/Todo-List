@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using TodoListCore;
 
 namespace ViewModels.Todo;
 
-public class TodoDTO
+public class TodoDTO : Request
 {
+    public int TaskId { get; set; }
     public bool Start_Task { get; set; }
     public DateTime InitializeDateTimeTask { get; set; }
     [Required(ErrorMessage = "o campo tarefa é obrigatório")]

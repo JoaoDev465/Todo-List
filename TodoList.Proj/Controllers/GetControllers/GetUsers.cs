@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Models;
+using TodoListCore.Interfaces;
+using TodoListCore.Response;
 using ViewModels.ResultViews;
 using ViewModels.User;
 
@@ -10,7 +13,7 @@ namespace TodoList.Proj.Controllers.GetControllers;
 [ApiController]
 [Route("api/v1/user/{id:int}")]
 
-public class GetTaskController:ControllerBase
+public class GetTaskController:IUserPost
 {
     private readonly Context _context;
 
@@ -20,24 +23,24 @@ public class GetTaskController:ControllerBase
     }
    
     [HttpGet]
-    public async Task<IActionResult> Get_OneUser(
-        [FromRoute] int id)
+    public async Task<Responses<User>> Getasync(
+       UserDto request)
     {
-        var user = await _context.Users
-            .Where(x => x.Id == id).
-            Select(x => new UserDto()
-            {
-                Id = x.Id,
-                UserEmail = x.Email,
-                UserName = x.Name,
-                UserPassword = x.PasswordHash
-            }).FirstOrDefaultAsync();
+        try
+        {
+            var users = await _context
+                .Users
+                .Where(x => x.Id == request.Id)
+                .FirstOrDefaultAsync();
 
-        if (user == null)
-            return NotFound(
-                new ResultViewsDataAndErrorsInJSON<string>
-                    ("usuário não encontrado"));
-
-        return Ok(user);
+            return users is null
+                ? new Responses<User>(null, 404, "Usuário Não Encontrado")
+                : new Responses<User>(users);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

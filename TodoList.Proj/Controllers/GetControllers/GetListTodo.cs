@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.DTOview;
 using TodoList.Proj.Models;
+using TodoListCore.DTO;
+using TodoListCore.Interfaces;
+using TodoListCore.Response;
 using ViewModels.ResultViews;
 using ViewModels.Todo;
 
@@ -12,7 +15,7 @@ namespace TodoList.Proj.Controllers.GetControllers;
 [ApiController]
 [Route("api/v1/task")]
 
-public class GetListTodoController : ControllerBase
+public class GetListTodoController : ITaskPost
 {
     private readonly Context _context;
 
@@ -23,34 +26,27 @@ public class GetListTodoController : ControllerBase
     
    
     [HttpGet]
-    public async Task<IActionResult> Get_List_User(
-        QueryPagination query)
+    public async Task<PageResponse<List<Todo>>> Getlistasync(
+        TodoDTO request, GetAllDatasDTO? data)
     {
-        var totaltasks = await _context.Todos.CountAsync();
-        
-        var tasks = await _context.Todos.
-            AsNoTracking().Select(x=> new TodoDTO
-            {
-                DescriptionOfTask = x.Description,
-                Task = x.Task,
-                InitializeDateTimeTask = x.Initialized,
-                FinalizedTimeTask = x.Finalized
-                
-            }).Skip((query.Page - 1) * query.PageSize).
-            Take(query.PageSize).ToListAsync();
-
-        var result = new
+        try
         {
-            Total = totaltasks,
-            ActualPage = query.Page,
-            PageSizes = query.PageSize,
-            Tasks = tasks
-        };
+            var query =
+                    _context.Todos.AsNoTracking()
+                    .Where(x => x.Id == request.userId)
+                    .OrderBy(x => x.Task);
 
-        return Ok(new ResultViewsDataAndErrorsInJSON
-            <dynamic>(new
-            {
-                result
-            }));
+            var task = await query.Skip(data.PageSize - 1 * (data.PageNumber))
+                .Take(data.PageNumber)
+                .ToListAsync();
+
+            var count = await query.CountAsync();
+
+            return new PageResponse<List<Todo>>(task, count, data.PageNumber, data.PageSize);
+        }
+        catch
+        {
+            return new PageResponse<List<Todo>>(null, 500, "Falha Interna No Servidor");
+        }
     }
 }

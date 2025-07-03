@@ -24,7 +24,7 @@ public class UserController : IUserPost
     }
   
     [HttpPost]
-    public async Task<Responses<User>> Createasync(UserDto request)
+    public async Task<Responses<User?>> Registerasync(UserDto request)
     {
         var user = new User
         {

@@ -17,7 +17,6 @@ public class UserDto : Request
     [EmailValidation]
     public string UserEmail { get; set; } = String.Empty;
     [Required(ErrorMessage = "o campo senha é obrigatório")]
-    // used patterns and regular expression for padronize passowords
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%&])[A-Za-z\d!@#$%&]{12,}$")]
     public string  UserPassword { get; set; } = String.Empty;
     public bool UserAreOnline { get; set; }

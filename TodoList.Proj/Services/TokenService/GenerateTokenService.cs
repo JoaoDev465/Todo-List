@@ -6,6 +6,7 @@ using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Extensions.ExtensiveObjects;
 using TodoList.Proj.InterfaceModel;
 using TodoList.Proj.Models;
+using TodoListCore.Interfaces;
 
 namespace TodoList.Proj.Services.TokenService;
 
@@ -42,9 +43,5 @@ public class GenerateTokenService: IGenerateTokenService
         return new SymmetricSecurityKey(key);
     }
 
-
-    public string TokenGenerator()
-    {
-        throw new NotImplementedException();
-    }
+    
 }

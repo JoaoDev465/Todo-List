@@ -4,6 +4,7 @@ using Moq;
 using RestSharp.Authenticators;
 using TodoList.Proj.InterfaceModel;
 using TodoList.Proj.Models;
+using TodoListCore.Interfaces;
 using Xunit;
 
 namespace TodoListTest.TestExtensiveServices.TestExtensiveServicesTokenGenerator;

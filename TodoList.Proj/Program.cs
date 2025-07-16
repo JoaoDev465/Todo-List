@@ -15,6 +15,7 @@ using TodoList.Proj.Services.EmailService;
 using TodoList.Proj.Services.TokenService;
 
 var builder = WebApplication.CreateBuilder(args); 
+builder.CorsServices();
 builder.DbContextServices();
 builder.TokenService();
 builder.EmailService();
@@ -24,13 +25,14 @@ builder.ControllerServicesAndBehavior();
 builder.TokenServiceConfiguration();
 builder.TestAuthenticationEscheme();
 builder.TestAuthenticationSchemeAddChallengeAuth();
-
 var app = builder.Build();
 
+app.UseCors("MyPolicy");
 app.AuthenticantionAndAuthorization();
 app.SmtpConfigurationsGetvalues();
 app.ConfigurationsJSONSApiKey();
 app.MapControllers();
+
 
 if(app.Environment.IsDevelopment())
 {

@@ -2,7 +2,7 @@
 
 namespace TodoListCore.DTO;
 
-public class GetAllDatasDTO : PageRequest
+public class GetAllDatasDto : PageRequest
 {
     
 }

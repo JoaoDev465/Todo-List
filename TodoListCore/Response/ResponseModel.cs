@@ -7,7 +7,7 @@ public class Responses<TData>
     private readonly int _code;
 
     [JsonConstructor]
-    public Responses() => _code = Configurations.DefaultStatusCode;
+    public Responses() {}
 
     public Responses(TData? data,
         int code = Configurations.DefaultStatusCode,
@@ -18,9 +18,15 @@ public class Responses<TData>
         Message = message;
     }
 
+    public static Responses<TData>Error(TData data,
+        int code = Configurations.DefaultstatusError,
+        string? message = null) => new Responses<TData>(default, code, message);
+
+    public int Code { get; set; }
     public string? Message { get; set; }
 
     public TData? Data { get; set; }
 
     [JsonIgnore] public bool IsSuccess => _code is >= 200 and <= 299;
+    [JsonIgnore] public bool IsError => _code is >= 400 and <= 499;
 }

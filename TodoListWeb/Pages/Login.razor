@@ -1,4 +1,5 @@
 ﻿@page "/login"
+@inherits LoginBehind
 
 <div class="style_top">
     <MudGrid Justify="Justify.Center" Class="d-flex justify-content-center mt-0">
@@ -12,33 +13,47 @@
                         width="350"
                         src="imagemChecklist.png"/>
                 </div>
-                <div class="align-content-center justify-content-center">
-                    <EditForm />
-                    <DataAnnotationsValidator/>
-                    <MudTextField
-                        T="string"
-                        Label="E-mail"
-                        HelperText="campo obrigatório"
-                        Style="width:50%"
-                        InputMode="InputMode.email"/>
+                
+                <EditForm Model="@Inputmodel" OnValidSubmit="OnvalidaSubmitasync">
+                    <div class="align-content-center justify-content-center">
+                        <DataAnnotationsValidator/>
+                        <MudTextField
+                            T="string"
+                            Label="E-mail"
+                            HelperText="campo obrigatório"
+                            Style="width:50%"
+                            @bind-Value="Inputmodel.UserEmail"/>
 
-                </div>
-                <div class="align-content-center justify-content-center">
-                    <DataAnnotationsValidator/>
-                    <MudTextField
-                        T="string"
-                        @bind-Value="_passworditem"
-                        Label="Password"
-                        HelperText="campo obrigatório"
-                        Style="width:50%"
-                        InputType="@(_showPassword ? InputType.Text : InputType.Password)"
-                        Adornment="Adornment.End"
-                        AdornmentIcon="@(_showPassword
-                                           ? Icons.Material.Filled.Visibility
-                                           : Icons.Material.Filled.VisibilityOff)"
-                        OnAdornmentClick="@PasswordShowCommand"/>
+                    </div>
+                    <div class="align-content-center justify-content-center">
+                        <DataAnnotationsValidator/>
+                        <MudTextField
+                            T="string"
+                            Label="Password"
+                            HelperText="campo obrigatório"
+                            @bind-value="Inputmodel.UserPassword"
+                            Style="width:50%"
+                            InputType="@(_showPassword ? InputType.Text : InputType.Password)"
+                            Adornment="Adornment.End"
+                            AdornmentIcon="@(_showPassword
+                                               ? Icons.Material.Filled.Visibility
+                                               : Icons.Material.Filled.VisibilityOff)"/>
 
-                </div>
+                    </div>
+                    <div class="d-flex mt-8">
+                       @if (IsBusy)
+                       {
+                           
+                           <MudProgressCircular Color="Color.Info" Indeterminate="true"/>
+                       }
+                       {
+                           
+                           <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary"  >ENTRAR</MudButton>
+                           <MudSpacer/>
+                           <MudButton Href="/comecar">QUERO ME CADASTRAR</MudButton>
+                       }
+                    </div>
+                </EditForm>
             </MudPaper>
             
         </MudItem>

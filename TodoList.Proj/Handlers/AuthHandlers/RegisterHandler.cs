@@ -32,8 +32,7 @@ using static Models.Role;
 [ApiController]
 [Route("api/v1/register")]
 
-public class LoginController(IGenerateTokenService tokenService,
-    Context context, IPasswordHasher<User> hasher) : IRegisterHandler
+public class LoginController(Context context, IPasswordHasher<User> hasher) : IRegisterHandler
 {
     private readonly IGenerateTokenService _tokenService;
     private readonly Context _context;

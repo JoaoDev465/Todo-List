@@ -1,16 +1,40 @@
-﻿using TodoListCore.ControllersHandlers;
+﻿using Apicontext.File;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SecureIdentity.Password;
+using TodoListCore.ControllersHandlers;
+using TodoListCore.DTO;
+using TodoListCore.Interfaces;
 using TodoListCore.Response;
 using View.ViewModels;
 
 namespace TodoList.Proj.Controllers.PostControllers;
 
-public class LoginHandler : ILoginHandler
+public class LoginHandler(Context context, IGenerateTokenService service): ILoginHandler
 {
-    public int Code { get; set; }
-    public string Message { get; set; }
-    public string data { get; set; }
-    public Task<Responses<string>> LoginAsync(LoginDTO request)
+ 
+
+    public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)
     {
-        throw new NotImplementedException();
+        var user = await context.Users.FirstOrDefaultAsync(x=>x.Email== request.UserEmail);
+
+        if (user is null)
+        {
+             return Responses<TokenResponse?>.Error(null, 404, "usuário não encontrado");
+        }
+
+        var hasher = PasswordHasher.Verify(user.PasswordHash, request.UserPassword);
+        if (hasher is false)
+        {
+           return Responses<TokenResponse>.Error(null, 401, "senha incorreta");
+        }
+
+        var token = service.TokenGenerator(user);
+
+        return new Responses<TokenResponse?>(new TokenResponse
+        {
+            Token = token
+        });
+
     }
 }

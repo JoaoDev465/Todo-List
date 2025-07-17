@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.WebAssembly;
 using Microsoft.JSInterop;
 using MT.Blazor.ProtectedStorage;
 using SecureIdentity.Password;
+using TodoListCore.IHandlers;
 using TodoListCore.Interfaces;
 using TodoListWeb.Handlers;
 

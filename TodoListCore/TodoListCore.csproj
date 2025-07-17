@@ -10,8 +10,4 @@
     <Compile Remove="ControllersHandlers\IUserHandler.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="IHandlers\IHandlerGet\" />
-  </ItemGroup>
-
 </Project>

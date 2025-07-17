@@ -1,11 +1,7 @@
-﻿
-using TodoList.Proj.Models;
-using TodoListCore.DTO;
-using TodoListCore.Response;
+﻿using TodoListCore.Response;
 using View.ViewModels;
-using ViewModels.User;
 
-namespace TodoListCore.ControllersHandlers;
+namespace TodoListCore.IHandlers;
 
 public interface ILoginHandler
 {

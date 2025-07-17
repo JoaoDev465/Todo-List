@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
 using TodoListCore.ControllersHandlers;
 using TodoListCore.DTO;
+using TodoListCore.IHandlers;
 using TodoListCore.Interfaces;
 using TodoListCore.Response;
 using View.ViewModels;

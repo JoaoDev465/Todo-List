@@ -1,7 +1,7 @@
-﻿using Apicontext.File;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Data;
 
-namespace TodoList.Proj.ExtensionMethods;
+namespace TodoList.Proj.Extensions.ExtensiveServices;
 
 public static class ExtensiveDbcontextService
 {

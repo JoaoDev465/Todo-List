@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using ViewModels.ResultViews;
 
-namespace TodoList.Proj.ExtensionMethods;
+namespace TodoList.Proj.Extensions.ExtensiveObjects;
 
 public  static  class ModelStateExtension
 {

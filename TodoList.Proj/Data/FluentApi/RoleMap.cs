@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TodoList.Proj.Models;
 
-namespace Apicontext.File.FluentApi;
+namespace TodoList.Proj.Data.FluentApi;
 // this class maps Roles to Db
 public class RoleMap: IEntityTypeConfiguration<Role>
 {

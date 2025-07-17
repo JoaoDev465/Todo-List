@@ -1,7 +1,7 @@
-﻿using TodoList.Proj.InterfaceModel;
+﻿using TodoList.Proj.InterfaceModel.InterfacesEmailServices;
 using TodoList.Proj.Services.EmailService;
 
-namespace TodoList.Proj.ExtensionMethods;
+namespace TodoList.Proj.Extensions.ExtensiveServices;
 
 public static class ExtensiveEmailSendService
 {

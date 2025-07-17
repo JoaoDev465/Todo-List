@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Xunit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using Program = TodoList.Proj.Program;
 
 namespace TodoListTest.TestExtensiveServices.TesteExtensioServicesSwagger;
 

@@ -1,18 +1,5 @@
-using System.IO.Compression;
-using System.Text;
-using Apicontext.File;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.AspNetCore.Server.HttpSys;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using TodoList.Proj;
-using TodoList.Proj.ExtensionMethods;
 using TodoList.Proj.Extensions.ExtensiveAppConfigurations;
 using TodoList.Proj.Extensions.ExtensiveServices;
-using TodoList.Proj.Services.EmailService;
-using TodoList.Proj.Services.TokenService;
 
 var builder = WebApplication.CreateBuilder(args); 
 builder.CorsServices();
@@ -45,7 +32,10 @@ app.Run();
 
 
 
-public partial class Program {}
+namespace TodoList.Proj
+{
+    public partial class Program {}
+}
 
     
     

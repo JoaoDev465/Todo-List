@@ -1,10 +1,8 @@
-using Apicontext.File.FluentApi;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using TodoList.Proj.Data.FluentApi;
 using TodoList.Proj.Models;
 
-namespace Apicontext.File;
+namespace TodoList.Proj.Data;
 
 public class  Context:DbContext
 {

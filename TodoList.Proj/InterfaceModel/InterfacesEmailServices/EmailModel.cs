@@ -1,6 +1,4 @@
-﻿using Moq;
-
-namespace TodoList.Proj.InterfaceModel;
+﻿namespace TodoList.Proj.InterfaceModel.InterfacesEmailServices;
 
 public class EmailModel
 {

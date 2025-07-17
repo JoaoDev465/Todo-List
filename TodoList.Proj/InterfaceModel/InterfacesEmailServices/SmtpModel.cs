@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TodoList.Proj.InterfaceModel;
+namespace TodoList.Proj.InterfaceModel.InterfacesEmailServices;
 
 public class SmtpModel
 {

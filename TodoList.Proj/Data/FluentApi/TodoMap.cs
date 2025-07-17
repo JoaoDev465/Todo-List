@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TodoList.Proj.Models;
 
-namespace Apicontext.File.FluentApi;
+namespace TodoList.Proj.Data.FluentApi;
 
 // this class maps todos to DB
 public class TodoMap:IEntityTypeConfiguration<Todo>

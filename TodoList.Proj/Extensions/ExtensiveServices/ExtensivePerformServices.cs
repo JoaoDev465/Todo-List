@@ -1,7 +1,7 @@
 ﻿using System.IO.Compression;
 using Microsoft.AspNetCore.ResponseCompression;
 
-namespace TodoList.Proj.ExtensionMethods;
+namespace TodoList.Proj.Extensions.ExtensiveServices;
 
 public static class ExtensivePerformServices
 {

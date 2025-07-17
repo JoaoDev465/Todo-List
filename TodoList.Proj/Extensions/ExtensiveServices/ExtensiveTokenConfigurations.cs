@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace TodoList.Proj.ExtensionMethods;
+namespace TodoList.Proj.Extensions.ExtensiveServices;
 
 public static class ExtensiveTokenConfigurations
 {

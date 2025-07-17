@@ -1,36 +1,13 @@
-﻿using System.Data.Common;
-using System.Net.Mail;
-using System.Runtime.InteropServices.JavaScript;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using SecureIdentity.Password;
-using TodoList.Proj.Atributtes.ApiKeyAtributte;
-using TodoList.Proj.Extensions.ExtensiveObjects;
-using TodoList.Proj.InterfaceModel;
-using TodoList.Proj.Services.EmailService;
-using TodoList.Proj.Services.TokenService;
-using TodoListCore.ControllersHandlers;
+using TodoList.Proj.Data;
+using TodoList.Proj.Models;
 using TodoListCore.Interfaces;
 using TodoListCore.Response;
-using View.ViewModels;
-using ViewModels.ResultViews;
 using ViewModels.User;
 
-namespace TodoList.Proj.Controllers.PostControllers;
-
-using Apicontext.File;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using TodoList.Proj.ExtensionMethods;
-using TodoList.Proj.Models;
-using ViewModels.ResultViews;
-using ViewModels.User;
-using static Models.Role;
-
-
-
+namespace TodoList.Proj.Handlers.AuthHandlers;
 
 public class LoginController(Context context, IPasswordHasher<User> hasher) : IRegisterHandler
 {

@@ -4,6 +4,7 @@ using System.Net.Mail;
 using Moq;
 using Resend;
 using TodoList.Proj.InterfaceModel;
+using TodoList.Proj.InterfaceModel.InterfacesEmailServices;
 
 namespace TodoList.Proj.Services.EmailService;
 

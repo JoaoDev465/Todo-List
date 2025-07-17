@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Moq;
 using TodoList.Proj.InterfaceModel;
+using TodoList.Proj.InterfaceModel.InterfacesEmailServices;
 using Xunit;
 using IConfiguration = Castle.Core.Configuration.IConfiguration;
 

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TodoList.Proj.Services.TokenService;
 
-namespace TodoList.Proj.ExtensionMethods;
+namespace TodoList.Proj.Extensions.ExtensiveServices;
 
 public static class TestAuthenticationSchemeServices
 {

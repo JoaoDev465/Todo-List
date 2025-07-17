@@ -1,16 +1,13 @@
-﻿using Apicontext.File;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
-using TodoListCore.ControllersHandlers;
-using TodoListCore.DTO;
+using TodoList.Proj.Data;
 using TodoListCore.IHandlers;
 using TodoListCore.Interfaces;
 using TodoListCore.Response;
 using View.ViewModels;
 
-namespace TodoList.Proj.Controllers.PostControllers;
+namespace TodoList.Proj.Handlers.AuthHandlers;
 
 public class LoginHandler(Context context, IGenerateTokenService service): ILoginHandler
 {

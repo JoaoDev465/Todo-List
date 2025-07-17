@@ -1,4 +1,4 @@
-﻿namespace TodoList.Proj.ExtensionMethods;
+﻿namespace TodoList.Proj.Extensions.ExtensiveServices;
 
 public static class ExtensiveSwaggerService
 {

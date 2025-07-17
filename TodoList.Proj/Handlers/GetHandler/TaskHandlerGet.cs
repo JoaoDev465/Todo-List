@@ -12,7 +12,8 @@ namespace TodoList.Proj.Handlers.GetHandler;
 
 public class TaskHandlerGet(Context context):ITaskHandlerGet
 {
-    [HttpGet("api/v1/tasks")]
+    [HttpGet]
+    [Route("api/v1/tasks")]
     public async Task<PageResponse<Todo>> GetTaskListAsync(TodoDTO request)
     {
         var content = new Todo

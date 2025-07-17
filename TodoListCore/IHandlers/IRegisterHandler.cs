@@ -6,5 +6,5 @@ namespace TodoListCore.Interfaces;
 
 public interface  IRegisterHandler
 {
-    public Task<Responses<User>> RegisterAsync(UserDto request);
+    public Task<Responses<User?>> RegisterAsync(UserDto request);
 }

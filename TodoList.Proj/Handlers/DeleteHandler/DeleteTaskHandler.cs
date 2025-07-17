@@ -1,4 +1,5 @@
 ﻿using Apicontext.File;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Models;
 using TodoListCore.IHandlers.IDeleteHandlers;
@@ -9,6 +10,8 @@ namespace TodoList.Proj.Handlers.DeleteHandler;
 
 public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
 {
+    [HttpDelete]
+    [Route("api/v1/tasks{id}")]
     public async Task<Responses<Todo?>> DeleteAsync(TodoDTO request)
     {
         var content = new Todo

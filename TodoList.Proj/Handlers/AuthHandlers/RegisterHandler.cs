@@ -29,20 +29,16 @@ using ViewModels.ResultViews;
 using ViewModels.User;
 using static Models.Role;
 
-[ApiController]
-[Route("api/v1/register")]
+
+
 
 public class LoginController(Context context, IPasswordHasher<User> hasher) : IRegisterHandler
 {
-    private readonly IGenerateTokenService _tokenService;
-    private readonly Context _context;
+   
     
-    public int Code { get; set; }
-    public string Message { get; set; }
-    public string data { get; set; }
     
     [HttpPost]
-
+    [Route("api/v1/register")]
     public async Task<Responses<User?>> RegisterAsync(UserDto request)
     {
         var user = new User

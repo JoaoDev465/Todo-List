@@ -1,5 +1,5 @@
 ﻿using Apicontext.File;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using TodoList.Proj.Models;
 using TodoListCore.ControllersHandlers;
 using TodoListCore.Response;
@@ -7,9 +7,10 @@ using ViewModels.Todo;
 
 namespace TodoList.Proj.Handlers.PostHandler;
 
-[Route("api/v1/post")]
 public class TaskhandlerCreate(Context context): ITaskHandlerCreate
 {
+    [HttpPost]
+    [Route("api/v1/post")]
     public async Task<Responses<Todo?>> CreateAsync(TodoDTO request)
     {
         var tasks = new Todo

@@ -1,5 +1,6 @@
 ﻿using Apicontext.File;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
 using TodoListCore.ControllersHandlers;
@@ -13,8 +14,9 @@ namespace TodoList.Proj.Controllers.PostControllers;
 
 public class LoginHandler(Context context, IGenerateTokenService service): ILoginHandler
 {
- 
-
+   
+    [HttpPost]
+    [Route("api/v1/login")]
     public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)
     {
         var user = await context.Users.FirstOrDefaultAsync(x=>x.Email== request.UserEmail);

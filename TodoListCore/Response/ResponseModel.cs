@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using TodoList.Proj.Models;
 
 namespace TodoListCore.Response;
 
@@ -18,7 +19,7 @@ public class Responses<TData>
         Message = message;
     }
 
-    public static Responses<TData>Error(TData data,
+    public static Responses<TData> Error(TData data,
         int code = Configurations.DefaultstatusError,
         string? message = null) => new Responses<TData>(default, code, message);
 

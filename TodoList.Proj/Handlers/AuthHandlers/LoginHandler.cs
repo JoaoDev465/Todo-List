@@ -16,7 +16,7 @@ public class LoginHandler(Context context, IGenerateTokenService service): ILogi
 {
    
     [HttpPost]
-    [Route("api/v1/login")]
+    [Route("api/v1login")]
     public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)
     {
         var user = await context.Users.FirstOrDefaultAsync(x=>x.Email== request.UserEmail);

@@ -11,7 +11,7 @@ namespace TodoList.Proj.Handlers.DeleteHandler;
 public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
 {
     [HttpDelete]
-    [Route("api/v1/tasks{id}")]
+    [Route("api/v1/tasks/{id}")]
     public async Task<Responses<Todo?>> DeleteAsync(TodoDTO request)
     {
         var content = new Todo

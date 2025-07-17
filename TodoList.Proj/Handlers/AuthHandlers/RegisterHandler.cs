@@ -9,7 +9,7 @@ using ViewModels.User;
 
 namespace TodoList.Proj.Handlers.AuthHandlers;
 
-public class LoginController(Context context, IPasswordHasher<User> hasher) : IRegisterHandler
+public class RegisterHandler(Context context, IPasswordHasher<User> hasher) : IRegisterHandler
 {
    
     

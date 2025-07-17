@@ -3,6 +3,10 @@ using TodoList.Proj.Extensions.ExtensiveServices;
 
 var builder = WebApplication.CreateBuilder(args); 
 builder.CorsServices();
+builder.HandlerTaskDependencies();
+builder.HandlerUserDependencie();
+builder.HAndlerAuthLoginService();
+builder.HAndlerAuthRegisterService();
 builder.DbContextServices();
 builder.TokenService();
 builder.EmailService();

@@ -39,6 +39,7 @@
   <ItemGroup>
     <Folder Include="IntegrationTests\" />
     <Folder Include="MockTests\" />
+    <Folder Include="UniTests\" />
   </ItemGroup>
   
 

@@ -9,7 +9,7 @@ using Assert = Xunit.Assert;
 
 namespace TodoListTest.MockTests.TestTaskHandlers;
 
-public class TaskHandlerCreate
+public class TestTaskHandlerCreate
 {
 
     [Fact]

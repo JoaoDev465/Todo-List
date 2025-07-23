@@ -39,7 +39,8 @@
   <ItemGroup>
     <Folder Include="IntegrationTests\" />
     <Folder Include="MockTests\" />
-    <Folder Include="UniTests\" />
+    <Folder Include="UniTests\TestHandlers\TestLoginHandler\" />
+    <Folder Include="UniTests\TestHandlers\TestUserHandler\" />
   </ItemGroup>
   
 

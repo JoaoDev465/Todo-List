@@ -20,7 +20,7 @@ public class PutTaskHandler(Context context):IPutTaskHandler
                 Description = request.DescriptionOfTask
             };
             var task = context.Todos.FirstOrDefaultAsync
-                (x => x.Id== request.TaskId && request.TaskId == x.Id);
+                (x => x.Id== request.Id && request.Id == x.Id);
             if (task is null)
             {
                 return Responses<Todo?>.Error(null,404,"tarefa não encontrada");
@@ -36,7 +36,7 @@ public class PutTaskHandler(Context context):IPutTaskHandler
                 return Responses<Todo?>.Error(null,500,"falha interna no servidor");
             }
 
-            return new Responses<Todo?>(content, 200, $"tarefa {request.TaskId} atualizada");
+            return new Responses<Todo?>(content, 200, $"tarefa {request.Id} atualizada");
 
         }
     }

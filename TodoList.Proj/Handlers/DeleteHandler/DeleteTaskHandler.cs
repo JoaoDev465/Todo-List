@@ -19,7 +19,7 @@ public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
             Task = request.Task,
             Description = request.DescriptionOfTask
         };
-        var task = await  context.Todos.FirstOrDefaultAsync(x => x.Id == request.userId && request.userId == x.Id);
+        var task = await  context.Todos.FirstOrDefaultAsync(x => x.Id == request.Id);
         if (task is null)
         {
             return Responses<Todo?>.Error(null,404,"usuário não encontrado");

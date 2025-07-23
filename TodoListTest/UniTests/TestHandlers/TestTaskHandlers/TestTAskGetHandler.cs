@@ -1,0 +1,39 @@
+﻿using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Data;
+using TodoList.Proj.Handlers.GetHandler;
+using TodoList.Proj.Models;
+using ViewModels.Todo;
+using Xunit;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+
+namespace TodoListTest.MockTests.TestTaskHandlers;
+
+public class TestTAskGetHandler
+{
+    [Fact]
+    public async Task Test_IsValid_When_ReturGenericContent()
+    {
+        var options = new DbContextOptionsBuilder<Context>()
+            .UseInMemoryDatabase(databaseName: "TODO").Options;
+
+        var context = new Context(options);
+
+        var handler = new TaskHandlerGet(context);
+
+        context.Todos.Add(new Todo
+        {
+            Id = 1,
+            Task = "ir ao supermercado"
+        });
+        await context.SaveChangesAsync();
+        
+        var request = new TodoDTO
+        {
+            Id = 1
+        };
+
+        var result =  await handler.GetByIdAsync(request);
+        
+        Assert.IsNotNull(result);
+    }
+}

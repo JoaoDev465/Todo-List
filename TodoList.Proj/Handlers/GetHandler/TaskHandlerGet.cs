@@ -39,7 +39,7 @@ public class TaskHandlerGet(Context context):ITaskHandlerGet
             Task = request.Task,
             Description = request.DescriptionOfTask
         };
-        var task = await context.Todos.FirstOrDefaultAsync(x => x.Id == request.TaskId);
+        var task = await context.Todos.FirstOrDefaultAsync(x => x.Id == request.Id);
         if (task is null)
         {
             return Responses<Todo?>.Error(null,404,"usuário não encontrado");

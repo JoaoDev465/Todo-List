@@ -5,7 +5,7 @@ namespace ViewModels.Todo;
 
 public class TodoDTO : Request
 {
-    public int TaskId { get; set; }
+    public int Id { get; set; }
     public bool Start_Task { get; set; }
     public DateTime InitializeDateTimeTask { get; set; }
     [Required(ErrorMessage = "o campo tarefa é obrigatório")]

@@ -19,6 +19,7 @@ public class GenerateTokenService: IGenerateTokenService
     {
         _securityTokenHandler = securityTokenHandler;
     }
+    
 
     public  string TokenGenerator(User user)
     {

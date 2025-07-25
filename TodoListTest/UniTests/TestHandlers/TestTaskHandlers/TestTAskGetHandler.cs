@@ -6,15 +6,15 @@ using ViewModels.Todo;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace TodoListTest.MockTests.TestTaskHandlers;
+namespace TodoListTest.UniTests.TestHandlers.TestTaskHandlers;
 
 public class TestTAskGetHandler
 {
     [Fact]
-    public async Task Test_IsValid_When_ReturGenericContent()
+    public async Task Test_IsValid_When_ReturGenericRequest()
     {
         var options = new DbContextOptionsBuilder<Context>()
-            .UseInMemoryDatabase(databaseName: "TODO").Options;
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString() ).Options;
 
         var context = new Context(options);
 

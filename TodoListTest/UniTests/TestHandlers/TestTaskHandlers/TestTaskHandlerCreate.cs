@@ -1,22 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Moq;
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.PostHandler;
-using TodoListCore.ControllersHandlers;
 using ViewModels.Todo;
 using Xunit;
 using Assert = Xunit.Assert;
 
-namespace TodoListTest.MockTests.TestTaskHandlers;
+namespace TodoListTest.UniTests.TestHandlers.TestTaskHandlers;
 
 public class TestTaskHandlerCreate
 {
 
     [Fact]
-    public async Task TestTaskCreate_When_Content_Is_Created()
+    public async Task TestTaskCreate_When_Request_Is_Valid()
     {
         var options = new DbContextOptionsBuilder<Context>()
-            .UseInMemoryDatabase(databaseName: "TODO")
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
 
         var context = new Context(options);

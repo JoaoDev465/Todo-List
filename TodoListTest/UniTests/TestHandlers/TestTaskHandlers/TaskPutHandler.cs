@@ -1,21 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
-using TodoList.Proj.Handlers.PostHandler;
 using TodoList.Proj.Handlers.PutHandlers;
 using TodoList.Proj.Models;
 using ViewModels.Todo;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace TodoListTest.UniTests.TestTaskHandlers;
+namespace TodoListTest.UniTests.TestHandlers.TestTaskHandlers;
 
 public class TestTaskPutHandler
 {
     [Fact]
-    public async Task TestHAndlerPut_Assert_When_GenericDataIsUpdated()
+    public async Task TestHAndlerPut_Assert_When_GenericRequestIsUpdated()
     {
         var options = new DbContextOptionsBuilder<Context>()
-            .UseInMemoryDatabase(databaseName: "TODO").Options;
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
 
         var context = new Context(options);
 

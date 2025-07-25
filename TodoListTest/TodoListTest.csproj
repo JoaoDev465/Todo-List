@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Compile Remove="Test1.cs" />
+    <Compile Remove="DataBaseFixtureUnique.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,8 +40,6 @@
   <ItemGroup>
     <Folder Include="IntegrationTests\" />
     <Folder Include="MockTests\" />
-    <Folder Include="UniTests\TestHandlers\TestLoginHandler\" />
-    <Folder Include="UniTests\TestHandlers\TestUserHandler\" />
   </ItemGroup>
   
 

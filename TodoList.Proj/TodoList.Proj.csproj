@@ -30,18 +30,22 @@
   <ItemGroup>
     <Compile Remove="p.cs" />
     <Compile Remove="Services\FalseTokenServices\**" />
+    <Compile Remove="InterfaceModel\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Services\FalseTokenServices\**" />
+    <EmbeddedResource Remove="InterfaceModel\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Services\FalseTokenServices\**" />
+    <Content Remove="InterfaceModel\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Services\FalseTokenServices\**" />
+    <None Remove="InterfaceModel\**" />
   </ItemGroup>
 
   <ItemGroup>

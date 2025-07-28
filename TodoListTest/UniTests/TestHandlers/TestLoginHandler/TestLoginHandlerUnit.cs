@@ -28,7 +28,7 @@ public class TestLoginHandlerUnit
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
         var context = new Context(options);
         
-        var handler = new LoginHandler(context, new GenerateTokenService(new JwtSecurityTokenHandler()));
+        var handler = new LoginHandler(context,new GenerateTokenService("abc1234"));
         var request = new LoginDTO
         {
             UserId = 1,

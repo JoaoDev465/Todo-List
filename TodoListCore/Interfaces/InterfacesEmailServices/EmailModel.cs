@@ -1,4 +1,4 @@
-﻿namespace TodoList.Proj.InterfaceModel.InterfacesEmailServices;
+﻿namespace TodoListCore.Interfaces.InterfacesEmailServices;
 
 public class EmailModel
 {

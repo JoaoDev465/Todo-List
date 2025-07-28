@@ -1,5 +1,5 @@
-﻿using TodoList.Proj.InterfaceModel.InterfacesEmailServices;
-using TodoList.Proj.Services.EmailService;
+﻿using TodoList.Proj.Services.EmailService;
+using TodoListCore.Interfaces.InterfacesEmailServices;
 
 namespace TodoList.Proj.Extensions.ExtensiveServices;
 

@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using TodoList.Proj.Extensions.ExtensiveObjects;
-using TodoList.Proj.InterfaceModel;
 using TodoList.Proj.Models;
 using TodoListCore.Interfaces;
 
@@ -11,13 +10,14 @@ namespace TodoList.Proj.Services.TokenService;
 
 public class GenerateTokenService: IGenerateTokenService
 {
-  
 
+    private readonly string _JwtKey;
     private readonly JwtSecurityTokenHandler _securityTokenHandler;
 
-    public GenerateTokenService(JwtSecurityTokenHandler securityTokenHandler)
+    public GenerateTokenService(string jwtKey)
     {
-        _securityTokenHandler = securityTokenHandler;
+        _JwtKey = jwtKey; 
+        _securityTokenHandler = new JwtSecurityTokenHandler();
     }
     
 

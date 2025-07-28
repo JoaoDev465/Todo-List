@@ -1,10 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿
 using System.Net;
 using System.Net.Mail;
-using Moq;
-using Resend;
-using TodoList.Proj.InterfaceModel;
-using TodoList.Proj.InterfaceModel.InterfacesEmailServices;
+using TodoListCore.Interfaces.InterfacesEmailServices;
 
 namespace TodoList.Proj.Services.EmailService;
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.Interfaces;
@@ -13,7 +14,7 @@ public class RegisterHandler(Context context, IPasswordHasher<User> hasher) : IR
 {
    
     
-    
+    [AtributeKey]
     [HttpPost]
     [Route("api/v1/register")]
     public async Task<Responses<User?>> RegisterAsync(UserDto request)

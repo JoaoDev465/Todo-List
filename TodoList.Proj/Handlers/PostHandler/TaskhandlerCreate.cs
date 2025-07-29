@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.ControllersHandlers;
@@ -9,6 +11,8 @@ namespace TodoList.Proj.Handlers.PostHandler;
 
 public class TaskhandlerCreate(Context context): ITaskHandlerCreate
 {
+    [AtributeKey]
+    [Authorize]
     [HttpPost]
     [Route("api/v1/post")]
     public async Task<Responses<Todo?>> CreateAsync(TodoDTO request)

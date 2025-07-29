@@ -1,3 +1,4 @@
+using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Extensions.ExtensiveAppConfigurations;
 using TodoList.Proj.Extensions.ExtensiveServices;
 
@@ -18,7 +19,9 @@ builder.TestAuthenticationEscheme();
 builder.TestAuthenticationSchemeAddChallengeAuth();
 var app = builder.Build();
 
-app.UseCors("MyPolicy");
+string? ConnectionCors = builder.Configuration.GetValue<string>("BeckEndCorsName");
+app.UseCors(ConnectionCors);
+app.UseMiddleware<AtributeKey>();
 app.AuthenticantionAndAuthorization();
 app.SmtpConfigurationsGetvalues();
 app.ConfigurationsJSONSApiKey();

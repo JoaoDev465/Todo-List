@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
+using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoListCore.IHandlers;
 using TodoListCore.Interfaces;
@@ -12,6 +13,7 @@ namespace TodoList.Proj.Handlers.AuthHandlers;
 public class LoginHandler(Context context, IGenerateTokenService service): ILoginHandler
 {
    
+    [AtributeKey]
     [HttpPost]
     [Route("api/v1login")]
     public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)

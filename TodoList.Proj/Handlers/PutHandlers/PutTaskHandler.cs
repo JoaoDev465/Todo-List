@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.IHandlers.IPutHandler;
@@ -10,6 +12,8 @@ namespace TodoList.Proj.Handlers.PutHandlers;
 
 public class PutTaskHandler(Context context):IPutTaskHandler
 {
+        [AtributeKey]
+        [Authorize]
         [HttpPut]
         [Route("api/v1/task/{id}")]
        public  async Task<Responses<Todo?>> PutAsync(TodoDTO request)

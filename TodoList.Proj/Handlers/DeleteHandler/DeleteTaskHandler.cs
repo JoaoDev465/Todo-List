@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.IHandlers.IDeleteHandlers;
@@ -10,6 +12,8 @@ namespace TodoList.Proj.Handlers.DeleteHandler;
 
 public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
 {
+    [AtributeKey]
+    [Authorize]
     [HttpDelete]
     [Route("api/v1/tasks/{id}")]
     public async Task<Responses<Todo?>> DeleteAsync(TodoDTO request)

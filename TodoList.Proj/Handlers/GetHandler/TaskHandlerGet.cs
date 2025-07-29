@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore;
@@ -12,6 +14,8 @@ namespace TodoList.Proj.Handlers.GetHandler;
 
 public class TaskHandlerGet(Context context):ITaskHandlerGet
 {
+    [AtributeKey]
+    [Authorize]
     [HttpGet]
     [Route("api/v1/tasks")]
     public async Task<PageResponse<Todo>> GetTaskListAsync(TodoDTO request)

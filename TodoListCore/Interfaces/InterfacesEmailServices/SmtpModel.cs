@@ -1,22 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 
 namespace TodoListCore.Interfaces.InterfacesEmailServices;
 
-public class SmtpModel
+public interface ISmtpClientWrapper
 {
-    [Required]
-    public string? Host{ get; set; } = String.Empty;
-    [Required]
-    public string? Port { get; set; }
-    [Required]
-    public string? Password { get; set; } = String.Empty;
-    [Required]
-    public string? UserName { get; set; } = String.Empty;
-}
-
-public interface ISmtpConfiguration
-{
-    public void Configurations(SmtpModel smtpModel)
+     void send(MailMessage message)
     {
         
     }

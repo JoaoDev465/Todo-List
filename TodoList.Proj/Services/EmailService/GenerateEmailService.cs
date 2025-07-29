@@ -10,53 +10,52 @@ namespace TodoList.Proj.Services.EmailService;
 
 public class GenerateEmailService : IGenerateEmailService
 {
-   
-    private readonly SmtpClient? _smtpClient;
+    private readonly SmtPClientWrapper? _wrapper;
     
-    public GenerateEmailService(IConfiguration configuration)
+
+    public GenerateEmailService(SmtPClientWrapper? wrapper)
     {
-      
-        _smtpClient = new SmtpClient(Configuration._SmTpService.Host,
+       
+        _wrapper = wrapper;
+    }
+    
+    public GenerateEmailService()
+    {
+        var smtpClient = new SmtpClient
+        (Configuration._SmTpService.Host, 
             Configuration._SmTpService.Port);
 
-        _smtpClient.Credentials = new NetworkCredential(
+        smtpClient.Credentials = new NetworkCredential(
             Configuration._SmTpService.Username,
             Configuration._SmTpService.Password);
 
-        _smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-        _smtpClient.EnableSsl = true;
+        smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+        smtpClient.EnableSsl = true;
     }
-    
-    public bool SendEmailusingConfigurationsSMTP(string Subject,
-        string Body,
-        string ToEmail = "joaodev465@gmail.com", 
-        string FromEmail = "joaodev465@gmail.com")
-    {
 
-        MailMessage mail = new MailMessage()
+    public void IsendEmail(string body,
+        string subject  ,
+        string fromEmail ="joaodev465@gmail.com",
+        string toEmail = "joaodev465@gmail.com")
+    {
+        MailMessage mail = new MailMessage
         {
-            From = new MailAddress(FromEmail),
-            Subject = Subject,
-            Body = Body
-        }; mail.To.Add(new MailAddress(ToEmail));
+            From = new MailAddress(fromEmail),
+            Subject = subject,
+            Body = body,
+        }; mail.To.Add(toEmail);
         
         try
         {
-            _smtpClient.Send(mail);
+            _wrapper.Send(mail);
             Console.WriteLine("Email enviado com sucesso");
-            return true;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-
     }
 
-
-    public void IsendEmail(EmailModel model)
-    {
-        throw new NotImplementedException();
-    }
+   
 }

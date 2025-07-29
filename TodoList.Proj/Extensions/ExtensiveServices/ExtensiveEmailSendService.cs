@@ -8,6 +8,7 @@ public static class ExtensiveEmailSendService
     public static void EmailService(this WebApplicationBuilder builder)
     {
         builder.Services.AddTransient<IGenerateEmailService,GenerateEmailService>();
+        builder.Services.AddTransient<ISmtpClientWrapper,SmtPClientWrapper>();
     }
 
 }

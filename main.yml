@@ -1,0 +1,32 @@
+﻿name: Todo-List-Proj
+
+on:
+  push:
+    branches:
+      - development
+  pull request:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@
+      with:
+        dotnet-version: 9.0.x
+        
+    - name: Restore dependencies
+      run : dotnet restore TodoList.sln
+      
+    - name: build project
+      run : dotnet build TodoList.sln --no-restore --configuration Release
+      
+    - name: build tests
+      run : dotnet test TodoList.sln --no-build --verbosy normal
+      

@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 using TodoList.Proj.Models;
 using TodoList.Proj.Services.TokenService;
 using TodoListCore.Interfaces;
@@ -11,10 +12,13 @@ namespace TodoListTest.UniTests.TestServices;
 public class TestUnitGenerateTokenServices
 {
     private readonly ITestOutputHelper _testOutputHelper;
+    private readonly string? _configuration;
 
-    public TestUnitGenerateTokenServices(ITestOutputHelper testOutputHelper)
+    public TestUnitGenerateTokenServices(ITestOutputHelper testOutputHelper,
+        IConfiguration conf)
     {
         _testOutputHelper = testOutputHelper;
+        _configuration = conf["JwtSettings:secret"];
     }
 
     [Fact]
@@ -24,7 +28,15 @@ public class TestUnitGenerateTokenServices
         {
             Name = "Pastel"
         };
-        var Service = new GenerateTokenService("abc1234");
+        var InMemorySettings = new Dictionary<string, string>()
+        {
+            { "JwtSettings:secret", "8236tqyewdodqijooiqwjnqljdqwhduoiqkqheq" }
+        };
+
+        IConfiguration configuration = new ConfigurationManager()
+            .AddInMemoryCollection(InMemorySettings).Build();
+        
+        var Service = new GenerateTokenService(configuration);
 
         var token = Service.TokenGenerator(user);
         _testOutputHelper.WriteLine(token);

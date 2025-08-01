@@ -31,21 +31,25 @@
     <Compile Remove="p.cs" />
     <Compile Remove="Services\FalseTokenServices\**" />
     <Compile Remove="InterfaceModel\**" />
+    <Compile Remove=".github\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Services\FalseTokenServices\**" />
     <EmbeddedResource Remove="InterfaceModel\**" />
+    <EmbeddedResource Remove=".github\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Services\FalseTokenServices\**" />
     <Content Remove="InterfaceModel\**" />
+    <Content Remove=".github\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Services\FalseTokenServices\**" />
     <None Remove="InterfaceModel\**" />
+    <None Remove=".github\**" />
   </ItemGroup>
 
   <ItemGroup>

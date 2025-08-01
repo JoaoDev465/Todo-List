@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - development
-  pull request:
-    branches:
-      - development
 
 jobs:
   build:

@@ -11,12 +11,12 @@ namespace TodoList.Proj.Services.TokenService;
 public class GenerateTokenService: IGenerateTokenService
 {
 
-    private readonly string _JwtKey;
+    private readonly string? _configuration;
     private readonly JwtSecurityTokenHandler _securityTokenHandler;
 
-    public GenerateTokenService(string jwtKey)
+    public GenerateTokenService(IConfiguration configuration)
     {
-        _JwtKey = jwtKey; 
+        _configuration = configuration["JwtSettings:secret"];
         _securityTokenHandler = new JwtSecurityTokenHandler();
     }
     

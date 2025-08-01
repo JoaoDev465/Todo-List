@@ -14,29 +14,26 @@ public class LoginWebHandler : ILoginHandler
 {
     private ILoginHandler _loginHandlerImplementation;
     private readonly HttpClient _client;
+    private readonly IGenerateTokenService _service;
 
-
-    public int Code { get; set; }
-    public string Message{ get; set; }
-    public string data { get; set; }
-  
-
-    public LoginWebHandler( HttpClient client)
+    public LoginWebHandler( HttpClient client,
+        IGenerateTokenService service)
     {
         _client = client;
+        _service = service;
     }
-    public async Task <Responses<string>> LoginAsync(LoginDTO request)
+    public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)
     {
+        var token = _service.TokenGenerator(new User());
         var userlogin =  await _client.PostAsJsonAsync("api/v1/login", request);
         
 
         return userlogin.IsSuccessStatusCode
-            ? new Responses<string>("login realizado com sucesso", 200, "login realizado com sucesso")
-            : new Responses<string>(null,400,"erro");
+            ? new Responses<TokenResponse?>(new TokenResponse
+            {
+                Token = token
+            })
+            : new Responses<TokenResponse?>(null,400,"erro");
     }
-
-    public Task<Responses<User?>> RegisterAsync(UserDto request)
-    {
-        return _loginHandlerImplementation.RegisterAsync(request);
-    }
+    
 }

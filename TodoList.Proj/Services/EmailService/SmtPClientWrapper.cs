@@ -5,15 +5,16 @@ namespace TodoList.Proj.Services.EmailService;
 
 public class SmtPClientWrapper: ISmtpClientWrapper
 {
-    private readonly ISmtpClientWrapper _smtpConfiguration;
+    private readonly string? _Configuration;
 
-    public SmtPClientWrapper(ISmtpClientWrapper configuration)
+    public SmtPClientWrapper(IConfiguration conf)
     {
-        _smtpConfiguration = configuration;
+      
+       _Configuration = conf["ConfSMTP"];
     }
 
     public void Send(MailMessage message)
     {
-        _smtpConfiguration.send(message);
+        
     }
 }

@@ -16,5 +16,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5280/") });
 builder.Services.AddTransient<ILoginHandler,LoginWebHandler>();
+builder.Services.AddScoped<IGenerateTokenService>();
 
 await builder.Build().RunAsync();

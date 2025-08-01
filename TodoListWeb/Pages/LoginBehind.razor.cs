@@ -46,7 +46,7 @@ public  partial class LoginBehind : ComponentBase
             else
             {
               
-                  await Js.InvokeVoidAsync("localStorage.setItem", "authToken", Handler.data );
+                  await Js.InvokeVoidAsync("localStorage.setItem", "authToken", result.Data );
                   Snackbar.Add(result.Message,Severity.Success);
                   await Task.Delay(200);
                   NavigationManager.NavigateTo("/");

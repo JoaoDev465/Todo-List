@@ -20,8 +20,7 @@ builder.TestAuthenticationSchemeAddChallengeAuth();
 var app = builder.Build();
 
 string? ConnectionCors = builder.Configuration.GetValue<string>("BeckEndCorsName");
-app.UseCors(ConnectionCors);
-app.UseMiddleware<AtributeKey>();
+app.UseCors("allow");
 app.AuthenticantionAndAuthorization();
 app.SmtpConfigurationsGetvalues();
 app.ConfigurationsJSONSApiKey();

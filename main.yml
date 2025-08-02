@@ -25,5 +25,5 @@ jobs:
       run : dotnet build TodoList.sln --no-restore --configuration Release
       
     - name: build tests
-      run : dotnet test TodoList.sln --no-build --verbosy normal
+      run : dotnet test TodoList.sln --no-build --verbosity normal
       

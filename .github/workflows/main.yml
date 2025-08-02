@@ -28,6 +28,3 @@ jobs:
       run: dotnet test --verbosity normal
       
       
-    - name: build tests
-      run : dotnet test TodoList.sln --no-build --verbosity normal
-      

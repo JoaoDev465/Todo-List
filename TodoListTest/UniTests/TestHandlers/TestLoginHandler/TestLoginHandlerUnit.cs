@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.InteropServices.JavaScript;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Moq;
 using TodoList.Proj.Data;
@@ -15,6 +16,7 @@ using ViewModels.User;
 using Xunit;
 using Xunit.Abstractions;
 using Assert = Xunit.Assert;
+using IConfiguration = Castle.Core.Configuration.IConfiguration;
 
 namespace TodoListTest.UniTests.TestHandlers.TestLoginHandler;
 
@@ -27,8 +29,15 @@ public class TestLoginHandlerUnit
         var options = new DbContextOptionsBuilder<Context>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
         var context = new Context(options);
+
+        var inMemorySettings = new Dictionary<string, string>()
+        {
+            { "JwtSettings", "983279y9872yhudkhqbdkjasbmaslxqljdkoqmoq" }
+        };
+        IConfigurationRoot configuration = new ConfigurationManager()
+            .AddInMemoryCollection(inMemorySettings).Build();
         
-        var handler = new LoginHandler(context,new GenerateTokenService("abc1234"));
+        var handler = new LoginHandler(context,new GenerateTokenService(configuration));
         var request = new LoginDTO
         {
             UserId = 1,

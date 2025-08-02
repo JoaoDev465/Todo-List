@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 8.0.x
         
     - name: Restore dependencies
       run : dotnet restore TodoList.sln
@@ -25,5 +25,5 @@ jobs:
       run : dotnet build TodoList.sln --no-restore --configuration Release
       
     - name: build tests
-      run : dotnet test TodoList.sln --no-build --verbosity normal
+      run : dotnet test TodoList.sln --verbosity normal
       

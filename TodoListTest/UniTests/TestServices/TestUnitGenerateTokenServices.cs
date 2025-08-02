@@ -12,13 +12,11 @@ namespace TodoListTest.UniTests.TestServices;
 public class TestUnitGenerateTokenServices
 {
     private readonly ITestOutputHelper _testOutputHelper;
-    private readonly string? _configuration;
+  
 
-    public TestUnitGenerateTokenServices(ITestOutputHelper testOutputHelper,
-        IConfiguration conf)
+    public TestUnitGenerateTokenServices(ITestOutputHelper testOutputHelper)
     {
         _testOutputHelper = testOutputHelper;
-        _configuration = conf["JwtSettings:secret"];
     }
 
     [Fact]

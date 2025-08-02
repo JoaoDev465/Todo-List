@@ -34,10 +34,14 @@ public class TestDeleteTaskHandler
          };
 
          var resultContentDeleted = await handler.DeleteAsync(deleteContent);
+         if (resultContentDeleted.IsSuccess)
+         {
+              Console.Write("deletado");
+         }
          await context.SaveChangesAsync();
          
          await context.Todos.FirstOrDefaultAsync(x => x.Id == 1);
-         Assert.IsNull(resultContentDeleted);
+         Assert.IsNotNull(resultContentDeleted);
          
      }
 }

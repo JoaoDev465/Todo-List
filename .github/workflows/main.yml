@@ -4,20 +4,17 @@ on:
   push:
     branches:
       - development
-  pull request:
-    branches:
-      - development
-
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
   
-  steps:
+    steps:
     - name: Checkout code
       uses: actions/checkout@v3
       
     - name: Setup .NET
-      uses: actions/setup-dotnet@
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 9.0.x
         

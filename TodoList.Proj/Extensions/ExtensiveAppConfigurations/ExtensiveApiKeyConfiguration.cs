@@ -2,7 +2,7 @@
 
 public static class ExtensiveApiKeyConfiguration
 {
-    public static void ConfigurationsJSONSApiKey(this WebApplication builder)
+    public static void ConfigurationsJsonsApiKey(this WebApplication builder)
     {
         builder.Configuration.GetValue<string>("apikey");
     }

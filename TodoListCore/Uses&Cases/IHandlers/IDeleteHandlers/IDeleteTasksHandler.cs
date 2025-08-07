@@ -1,10 +1,10 @@
 ﻿using TodoList.Proj.Models;
 using TodoListCore.Response;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 
 namespace TodoListCore.IHandlers.IDeleteHandlers;
 
 public interface IDeleteTasksHandler
 {
-    Task<Responses<Todo?>> DeleteAsync(TodoDTO request);
+    Task<Responses<Todo?>> DeleteAsync(TodoDto request);
 }

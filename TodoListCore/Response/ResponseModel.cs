@@ -5,8 +5,7 @@ namespace TodoListCore.Response;
 
 public class Responses<TData>
 {
-    private readonly int _code;
-
+  
     [JsonConstructor]
     public Responses() {}
 
@@ -15,7 +14,7 @@ public class Responses<TData>
         string? message = null)
     {
         Data = data;
-        _code = code;
+        Code = code;
         Message = message;
     }
 
@@ -28,6 +27,6 @@ public class Responses<TData>
 
     public TData? Data { get; set; }
 
-    [JsonIgnore] public bool IsSuccess => _code is >= 200 and <= 299;
-    [JsonIgnore] public bool IsError => _code is >= 400 and <= 499;
+    [JsonIgnore] public bool IsSuccess => Code is >= 200 and <= 299;
+    [JsonIgnore] public bool IsError => Code is >= 400 and <= 499;
 }

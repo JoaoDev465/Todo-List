@@ -5,24 +5,36 @@ using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.Interfaces;
+using TodoListCore.Models;
 using TodoListCore.Response;
 using ViewModels.User;
 
 namespace TodoList.Proj.Handlers.AuthHandlers;
 
-public class RegisterHandler(Context context, IPasswordHasher<User> hasher) : IRegisterHandler
+[ApiController]
+public class RegisterHandler(Context context, IPasswordHasher<User?> hasher) : IRegisterHandler
 {
    
     
-    [AtributeKey]
+   
     [HttpPost]
     [Route("api/v1/register")]
     public async Task<Responses<User?>> RegisterAsync(UserDto request)
     {
+       
+                                                           
+                       
         var user = new User
         {
-            Email = request.UserEmail,PasswordHash = hasher.HashPassword(null,request.UserPassword)
+            Email = request.UserEmail,
+           PasswordHash =   request.UserPassword,
+           Roles = new List<Role>
+           {
+               new Role{Name = "user"}
+           }
         };
+        user.PasswordHash = hasher.HashPassword(null, request.UserPassword);
+        
         if (await context.Users.AnyAsync(x => x.Email == request.UserEmail))
         {
             return Responses<User?>.Error(null, 400,"usuário já,existente");

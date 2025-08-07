@@ -1,7 +1,6 @@
 using System.Collections.Frozen;
 using System.ComponentModel.DataAnnotations;
 using TodoListCore;
-using ViewModels.Role;
 
 
 namespace ViewModels.User;
@@ -22,6 +21,7 @@ public class UserDto : Request
     public bool UserAreOnline { get; set; }
     
     public string Slug { get; set; } = string.Empty;
+    
     
 }
 

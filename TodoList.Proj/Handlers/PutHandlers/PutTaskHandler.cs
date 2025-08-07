@@ -6,17 +6,18 @@ using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.IHandlers.IPutHandler;
 using TodoListCore.Response;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 
 namespace TodoList.Proj.Handlers.PutHandlers;
 
+[ApiController]
 public class PutTaskHandler(Context context):IPutTaskHandler
 {
         [AtributeKey]
-        [Authorize]
+        [Authorize("user")]
         [HttpPut]
         [Route("api/v1/task/{id}")]
-       public  async Task<Responses<Todo?>> PutAsync(TodoDTO request)
+       public  async Task<Responses<Todo?>> PutAsync(TodoDto request)
         {
             var content = new Todo
             {

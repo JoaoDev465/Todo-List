@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data.FluentApi;
 using TodoList.Proj.Models;
+using TodoListCore.Models;
 
 namespace TodoList.Proj.Data;
 

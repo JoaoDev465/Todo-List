@@ -6,17 +6,18 @@ using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.IHandlers.IDeleteHandlers;
 using TodoListCore.Response;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 
 namespace TodoList.Proj.Handlers.DeleteHandler;
 
+[ApiController]
 public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
 {
     [AtributeKey]
-    [Authorize]
+    [Authorize("user")]
     [HttpDelete]
     [Route("api/v1/tasks/{id}")]
-    public async Task<Responses<Todo?>> DeleteAsync(TodoDTO request)
+    public async Task<Responses<Todo?>> DeleteAsync(TodoDto request)
     {
         var content = new Todo
         {

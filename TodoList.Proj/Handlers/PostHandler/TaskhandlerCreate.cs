@@ -1,26 +1,39 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
 using TodoList.Proj.Models;
 using TodoListCore.ControllersHandlers;
 using TodoListCore.Response;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 
 namespace TodoList.Proj.Handlers.PostHandler;
 
-public class TaskhandlerCreate(Context context): ITaskHandlerCreate
+[ApiController]
+public class TaskhandlerCreate(Context context, IHttpContextAccessor accessor): ITaskHandlerCreate
 {
+    
     [AtributeKey]
-    [Authorize]
+    [Authorize("user")]
     [HttpPost]
     [Route("api/v1/post")]
-    public async Task<Responses<Todo?>> CreateAsync(TodoDTO request)
+    public async Task<Responses<Todo?>> CreateAsync(TodoDto request)
     {
+        var user = accessor.HttpContext.User;
+        var userIdclaim = user?.FindFirst(ClaimTypes.NameIdentifier);
+
+        if (userIdclaim == null)
+        {
+            return Responses<Todo?>.Error(null,404,"não encontrado");
+        }
+        
         var tasks = new Todo
         {
             Task = request.Task,
-            Description = request.DescriptionOfTask
+            Description = request.DescriptionOfTask,
+            UserId = int.Parse(userIdclaim.Value)
         };
 
         try

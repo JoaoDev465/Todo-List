@@ -2,7 +2,8 @@ using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Extensions.ExtensiveAppConfigurations;
 using TodoList.Proj.Extensions.ExtensiveServices;
 
-var builder = WebApplication.CreateBuilder(args); 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
 builder.CorsServices();
 builder.HandlerTaskDependencies();
 builder.HandlerUserDependencie();
@@ -15,15 +16,14 @@ builder.PerformaceServices();
 builder.SwaggerApplicationService();
 builder.ControllerServicesAndBehavior();
 builder.TokenServiceConfiguration();
-builder.TestAuthenticationEscheme();
-builder.TestAuthenticationSchemeAddChallengeAuth();
 var app = builder.Build();
 
-string? ConnectionCors = builder.Configuration.GetValue<string>("BeckEndCorsName");
+
 app.UseCors("allow");
+app.UseRouting();
 app.AuthenticantionAndAuthorization();
 app.SmtpConfigurationsGetvalues();
-app.ConfigurationsJSONSApiKey();
+app.ConfigurationsJsonsApiKey();
 app.MapControllers();
 
 

@@ -2,7 +2,7 @@
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.GetHandler;
 using TodoList.Proj.Models;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
@@ -27,7 +27,7 @@ public class TestTAskGetHandler
         });
         await context.SaveChangesAsync();
         
-        var request = new TodoDTO
+        var request = new TodoDto
         {
             Id = 1
         };

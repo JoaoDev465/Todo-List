@@ -2,7 +2,7 @@
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.PutHandlers;
 using TodoList.Proj.Models;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
@@ -27,7 +27,7 @@ public class TestTaskPutHandler
         });
       await   context.SaveChangesAsync();
 
-      var updateRequest = new TodoDTO
+      var updateRequest = new TodoDto
       {
           userId = 1,
           Task = "jogar bola"

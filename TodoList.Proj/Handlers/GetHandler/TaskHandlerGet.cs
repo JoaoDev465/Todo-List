@@ -8,17 +8,18 @@ using TodoListCore;
 using TodoListCore.DTO;
 using TodoListCore.IHandlers.IGetHandler;
 using TodoListCore.Response;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 
 namespace TodoList.Proj.Handlers.GetHandler;
 
+[ApiController]
 public class TaskHandlerGet(Context context):ITaskHandlerGet
 {
     [AtributeKey]
-    [Authorize]
+    [Authorize("user")]
     [HttpGet]
     [Route("api/v1/tasks")]
-    public async Task<PageResponse<Todo>> GetTaskListAsync(TodoDTO request)
+    public async Task<PageResponse<Todo>> GetTaskListAsync(TodoDto request)
     {
         var content = new Todo
         {
@@ -35,8 +36,10 @@ public class TaskHandlerGet(Context context):ITaskHandlerGet
         return new PageResponse<Todo>(content,totalItens,currentpage);
     }
 
+    [AtributeKey]
+    [Authorize("user")]
     [HttpGet("api/v1/task/{id}")]
-    public async  Task<Responses<Todo?>> GetByIdAsync(TodoDTO request)
+    public async  Task<Responses<Todo?>> GetByIdAsync(TodoDto request)
     {
         var content = new Todo
         {

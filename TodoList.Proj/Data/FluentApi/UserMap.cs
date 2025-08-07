@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TodoList.Proj.Models;
+using TodoListCore.Models;
 
 namespace TodoList.Proj.Data.FluentApi;
 
@@ -29,20 +30,12 @@ public class UserMap: IEntityTypeConfiguration<User>
             .HasColumnType("Nvarchar")
             .HasMaxLength(200);
 
-        builder.Property(x => x.Slug)
-            .HasColumnName("Slug")
-            .HasColumnType("Nvarchar")
-            .HasMaxLength(100);
-
         builder.Property(x => x.PasswordHash)
             .IsRequired()
             .HasColumnName("PasswordHash")
             .HasColumnType("Nvarchar")
             .HasMaxLength(350);
-
-        builder.Property(x => x.IsOnline)
-            .HasDefaultValue(false);
-
+        
         // relationship many for many
         builder
             .HasMany(x => x.Roles)

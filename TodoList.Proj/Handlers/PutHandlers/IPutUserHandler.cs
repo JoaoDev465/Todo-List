@@ -12,10 +12,11 @@ using ViewModels.User;
 
 namespace TodoList.Proj.Handlers.PutHandlers;
 
+[ApiController]
 public class PutUserHandler(Context context, IPasswordHasher<User?> hasher):IPutUserHandler
 {
     [AtributeKey]
-    [Authorize]
+    [Authorize("user")]
     [HttpPut]
     [Route("api/v1/user/{id}")]
     public async Task<Responses<User?>> PutAsync(UserDto request)

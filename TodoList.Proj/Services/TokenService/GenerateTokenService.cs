@@ -11,19 +11,23 @@ namespace TodoList.Proj.Services.TokenService;
 public class GenerateTokenService: IGenerateTokenService
 {
 
-    private readonly string? _configuration;
+    private readonly string? _JwtKey;
     private readonly JwtSecurityTokenHandler _securityTokenHandler;
 
     public GenerateTokenService(IConfiguration configuration)
     {
-        _configuration = configuration["JwtSettings:secret"];
+        _JwtKey = configuration["JwtSettings:secret"];
         _securityTokenHandler = new JwtSecurityTokenHandler();
     }
     
 
     public  string TokenGenerator(User user)
     {
-        var claimfromuser = user.GetClaim();
+        var claimfromuser = new[]
+        {
+            new Claim(ClaimTypes.Role, "user"),
+            new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
+        };
         var securitySymmetricKey = _SymmetricSecurityKey();
         var tokenDescriptorConf = new SecurityTokenDescriptor
         {
@@ -39,7 +43,7 @@ public class GenerateTokenService: IGenerateTokenService
 
     public  SymmetricSecurityKey _SymmetricSecurityKey()
     {
-        var key = Encoding.ASCII.GetBytes(Configuration.JWTKey);
+        var key = Encoding.UTF8.GetBytes(_JwtKey);
         return new SymmetricSecurityKey(key);
     }
 

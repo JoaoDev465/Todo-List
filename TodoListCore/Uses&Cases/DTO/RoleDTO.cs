@@ -1,9 +1,8 @@
-using TodoListCore;
-
-namespace ViewModels.Role;
+namespace TodoListCore.Uses_Cases.DTO;
 
 
-public class RoleViews : Request
+public class RoleDto : Request
 {
-    public string Name_Role { get; set; } = string.Empty;
+    public string NameRole { get; set; } = string.Empty;
 }
+

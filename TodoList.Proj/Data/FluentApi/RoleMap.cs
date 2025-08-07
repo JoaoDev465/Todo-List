@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TodoList.Proj.Models;
+using TodoListCore.Models;
 
 namespace TodoList.Proj.Data.FluentApi;
 // this class maps Roles to Db
@@ -16,10 +17,6 @@ public class RoleMap: IEntityTypeConfiguration<Role>
 
         builder.Property(x => x.Name)
             .HasColumnName("Role_Name")
-            .HasColumnType("Nvarchar")
-            .HasMaxLength(100);
-        builder.Property(x => x.Slug)
-            .HasColumnName("Slug")
             .HasColumnType("Nvarchar")
             .HasMaxLength(100);
 

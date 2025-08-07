@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SecureIdentity.Password;
 using TodoList.Proj.Handlers.AuthHandlers;
 using TodoList.Proj.Handlers.DeleteHandler;
 using TodoList.Proj.Handlers.GetHandler;
@@ -24,6 +25,7 @@ public static class ExtensiveHandlers
         builder.Services.AddTransient<ITaskHandlerCreate,TaskhandlerCreate>();
         builder.Services.AddTransient<IDeleteTasksHandler, DeleteTaskHandler>();
         builder.Services.AddTransient<ITaskHandlerGet, TaskHandlerGet>();
+        builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
     }
 
     public static void HandlerUserDependencie(this WebApplicationBuilder builder)
@@ -36,6 +38,7 @@ public static class ExtensiveHandlers
     {
         builder.Services.AddScoped<IGenerateTokenService, GenerateTokenService>();
         builder.Services.AddTransient<ILoginHandler,LoginHandler>();
+        builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
     }
 
     public static void HAndlerAuthRegisterService(this WebApplicationBuilder builder)

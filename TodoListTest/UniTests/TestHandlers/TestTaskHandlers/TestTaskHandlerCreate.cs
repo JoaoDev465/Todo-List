@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.PostHandler;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 using Xunit;
 using Assert = Xunit.Assert;
 
@@ -20,7 +20,7 @@ public class TestTaskHandlerCreate
         var context = new Context(options);
 
         var handler = new TaskhandlerCreate(context);
-        var request = new TodoDTO
+        var request = new TodoDto
         {
             Task = "Ir ao Supermercado"
         };

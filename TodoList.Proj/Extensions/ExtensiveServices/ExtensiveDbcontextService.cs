@@ -7,8 +7,8 @@ public static class ExtensiveDbcontextService
 {
    public static void DbContextServices(this WebApplicationBuilder builder)
    {
-      var DbContextConnectionString =  builder.Configuration.GetConnectionString("connection");
-      builder.Services.AddDbContext<Context>(x => x.UseSqlServer(DbContextConnectionString));
+      var dbContextConnectionString =  builder.Configuration.GetConnectionString("connection");
+      builder.Services.AddDbContext<Context>(x => x.UseSqlServer(dbContextConnectionString));
   
    }
 

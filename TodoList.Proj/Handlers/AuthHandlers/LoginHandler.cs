@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
 using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
+using TodoList.Proj.Models;
 using TodoListCore.IHandlers;
 using TodoListCore.Interfaces;
 using TodoListCore.Response;
@@ -10,12 +12,13 @@ using View.ViewModels;
 
 namespace TodoList.Proj.Handlers.AuthHandlers;
 
-public class LoginHandler(Context context, IGenerateTokenService service): ILoginHandler
+[ApiController]
+public class LoginHandler(Context context, IGenerateTokenService service, IPasswordHasher<User> hasher): ILoginHandler
 {
    
-    [AtributeKey]
+    
     [HttpPost]
-    [Route("api/v1login")]
+    [Route("api/v1/login")]
     public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)
     {
         var user = await context.Users.FirstOrDefaultAsync(x=>x.Email== request.UserEmail);
@@ -25,10 +28,11 @@ public class LoginHandler(Context context, IGenerateTokenService service): ILogi
              return Responses<TokenResponse?>.Error(null, 404, "usuário não encontrado");
         }
 
-        var hasher = PasswordHasher.Verify(user.PasswordHash, request.UserPassword);
-        if (hasher is false)
+        var result = hasher.VerifyHashedPassword(user, user.PasswordHash, request.UserPassword);
+        if (result == PasswordVerificationResult.Failed)
         {
-           return Responses<TokenResponse>.Error(null, 401, "senha incorreta");
+            return Responses<TokenResponse>.Error(null, 401, "senha incorreta");
+
         }
 
         var token = service.TokenGenerator(user);

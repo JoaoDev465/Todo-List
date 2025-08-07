@@ -2,7 +2,7 @@
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.DeleteHandler;
 using TodoList.Proj.Models;
-using ViewModels.Todo;
+using TodoListCore.Uses_Cases.DTO;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
@@ -27,7 +27,7 @@ public class TestDeleteTaskHandler
          await context.SaveChangesAsync();
 
          var handler = new DeleteTaskHandler(context);
-         var deleteContent = new TodoDTO
+         var deleteContent = new TodoDto
          {
               Id = 1,
               Task = "ir ao mercado"

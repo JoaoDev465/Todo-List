@@ -20,7 +20,7 @@ public class TaskhandlerCreate(Context context, IHttpContextAccessor accessor): 
     [Route("api/v1/post")]
     public async Task<Responses<Todo?>> CreateAsync(TodoDto request)
     {
-        var user = accessor.HttpContext.User;
+        var user = accessor?.HttpContext?.User;
         var userIdclaim = user?.FindFirst(ClaimTypes.NameIdentifier);
 
         if (userIdclaim == null)

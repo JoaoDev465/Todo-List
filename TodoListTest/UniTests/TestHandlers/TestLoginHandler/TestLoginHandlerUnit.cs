@@ -49,7 +49,7 @@ public class TestLoginHandlerUnit
         {
             Id = 1,
             Email = "joao@gmail.com",
-            PasswordHash = "Dark1234@ola"
+            PasswordHash = hash.HashPassword(null,request.UserPassword)
         });
 
         await context.SaveChangesAsync();

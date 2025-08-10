@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.InteropServices.JavaScript;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -25,6 +26,7 @@ public class TestLoginHandlerUnit
     [Fact]
     public async Task TestHandle_WhenUSerRequest_IsNotNull()
     {
+        var hash = new PasswordHasher<User>();
         var options = new DbContextOptionsBuilder<Context>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
         var context = new Context(options);
@@ -36,7 +38,7 @@ public class TestLoginHandlerUnit
         IConfigurationRoot configuration = new ConfigurationManager()
             .AddInMemoryCollection(inMemorySettings).Build();
         
-        var handler = new LoginHandler(context,new GenerateTokenService(configuration));
+        var handler = new LoginHandler(context,new GenerateTokenService(configuration),hash);
         var request = new LoginDTO
         {
             UserId = 1,

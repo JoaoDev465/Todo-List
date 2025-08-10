@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.PostHandler;
 using TodoListCore.Uses_Cases.DTO;
@@ -19,7 +20,7 @@ public class TestTaskHandlerCreate
 
         var context = new Context(options);
 
-        var handler = new TaskhandlerCreate(context);
+        var handler = new TaskhandlerCreate(context,new HttpContextAccessor());
         var request = new TodoDto
         {
             Task = "Ir ao Supermercado"

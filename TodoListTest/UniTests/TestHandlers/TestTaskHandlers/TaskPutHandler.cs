@@ -29,7 +29,6 @@ public class TestTaskPutHandler
 
       var updateRequest = new TodoDto
       {
-          userId = 1,
           Task = "jogar bola"
       };
 

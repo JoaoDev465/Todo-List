@@ -5,17 +5,16 @@ using Microsoft.EntityFrameworkCore;
 using SecureIdentity.Password;
 using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
-using TodoList.Proj.Models;
-using TodoListCore.IHandlers.IPutHandler;
+using TodoListCore.Models;
 using TodoListCore.Response;
-using ViewModels.User;
+using TodoListCore.Uses_Cases.DTO;
+using TodoListCore.Uses_Cases.IHandlers.IPutHandler;
 
 namespace TodoList.Proj.Handlers.PutHandlers;
 
 [ApiController]
 public class PutUserHandler(Context context, IPasswordHasher<User?> hasher):IPutUserHandler
 {
-    [AtributeKey]
     [Authorize("user")]
     [HttpPut]
     [Route("api/v1/user/{id}")]

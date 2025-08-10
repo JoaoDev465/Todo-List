@@ -1,6 +1,4 @@
-﻿using TodoListCore.Response;
-
-namespace TodoListCore.DTO;
+﻿namespace TodoListCore.Uses_Cases.DTO;
 
 public class GetAllDatasDto : PageRequest
 {

@@ -1,9 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using TodoListCore;
-using ViewModels.User;
 
-namespace View.ViewModels;
+namespace TodoListCore.Uses_Cases.DTO;
 
 public class LoginDTO : Request
 {

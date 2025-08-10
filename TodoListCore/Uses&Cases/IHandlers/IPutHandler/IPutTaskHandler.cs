@@ -1,8 +1,8 @@
-﻿using TodoList.Proj.Models;
+﻿using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
 
-namespace TodoListCore.IHandlers.IPutHandler;
+namespace TodoListCore.Uses_Cases.IHandlers.IPutHandler;
 
 public interface IPutTaskHandler
 {

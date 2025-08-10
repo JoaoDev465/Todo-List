@@ -2,9 +2,8 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using TodoList.Proj.Extensions.ExtensiveObjects;
-using TodoList.Proj.Models;
 using TodoListCore.Interfaces;
+using TodoListCore.Models;
 
 namespace TodoList.Proj.Services.TokenService;
 
@@ -37,13 +36,14 @@ public class GenerateTokenService: IGenerateTokenService
         };
 
         var token = _securityTokenHandler.CreateToken(tokenDescriptorConf);
-
+        Console.WriteLine(token);
         return _securityTokenHandler.WriteToken(token);
     }
 
     public  SymmetricSecurityKey _SymmetricSecurityKey()
     {
         var key = Encoding.UTF8.GetBytes(_JwtKey);
+        Console.WriteLine(_JwtKey);
         return new SymmetricSecurityKey(key);
     }
 

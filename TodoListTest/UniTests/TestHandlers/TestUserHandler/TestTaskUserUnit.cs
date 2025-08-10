@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.PutHandlers;
-using TodoList.Proj.Models;
-using ViewModels.User;
+using TodoListCore.Models;
+using TodoListCore.Uses_Cases.DTO;
 using Xunit;
 using Assert = Xunit.Assert;
 

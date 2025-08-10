@@ -1,7 +1,7 @@
 ﻿using TodoListCore.Response;
-using View.ViewModels;
+using TodoListCore.Uses_Cases.DTO;
 
-namespace TodoListCore.IHandlers;
+namespace TodoListCore.Uses_Cases.IHandlers;
 
 public interface ILoginHandler
 {

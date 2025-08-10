@@ -3,7 +3,7 @@ using Moq;
 using TodoListCore.Interfaces.InterfacesEmailServices;
 using Xunit;
 
-namespace TodoListTest.IntegrationTests;
+namespace TodoListTest.MockTests;
 
 public class TestSmtpService
 {

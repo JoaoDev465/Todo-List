@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
-using TodoList.Proj.Models;
 using TodoListCore.Interfaces;
 using TodoListCore.Models;
 using TodoListCore.Response;
-using ViewModels.User;
+using TodoListCore.Uses_Cases.DTO;
+using TodoListCore.Uses_Cases.IHandlers;
 
 namespace TodoList.Proj.Handlers.AuthHandlers;
 

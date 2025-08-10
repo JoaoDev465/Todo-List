@@ -1,5 +1,5 @@
 ﻿
-using TodoList.Proj.Models;
+using TodoListCore.Models;
 
 namespace TodoListCore.Interfaces;
 

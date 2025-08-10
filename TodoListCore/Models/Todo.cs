@@ -1,4 +1,4 @@
-﻿namespace TodoList.Proj.Models;
+﻿namespace TodoListCore.Models;
 // class for represent users tasks
 public class Todo
 {

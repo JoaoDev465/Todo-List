@@ -14,19 +14,24 @@ public static class ExtensiveSwaggerService
             {
                 Name = "Authorization",
                 Type = SecuritySchemeType.Http,
-                Scheme = "bearer",
+                Scheme = "Bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Digite o seu token JWt no campo abaixo"
+                Description = "Digite Bearer seguido do  token JWt no campo abaixo",
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
             };
             
-            x.AddSecurityDefinition("bearer",securityScheme);
+            x.AddSecurityDefinition("Bearer",securityScheme);
 
             var securityRequirement = new OpenApiSecurityRequirement
             {
                 {
                     securityScheme,
-                    new[] { "bearer" }
+                    new string[] {}
                 }
             };
             

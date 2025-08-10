@@ -1,6 +1,4 @@
-﻿using TodoList.Proj.Models;
-
-namespace TodoListCore.Models;
+﻿namespace TodoListCore.Models;
 // this class define the role user,simple and easy by implement in Db
 public class Role 
 {

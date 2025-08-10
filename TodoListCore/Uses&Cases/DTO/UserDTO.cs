@@ -1,9 +1,6 @@
-using System.Collections.Frozen;
 using System.ComponentModel.DataAnnotations;
-using TodoListCore;
 
-
-namespace ViewModels.User;
+namespace TodoListCore.Uses_Cases.DTO;
 
 // class that work  to padronize errors and  forms
 public class UserDto : Request

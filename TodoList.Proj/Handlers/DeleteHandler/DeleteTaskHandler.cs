@@ -3,36 +3,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
-using TodoList.Proj.Models;
-using TodoListCore.IHandlers.IDeleteHandlers;
+using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
+using TodoListCore.Uses_Cases.IHandlers.IDeleteHandlers;
 
 namespace TodoList.Proj.Handlers.DeleteHandler;
 
 [ApiController]
 public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
 {
-    [AtributeKey]
+    
     [Authorize("user")]
-    [HttpDelete]
-    [Route("api/v1/tasks/{id}")]
-    public async Task<Responses<Todo?>> DeleteAsync(TodoDto request)
+    [HttpPost]
+    [Route("api/v1/tasks/delete")]
+    public async Task<Responses<Todo?>> DeleteAsync([FromBody]TodoDto request)
     {
-        var content = new Todo
-        {
-            Task = request.Task,
-            Description = request.DescriptionOfTask
-        };
+       
         var task = await  context.Todos.FirstOrDefaultAsync(x => x.Id == request.Id);
+        
         if (task is null)
         {
-            return Responses<Todo?>.Error(null,404,"usuário não encontrado");
+            return Responses<Todo?>.Error(null,404,"tarefa não encontrada");
         }
 
         try
         {
-            context.Todos.Remove(task);
+           context.Todos.Remove(task);
            await  context.SaveChangesAsync();
         }
         catch (Exception e)

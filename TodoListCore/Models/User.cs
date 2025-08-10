@@ -1,6 +1,4 @@
-﻿using TodoListCore.Models;
-
-namespace TodoList.Proj.Models;
+﻿namespace TodoListCore.Models;
 
 public class User
 {

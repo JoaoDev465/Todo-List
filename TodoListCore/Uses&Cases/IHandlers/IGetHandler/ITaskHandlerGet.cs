@@ -1,12 +1,11 @@
-﻿using TodoList.Proj.Models;
-using TodoListCore.DTO;
+﻿using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
 
-namespace TodoListCore.IHandlers.IGetHandler;
+namespace TodoListCore.Uses_Cases.IHandlers.IGetHandler;
 
 public interface ITaskHandlerGet
 {
-    Task<PageResponse<Todo>> GetTaskListAsync(TodoDto request);
+    Task<PageResponse<List<Todo>>> GetTaskListAsync(TodoDto request);
     Task<Responses<Todo?>> GetByIdAsync(TodoDto request);
 }

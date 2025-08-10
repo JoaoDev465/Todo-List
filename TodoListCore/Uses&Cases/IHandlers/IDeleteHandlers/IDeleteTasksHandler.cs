@@ -1,8 +1,8 @@
-﻿using TodoList.Proj.Models;
+﻿using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
 
-namespace TodoListCore.IHandlers.IDeleteHandlers;
+namespace TodoListCore.Uses_Cases.IHandlers.IDeleteHandlers;
 
 public interface IDeleteTasksHandler
 {

@@ -1,8 +1,8 @@
-﻿using TodoList.Proj.Models;
+﻿using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
 
-namespace TodoListCore.ControllersHandlers;
+namespace TodoListCore.Uses_Cases.IHandlers;
 
 public interface ITaskHandlerCreate
 {

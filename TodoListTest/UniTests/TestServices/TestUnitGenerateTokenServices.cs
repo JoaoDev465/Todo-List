@@ -1,8 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
-using TodoList.Proj.Models;
 using TodoList.Proj.Services.TokenService;
 using TodoListCore.Interfaces;
+using TodoListCore.Models;
 using Xunit;
 using Xunit.Abstractions;
 using Assert = Xunit.Assert;

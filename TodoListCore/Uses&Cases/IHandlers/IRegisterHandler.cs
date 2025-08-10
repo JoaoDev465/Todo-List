@@ -1,8 +1,8 @@
-﻿using TodoList.Proj.Models;
+﻿using TodoListCore.Models;
 using TodoListCore.Response;
-using ViewModels.User;
+using TodoListCore.Uses_Cases.DTO;
 
-namespace TodoListCore.Interfaces;
+namespace TodoListCore.Uses_Cases.IHandlers;
 
 public interface  IRegisterHandler
 {

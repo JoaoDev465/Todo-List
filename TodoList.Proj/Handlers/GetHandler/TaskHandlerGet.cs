@@ -3,55 +3,47 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
-using TodoList.Proj.Models;
 using TodoListCore;
-using TodoListCore.DTO;
-using TodoListCore.IHandlers.IGetHandler;
+using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
+using TodoListCore.Uses_Cases.IHandlers.IGetHandler;
 
 namespace TodoList.Proj.Handlers.GetHandler;
 
 [ApiController]
 public class TaskHandlerGet(Context context):ITaskHandlerGet
 {
-    [AtributeKey]
     [Authorize("user")]
     [HttpGet]
     [Route("api/v1/tasks")]
-    public async Task<PageResponse<Todo>> GetTaskListAsync(TodoDto request)
+    public async Task<PageResponse<List<Todo>>> GetTaskListAsync(TodoDto request)
     {
-        var content = new Todo
-        {
-            Task = request.Task,
-            Description = request.DescriptionOfTask
-        };
+       
 
         var totalItens = await context.Todos.CountAsync();
 
-        var currentpage = Configurations.defaultpagenumber;
+        var pagenumber = Configurations.defaultpagenumber;
 
-        var pageskip = context.Todos.Skip(currentpage - (Configurations.defaultpagesize)).Take(currentpage);
+        var pagesize = Configurations.defaultpagesize;
 
-        return new PageResponse<Todo>(content,totalItens,currentpage);
+        var tasks = await context.Todos.Skip
+            ((pagenumber - 1) * pagesize).Take(pagesize).ToListAsync();
+        
+        return new PageResponse<List<Todo>>(tasks,totalItens,totalItens);
     }
-
-    [AtributeKey]
     [Authorize("user")]
-    [HttpGet("api/v1/task/{id}")]
-    public async  Task<Responses<Todo?>> GetByIdAsync(TodoDto request)
+    [HttpGet("api/v1/task")]
+    public async  Task<Responses<Todo?>> GetByIdAsync( [FromQuery] TodoDto request)
     {
-        var content = new Todo
-        {
-            Task = request.Task,
-            Description = request.DescriptionOfTask
-        };
+      
         var task = await context.Todos.FirstOrDefaultAsync(x => x.Id == request.Id);
-        if (task is null)
+        if (task == null)
         {
+            Console.WriteLine($"id recebido , {request.Id}");
             return Responses<Todo?>.Error(null,404,"usuário não encontrado");
         }
 
-        return new Responses<Todo?>(content, 200, "usuário");
+        return new Responses<Todo?>(task, 200, "usuário");
     }
 }

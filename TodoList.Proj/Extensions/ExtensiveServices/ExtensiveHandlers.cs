@@ -5,14 +5,13 @@ using TodoList.Proj.Handlers.DeleteHandler;
 using TodoList.Proj.Handlers.GetHandler;
 using TodoList.Proj.Handlers.PostHandler;
 using TodoList.Proj.Handlers.PutHandlers;
-using TodoList.Proj.Models;
 using TodoList.Proj.Services.TokenService;
-using TodoListCore.ControllersHandlers;
-using TodoListCore.IHandlers;
-using TodoListCore.IHandlers.IDeleteHandlers;
-using TodoListCore.IHandlers.IGetHandler;
-using TodoListCore.IHandlers.IPutHandler;
 using TodoListCore.Interfaces;
+using TodoListCore.Models;
+using TodoListCore.Uses_Cases.IHandlers;
+using TodoListCore.Uses_Cases.IHandlers.IDeleteHandlers;
+using TodoListCore.Uses_Cases.IHandlers.IGetHandler;
+using TodoListCore.Uses_Cases.IHandlers.IPutHandler;
 
 namespace TodoList.Proj.Extensions.ExtensiveServices;
 

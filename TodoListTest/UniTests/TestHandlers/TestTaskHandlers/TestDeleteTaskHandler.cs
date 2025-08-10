@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.DeleteHandler;
-using TodoList.Proj.Models;
+using TodoListCore.Models;
 using TodoListCore.Uses_Cases.DTO;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;

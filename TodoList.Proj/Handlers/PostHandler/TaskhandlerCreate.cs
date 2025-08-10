@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Proj.Atributtes.ApiKeyAtributte;
 using TodoList.Proj.Data;
-using TodoList.Proj.Models;
-using TodoListCore.ControllersHandlers;
+using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
+using TodoListCore.Uses_Cases.IHandlers;
 
 namespace TodoList.Proj.Handlers.PostHandler;
 
@@ -15,7 +15,7 @@ namespace TodoList.Proj.Handlers.PostHandler;
 public class TaskhandlerCreate(Context context, IHttpContextAccessor accessor): ITaskHandlerCreate
 {
     
-    [AtributeKey]
+ 
     [Authorize("user")]
     [HttpPost]
     [Route("api/v1/post")]

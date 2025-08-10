@@ -33,7 +33,7 @@ public class TestLoginHandlerUnit
 
         var inMemorySettings = new Dictionary<string, string>()
         {
-            { "JwtSettings", "983279y9872yhudkhqbdkjasbmaslxqljdkoqmoq" }
+            { "JwtSettings:secret", "983279y9872yhudkhqbdkjasbmaslxqljdkoqmoq" }
         };
         IConfigurationRoot configuration = new ConfigurationManager()
             .AddInMemoryCollection(inMemorySettings).Build();

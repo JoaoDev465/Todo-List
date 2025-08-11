@@ -17,7 +17,7 @@ public static class ExtensiveSwaggerService
                 Scheme = "Bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Digite Bearer seguido do  token JWt no campo abaixo",
+                Description = "Digite o token JWt no campo abaixo",
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,

@@ -23,13 +23,13 @@ public class LoginHandler(Context context, IGenerateTokenService service, IPassw
 
         if (user is null)
         {
-             return Responses<TokenResponse?>.Error(null, 404, "usuário não encontrado");
+            return new Responses<TokenResponse?>(null, 404, "Not Found");
         }
 
         var result = hasher.VerifyHashedPassword(user, user.PasswordHash, request.UserPassword);
         if (result == PasswordVerificationResult.Failed)
         {
-            return Responses<TokenResponse>.Error(null, 401, "senha incorreta");
+            return new Responses<TokenResponse?>(null, 401, "Error: senha inválida");
 
         }
 
@@ -39,6 +39,5 @@ public class LoginHandler(Context context, IGenerateTokenService service, IPassw
         {
             Token = token
         });
-
     }
 }

@@ -25,7 +25,7 @@ public class TaskhandlerCreate(Context context, IHttpContextAccessor accessor): 
 
         if (userIdclaim == null)
         {
-            return Responses<Todo?>.Error(null,404,"não encontrado");
+            return new  Responses<Todo?>(null,404,"não encontrado");
         }
         
         var tasks = new Todo
@@ -42,7 +42,7 @@ public class TaskhandlerCreate(Context context, IHttpContextAccessor accessor): 
         }
         catch (Exception e)
         {
-            return Responses<Todo?>.Error(null, 500, "falha interna no servidor");
+            return new Responses<Todo?>(null, 500, "falha interna no servidor");
         }
 
         return new Responses<Todo?>(tasks, 201, "task criada com sucesso");

@@ -23,7 +23,7 @@ public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
         
         if (task is null)
         {
-            return Responses<Todo?>.Error(null,404,"tarefa não encontrada");
+            return new Responses<Todo?>(null,404,"tarefa não encontrada");
         }
 
         try
@@ -33,7 +33,7 @@ public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
         }
         catch (Exception e)
         {
-          return Responses<Todo?>.Error(null,500,"falha interna no servidor");
+          return new Responses<Todo?>(null,500,"falha interna no servidor");
         }
 
         return new Responses<Todo?>(task, 200, "tarefa excluída com sucesso");

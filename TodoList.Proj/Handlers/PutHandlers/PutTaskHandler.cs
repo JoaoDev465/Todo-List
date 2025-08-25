@@ -27,7 +27,7 @@ public class PutTaskHandler(Context context):IPutTaskHandler
                 (x => x.Id== request.Id && request.Id == x.Id);
             if (task is null)
             {
-                return Responses<Todo?>.Error(null,404,"tarefa não encontrada");
+                return new Responses<Todo?>(null,404,"tarefa não encontrada");
             }
 
             try
@@ -37,7 +37,7 @@ public class PutTaskHandler(Context context):IPutTaskHandler
             }
             catch (Exception e)
             {
-                return Responses<Todo?>.Error(null,500,"falha interna no servidor");
+                return new Responses<Todo?>(null,500,"falha interna no servidor");
             }
 
             return new Responses<Todo?>(content, 200, $"tarefa {request.Id} atualizada");

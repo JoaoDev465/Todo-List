@@ -36,7 +36,7 @@ public class RegisterHandler(Context context, IPasswordHasher<User?> hasher) : I
         
         if (await context.Users.AnyAsync(x => x.Email == request.UserEmail))
         {
-            return Responses<User?>.Error(null, 400,"usuário já,existente");
+            return new  Responses<User?>(null, 400,"usuário já,existente");
         }
         
         await context.Users.AddAsync(user);

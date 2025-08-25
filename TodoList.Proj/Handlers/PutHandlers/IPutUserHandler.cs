@@ -27,7 +27,7 @@ public class PutUserHandler(Context context, IPasswordHasher<User?> hasher):IPut
             (x => x.Id == request.Id && request.Id == x.Id);
         if (user is null)
         {
-            return Responses<User?>.Error(null,404,"usuário não encontrado");
+            return new Responses<User?>(null,404,"usuário não encontrado");
         }
 
         try
@@ -37,7 +37,7 @@ public class PutUserHandler(Context context, IPasswordHasher<User?> hasher):IPut
         }
         catch (Exception e)
         {
-           return Responses<User?>.Error(null,500,"falha interna no servidor");
+           return new Responses<User?>(null,500,"falha interna no servidor");
         }
 
         return new Responses<User?>(content, 200, $"user {request.Id} atualizado");

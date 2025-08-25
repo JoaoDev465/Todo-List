@@ -6,10 +6,10 @@ public class Responses<TData>
 {
   
     [JsonConstructor]
-    public Responses() {}
+    public Responses(TokenResponse data) {}
 
     public Responses(TData? data,
-        int code = Configurations.DefaultStatusCode,
+        int code,
         string? message = null)
     {
         Data = data;
@@ -17,9 +17,6 @@ public class Responses<TData>
         Message = message;
     }
 
-    public static Responses<TData> Error(TData data,
-        int code = Configurations.DefaultstatusError,
-        string? message = null) => new Responses<TData>(default, code, message);
 
     public int Code { get; set; }
     public string? Message { get; set; }
@@ -27,5 +24,5 @@ public class Responses<TData>
     public TData? Data { get; set; }
 
     [JsonIgnore] public bool IsSuccess => Code is >= 200 and <= 299;
-    [JsonIgnore] public bool IsError => Code is >= 400 and <= 499;
+    [JsonIgnore] public bool IsError => Code is >= 400 and <= 599;
 }

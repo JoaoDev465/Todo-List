@@ -40,7 +40,7 @@ public class TaskHandlerGet(Context context):ITaskHandlerGet
         if (task == null)
         {
             Console.WriteLine($"id recebido , {request.Id}");
-            return Responses<Todo?>.Error(null,404,"usuário não encontrado");
+            return new Responses<Todo?>(null,404,"usuário não encontrado");
         }
 
         return new Responses<Todo?>(task, 200, "usuário");

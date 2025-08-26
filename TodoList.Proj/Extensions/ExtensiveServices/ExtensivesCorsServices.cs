@@ -6,6 +6,6 @@ public static class ExtensivesCorsServices
     {
         builder.Services.AddCors(x => x.AddPolicy(
             "allow", policyBuilder =>
-                policyBuilder.AllowAnyHeader().AllowAnyMethod()));
+                policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
     }
 }

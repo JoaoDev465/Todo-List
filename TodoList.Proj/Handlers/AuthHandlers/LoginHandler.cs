@@ -38,6 +38,6 @@ public class LoginHandler(Context context, IGenerateTokenService service, IPassw
         return new Responses<TokenResponse?>(new TokenResponse
         {
             Token = token
-        });
+        },200,null);
     }
 }

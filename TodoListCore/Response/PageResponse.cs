@@ -10,7 +10,7 @@ public class PageResponse<TData>: Responses<TData>
         int totalcount,
         int currentCount = 1,
         int pageSize = Configurations.defaultpagesize)
-        : base(data)
+        : base()
     {
         Data = data;
         TotalCount = totalcount;
@@ -23,7 +23,7 @@ public class PageResponse<TData>: Responses<TData>
         TData? data,
         int code = Configurations.DefaultStatusCode,
         string? message = null
-        ):base(data)
+        ):base()
     {
     }
 

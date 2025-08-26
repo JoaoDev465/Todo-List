@@ -1,0 +1,57 @@
+﻿@page "/Login"
+@inherits  Behind
+
+<PageTitle>Login</PageTitle>
+
+
+<div class="d-flex">
+    <MudGrid Justify="Justify.Center" Class="align-content-center">
+        <MudItem xs="12" lg="6" xl="6" xxl="6" md="8" sm="12" >
+            <MudPaper  Class="justify-content-center mt-5" Width="25" Elevation="5">
+                <div class="mx-5">
+                    <MudText Typo="Typo.h2">login</MudText>
+                </div>
+                <div>
+                    <img width="350" src="edac6bc8-baa5-4c20-8764-d8e502fd2eb8.jpg" alt=""/>
+                </div>
+                    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+                        <div class="align-content-center justify-content-center">
+                            <DataAnnotationsValidator/>
+                            <MudTextField
+                                T ="string"
+                                Label="E-mail"
+                                HelperText="campo obrigatório"
+                                For="@(() =>InputModel.UserEmail)"
+                                @bind-Value="InputModel.UserEmail"
+                                Style="width: 50%"
+                                InputType="InputType.Email"/>
+                            
+                        </div>
+                        <div class="align-content-center justify-content-center">
+                            <MudTextField
+                                T ="string"
+                                Label="Senha"
+                                HelperText="campo obrigatório"
+                                For="@(()=>InputModel.UserPassword)"
+                                @bind-Value="InputModel.UserPassword"
+                                Style="width: 50%"
+                                InputType="InputType.Password"/>
+
+                        </div>
+                        <div class="d-flex mt-8">
+                            @if (Isbusy)
+                            {
+                                <MudProgressCircular  Color="Color.Info" Indeterminate="true"/>
+                            }
+                            else
+                            {
+                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Entrar</MudButton>
+                                <MudSpacer/>
+                            }
+                            
+                        </div>
+                    </EditForm>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</div>

@@ -6,7 +6,7 @@ public class Responses<TData>
 {
   
     [JsonConstructor]
-    public Responses(TokenResponse data) {}
+    public Responses() {}
 
     public Responses(TData? data,
         int code,

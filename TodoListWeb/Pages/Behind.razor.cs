@@ -4,17 +4,27 @@ using MudBlazor;
 using TodoListCore.Uses_Cases.DTO;
 using TodoListCore.Uses_Cases.IHandlers;
 using TodoListWeb.Handlers;
+using TodoListWeb.Security;
 
 namespace TodoListWeb.Pages;
 
 public partial class Behind : ComponentBase
 {
-    [Inject] private IJSRuntime JsRuntime { get; set; } = null;
+    [Inject] private JwtSecurityProvider _jwtSecurityProvider { get; set; }
     [Inject] public ISnackbar Snackbar { get; set; } = null;
     [Inject] public NavigationManager NavigationManager { get; set; } = null;
     [Inject] public ILoginHandler Handler { get; set; } = null;
     public LoginDTO InputModel { get; set; } = new();
     public bool Isbusy { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authstate = await _jwtSecurityProvider.GetAuthenticationStateAsync();
+        var user = authstate.User;
+        
+        if(user.Identity is {IsAuthenticated: true})
+            NavigationManager.NavigateTo("/home");
+    }
 
     public async Task OnValidSubmitAsync()
     {
@@ -22,16 +32,16 @@ public partial class Behind : ComponentBase
         try
         {
             var result = await Handler.LoginAsync(InputModel);
-            if (result.IsError)
+            if (result.IsSuccess)
             {
-                Snackbar.Add(result.Message = "senha inválida", Severity.Error);
+                Snackbar.Add(result.Message = "Login Feito Com Sucesso", Severity.Success);
+                _jwtSecurityProvider.NotifyAuthenticationStateChanged();
+                await Task.Delay(200);
+                NavigationManager.NavigateTo("/home");
             }
             else
             {
-                await JsRuntime.InvokeVoidAsync("localStorage.setItem", "AuthToken", result.Data);
-                Snackbar.Add(result.Message, Severity.Success);
-                await Task.Delay(200);
-                NavigationManager.NavigateTo("/");
+                Snackbar.Add(result.Message = "senha inválida", Severity.Error);
             }
         }
         catch (Exception e)
@@ -43,4 +53,5 @@ public partial class Behind : ComponentBase
             Isbusy = false;
         }
     }
+
 }

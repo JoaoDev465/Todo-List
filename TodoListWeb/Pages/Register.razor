@@ -1,0 +1,42 @@
+﻿@page "/register"
+@inherits  Registrador
+
+<PageTitle>Register</PageTitle>
+
+<MudGrid Justify="Justify.Center ">
+    <MudItem xs="12" lg="6" xl="6" xxl="6" md="8" sm="12">
+        <MudPaper Class="w-500 mt-11 mb-10 mx-5" >
+            <div class="d-flex align-content-center justify-content-center">
+                <h2>Registrador</h2>
+            </div>
+            <div class="d-flex justify-content-center ">
+                <img src="05fd6e26-9990-4301-8ebd-80958671e768.jpg" width="350" alt=""/>
+            </div>
+            <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+                <DataAnnotationsValidator />
+                <MudTextField
+                    T="string"
+                    Label="Email"
+                    HelperText="Email é obrigatório"
+                    @bind-Value="InputModel.UserEmail"
+                    InputType="InputType.Email"/>
+                <MudTextField
+                    T="string"
+                    Label="Senha"
+                    HelperText="Senha obrigatória"
+                    @bind-Value="InputModel.UserPassword"
+                    InputType="InputType.Password"/>
+                <div class="d-flex align-content-center">
+                    @if (Isbusy)
+                    {
+                        <MudProgressCircular Color="Color.Info" Indeterminate="true"/>
+                    }
+                    else
+                    {
+                        <MudButton  ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info">Cadastrar</MudButton>
+                    }
+                </div>
+            </EditForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

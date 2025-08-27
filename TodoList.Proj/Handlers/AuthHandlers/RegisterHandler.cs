@@ -22,17 +22,16 @@ public class RegisterHandler(Context context, IPasswordHasher<User?> hasher) : I
     {
        
                                                            
-                       
+     var password =   hasher.HashPassword(null, request.UserPassword);
         var user = new User
         {
-            Email = request.UserEmail,
-           PasswordHash =   request.UserPassword,
+            Email = request.UserEmail.Trim().ToLower(),
+           PasswordHash =   password,
            Roles = new List<Role>
            {
                new Role{Name = "user"}
            }
         };
-        user.PasswordHash = hasher.HashPassword(null, request.UserPassword);
         
         if (await context.Users.AnyAsync(x => x.Email == request.UserEmail))
         {

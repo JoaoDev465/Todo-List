@@ -5,6 +5,7 @@ using TodoListCore.Models;
 using TodoListCore.Response;
 using TodoListCore.Uses_Cases.DTO;
 using TodoListCore.Uses_Cases.IHandlers;
+using TodoListWeb.Security;
 
 namespace TodoListWeb.Handlers;
 
@@ -12,11 +13,13 @@ public class LoginHandler : ILoginHandler
 {
     
     private readonly HttpClient _client;
+    private readonly JwtSecurityProvider _provider;
 
-    public LoginHandler( HttpClient client)
+    public LoginHandler( HttpClient client, JwtSecurityProvider provider)
     {
        
         _client = client;
+        _provider = provider;
     }
 
     public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)
@@ -27,13 +30,15 @@ public class LoginHandler : ILoginHandler
             if (!response.IsSuccessStatusCode)
                 return new Responses<TokenResponse?>(null, 400, "Bad Request");
 
-            var tokenresponse = await response.Content.ReadFromJsonAsync<TokenResponse>();
-            return new Responses<TokenResponse?>(tokenresponse,200,null);
+            var tokenresponse = await response.Content.ReadFromJsonAsync<Responses<TokenResponse>>();
+
+            await _provider.MarkUserIsAuth(tokenresponse.Data.Token);
+            
+            return new Responses<TokenResponse?>(tokenresponse.Data,200,null);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            return new Responses<TokenResponse?>(null, 500, e.Message);
         }
 
     }

@@ -1,17 +1,45 @@
 ﻿
+@using Microsoft.AspNetCore.Components.Authorization
+@using TodoListCore.Models
+@using TodoListCore.Uses_Cases.DTO
 @inherits LayoutComponentBase
 
 <MudThemeProvider/>
 <MudPopoverProvider/>
 <MudDialogProvider/>
+        <MudLayout>
+            <MudAppBar>
+            </MudAppBar>
+            <MudMainContent>
+                @Body
+            </MudMainContent>
+        </MudLayout>
 <MudSnackbarProvider/>
 
-<MudLayout>
-    <MudAppBar>
-        Home
-    </MudAppBar>
-    
-    <MudMainContent>
-        @Body
-    </MudMainContent>
-</MudLayout>
+@code {
+
+    private bool _isDrawerOpened = true;
+    private bool _isDarkMode = true;
+    private MudThemeProvider _mudThemeProvider = null!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            StateHasChanged();
+        }
+    }
+
+    private Task OnSystemPreferenceChanged(bool newValue)
+    {
+        _isDarkMode = newValue;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private void ToggleDrawer()
+        => _isDrawerOpened = !_isDrawerOpened;
+
+}

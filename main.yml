@@ -19,11 +19,11 @@ jobs:
         dotnet-version: 8.0.x
         
     - name: Restore dependencies
-      run : dotnet restore TodoList.sln
+      run : dotnet restore 
       
     - name: build project
-      run : dotnet build TodoList.sln --no-restore --configuration Release
+      run : dotnet build  --no-restore --configuration Release
       
     - name: build tests
-      run : dotnet test TodoList.sln --verbosity normal
+      run : dotnet test  --verbosity normal
       

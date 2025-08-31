@@ -17,14 +17,15 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
+        cache : true
         
     - name: Restore dependencies
-      run : dotnet restore 
+      run : dotnet restore TodoList.sln
       
     - name: build project
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build TodoList.sln --no-restore --configuration Release
       
     - name: Run Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test TodoLis.sln --no-build --verbosity normal
       
       

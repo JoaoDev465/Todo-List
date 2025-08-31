@@ -1,0 +1,20 @@
+﻿@page "ver/tarefas"
+
+<MudContainer Class="mt-8">
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" md="6">
+            <MudCard Class="d-flex justify-content-center">
+                <MudTable T="Task">
+                    <HeaderContent>
+                        <MudTh>Tarefa</MudTh>
+                        <MudTh>Descrição</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Tarefa">@WriteModel.Task</MudTd>
+                        <MudTd DataLabel="Descrição">@WriteModel.DescriptionOfTask</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

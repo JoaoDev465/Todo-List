@@ -1,10 +1,67 @@
 ﻿@page "/home"
-
+@attribute [Authorize]
 
 <PageTitle>Home</PageTitle>
 
-<div class="d-flex">
-    <h1 class="justify-content-around">Welcome</h1>
-</div>
-
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Lista De Tarefas</MudText>
+    <MudText Align="Align.Center">Bem vindo a sua lista de tarefas.</MudText>
+    <MudGrid Class="mt-8">
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg  d-flex flex-column justify-content-between"  Style="height: 100%">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Escrever tarefas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="d-flex justify-content-center align-items-center flex-grow-1">
+                        <img
+                            src="Best%20Resume%20Layouts%20for%202022%20with%20Examples%20and….jpg"
+                            width="150"
+                        />
+                </MudCardContent>
+                <MudCardActions Class=" d-flex justify-center">
+                    <MudButton OnClick="@(()=> _navigationManager.NavigateTo("criar/tarefas"))" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Começar</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg  d-flex flex-column justify-content-between"  Style="height: 100%">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Atualizar tarefas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent class="d-flex justify-content-center align-items-center flex-grow-1">
+                        <img src="466fc5b6-0d20-4b16-a72e-5da5f99a6014.jpg"
+                             width="150"/>
+                </MudCardContent>
+                <MudCardActions Class=" d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Gerenciar</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4">
+            <MudCard Elevation="25" Class="rounded-lg d-flex flex-column justify-content-between" Style="height: 100%">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Excluir tarefas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="d-flex justify-content-center align-items-center flex-grow-1">
+                        <img src="Download%20hands%20holding%20clipboard%20with%20checklist%20with%20green%20check%20mark%20and%20pencil_%20control%20list____.jpg"
+                             width="150"/>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Apagar</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
 Welcome to your new app.
+
+@code
+{
+    [Inject] public NavigationManager _navigationManager { get; set; }
+}

@@ -45,11 +45,12 @@ public class TestLoginHandlerUnit
             UserEmail = "joao@gmail.com",
             UserPassword = "Dark1234@ola"
         };
+        var password = hash.HashPassword(null, request.UserPassword);
        await   context.Users.AddAsync(new User
         {
             Id = 1,
             Email = "joao@gmail.com",
-            PasswordHash = hash.HashPassword(null,request.UserPassword)
+            PasswordHash = password
         });
 
         await context.SaveChangesAsync();

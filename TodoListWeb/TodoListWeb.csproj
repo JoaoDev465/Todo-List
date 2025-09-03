@@ -23,6 +23,9 @@
 
   <ItemGroup>
     <Content Remove="Pages\Behind.razor" />
+    <Content Update="Development.json">
+      <DependentUpon>.gitignore</DependentUpon>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

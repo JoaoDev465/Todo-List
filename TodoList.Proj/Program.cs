@@ -18,8 +18,7 @@ builder.ControllerServicesAndBehavior();
 builder.TokenServiceConfiguration();
 var app = builder.Build();
 
-
-app.UseCors("allow");
+app.UseCors("Allow");
 app.UseRouting();
 app.AuthenticantionAndAuthorization();
 app.SmtpConfigurationsGetvalues();

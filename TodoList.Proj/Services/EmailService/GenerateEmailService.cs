@@ -22,12 +22,12 @@ public class GenerateEmailService : IGenerateEmailService
     public GenerateEmailService()
     {
         var smtpClient = new SmtpClient
-        (Configuration._SmTpService.Host, 
-            Configuration._SmTpService.Port);
+        (Configuration.SmTpService.Host, 
+            Configuration.SmTpService.Port);
 
         smtpClient.Credentials = new NetworkCredential(
-            Configuration._SmTpService.Username,
-            Configuration._SmTpService.Password);
+            Configuration.SmTpService.Username,
+            Configuration.SmTpService.Password);
 
         smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
         smtpClient.EnableSsl = true;

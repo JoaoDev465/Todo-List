@@ -6,5 +6,5 @@ namespace TodoListCore.Uses_Cases.IHandlers.IPutHandler;
 
 public interface IPutTaskHandler
 {
-    Task<Responses<Todo?>> PutAsync(TodoDto request);
+    Task<Responses<Todo?>> PutAsync(int id,TodoDto request);
 }

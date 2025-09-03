@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Diagnostics.SymbolStore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
@@ -15,24 +16,21 @@ public class PutTaskHandler(Context context):IPutTaskHandler
     
         [Authorize("user")]
         [HttpPut]
-        [Route("api/v1/task/{id}")]
-       public  async Task<Responses<Todo?>> PutAsync([FromBody]TodoDto request)
-        {
-            var content = new Todo
-            {
-                Task = request.Task,
-                Description = request.DescriptionOfTask
-            };
-            var task = await context.Todos.FirstOrDefaultAsync
-                (x => x.Id== request.Id && request.Id == x.Id);
+        [Route("api/v1/task/{id:int}")]
+       public  async Task<Responses<Todo?>> PutAsync([FromRoute] int id,[FromBody] TodoDto request)
+       {
+           var task = await context.Todos.FirstOrDefaultAsync(x => x.Id == id);
+               
             if (task is null)
             {
                 return new Responses<Todo?>(null,404,"tarefa não encontrada");
             }
+            task.Task = request.Task;
+            task.Description = request.DescriptionOfTask;
 
             try
             {
-                context.Todos.Update(content);
+                context.Todos.Update(task);
                 await context.SaveChangesAsync();
             }
             catch (Exception e)
@@ -40,7 +38,7 @@ public class PutTaskHandler(Context context):IPutTaskHandler
                 return new Responses<Todo?>(null,500,"falha interna no servidor");
             }
 
-            return new Responses<Todo?>(content, 200, $"tarefa {request.Id} atualizada");
+            return new Responses<Todo?>(task, 200, $"tarefa {request.Id} atualizada");
 
         }
     }

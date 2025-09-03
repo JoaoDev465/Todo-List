@@ -4,7 +4,6 @@ using TodoListCore.Models;
 
 namespace TodoList.Proj.Data.FluentApi;
 
-// this is class for User maps statements to Data Base
 public class UserMap: IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)

@@ -6,24 +6,26 @@ public class PageResponse<TData>: Responses<TData>
 {
     [JsonConstructor]
    public  PageResponse(
-        TData data,
+        TData? data,
         int totalcount,
+        int code,
         int currentCount = 1,
         int pageSize = Configurations.defaultpagesize)
-        : base()
-    {
+        :base(data,code)
+   {
+       Code = code;
         Data = data;
         TotalCount = totalcount;
         CurrentCount = currentCount;
         PageSize = pageSize;
-    }
+   }
 
     public PageResponse
     (
         TData? data,
-        int code = Configurations.DefaultStatusCode,
+        int code,
         string? message = null
-        ):base()
+        ):base(data,code,message)
     {
     }
 

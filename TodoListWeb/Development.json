@@ -1,0 +1,5 @@
+﻿{
+  "BeckendUri": {
+    "Secret": "http://localhost:5280/"
+}
+}

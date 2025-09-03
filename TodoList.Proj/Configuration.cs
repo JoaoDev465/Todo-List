@@ -2,8 +2,8 @@
 
 public static class Configuration
 {
-    public static string JWTKey { get; set; } = "";
-    public static SmTpService _SmTpService;
+  
+    public static SmTpService SmTpService;
 }
 
 public class SmTpService()

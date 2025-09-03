@@ -15,16 +15,16 @@ public class PutUserHandler(Context context, IPasswordHasher<User?> hasher):IPut
 {
     [Authorize("user")]
     [HttpPut]
-    [Route("api/v1/user/{id}")]
-    public async Task<Responses<User?>> PutAsync(UserDto request)
+    [Route("api/v1/user/{request.id}")]
+    public async Task<Responses<User?>> PutAsync([FromRoute]UserDto request)
     {
-        var content = new User
-        {
-            Email = request.UserEmail,
-            PasswordHash = hasher.HashPassword(null,request.UserPassword)
-        };
-        var user = context.Users.FirstOrDefaultAsync
-            (x => x.Id == request.Id && request.Id == x.Id);
+        var password = hasher.HashPassword(null, request.UserPassword);
+        var user = await context.Users.FirstOrDefaultAsync
+            (x => x.Id == request.Id);
+
+        user.Email = request.UserEmail;
+        user.PasswordHash = password;
+       
         if (user is null)
         {
             return new Responses<User?>(null,404,"usuário não encontrado");
@@ -32,7 +32,7 @@ public class PutUserHandler(Context context, IPasswordHasher<User?> hasher):IPut
 
         try
         {
-            context.Users.Update(content);
+            context.Users.Update(user);
             await context.SaveChangesAsync();
         }
         catch (Exception e)
@@ -40,7 +40,7 @@ public class PutUserHandler(Context context, IPasswordHasher<User?> hasher):IPut
            return new Responses<User?>(null,500,"falha interna no servidor");
         }
 
-        return new Responses<User?>(content, 200, $"user {request.Id} atualizado");
+        return new Responses<User?>(user, 200, $"user {request.Id} atualizado");
 
     }
 }

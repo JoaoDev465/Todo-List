@@ -12,9 +12,12 @@ public partial class CreateTask : ComponentBase
     [Inject] public JwtSecurityProvider Provider { get; set; } = null;
     [Inject] private ISnackbar _snackbar { get; set; } = null;
     [Inject] public ITaskHandlerCreate HandlerCreate { get; set; } = null;
+    [Inject] private NavigationManager NavigationManager { get; set; } = null;
     public TodoDto InputModel { get; set; } = new();
     public bool Isbusy { get; set; }
     
+    
+   
 
     public async Task CreateAsync()
     {

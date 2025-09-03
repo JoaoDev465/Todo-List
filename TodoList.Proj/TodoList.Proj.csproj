@@ -56,8 +56,4 @@
     <ProjectReference Include="..\TodoListCore\TodoListCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\ExtensiveObjects\" />
-  </ItemGroup>
-
 </Project>

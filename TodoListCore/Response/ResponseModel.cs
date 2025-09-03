@@ -4,7 +4,8 @@ namespace TodoListCore.Response;
 
 public class Responses<TData>
 {
-  
+    
+
     [JsonConstructor]
     public Responses() {}
 

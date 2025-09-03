@@ -29,8 +29,4 @@
     <ProjectReference Include="..\TodoListCore\TodoListCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\GetHandler\" />
-  </ItemGroup>
-
 </Project>

@@ -32,7 +32,7 @@ public class TestTAskGetHandler
             Id = 1
         };
 
-        var result =  await handler.GetByIdAsync(request);
+        var result =  await handler.GetByIdAsync(request.Id);
         
         Assert.IsNotNull(result);
     }

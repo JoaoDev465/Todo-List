@@ -2,5 +2,5 @@
 
 public class GetAllDatasDto : PageRequest
 {
-    
+    public int Id { get; set; }
 }

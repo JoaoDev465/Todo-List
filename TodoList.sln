@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "new", "new", "{C497B92E-504
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoListWeb", "TodolistWeb\TodoListWeb.csproj", "{7E066C88-5DF8-4BBE-AFD7-0AAE38B4BA2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoListWeb", "TodoListWeb\TodoListWeb.csproj", "{7E066C88-5DF8-4BBE-AFD7-0AAE38B4BA2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

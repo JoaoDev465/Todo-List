@@ -14,9 +14,9 @@ public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
 {
     
     [Authorize("user")]
-    [HttpPost]
-    [Route("api/v1/tasks/delete")]
-    public async Task<Responses<Todo?>> DeleteAsync([FromBody]TodoDto request)
+    [HttpDelete]
+    [Route("api/v1/delete/{request.id}")]
+    public async Task<Responses<Todo?>> DeleteAsync([FromRoute]TodoDto request)
     {
        
         var task = await  context.Todos.FirstOrDefaultAsync(x => x.Id == request.Id);

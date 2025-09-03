@@ -6,7 +6,7 @@ public static  class ExtensiveSmtpConfigurations
     {
         var smtp = new SmTpService();
         builder.Configuration.GetSection("ConfSMTP").Bind(smtp);
-        Configuration._SmTpService = smtp;
+        Configuration.SmTpService = smtp;
         if (string.IsNullOrEmpty(smtp.ToString()))
         {
             Console.WriteLine("falha ao gerar o smtp, está nulo");

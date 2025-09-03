@@ -9,7 +9,9 @@ public static class ExtensiveControllerServices
             x.SuppressModelStateInvalidFilter = true;
         }).AddJsonOptions(c =>
         {
-            c.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+            c.JsonSerializerOptions.ReferenceHandler = null;
+            c.JsonSerializerOptions.DefaultIgnoreCondition =
+                System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
         });
     }
 

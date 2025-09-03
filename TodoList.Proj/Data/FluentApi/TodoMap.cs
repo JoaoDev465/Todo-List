@@ -4,7 +4,6 @@ using TodoListCore.Models;
 
 namespace TodoList.Proj.Data.FluentApi;
 
-// this class maps todos to DB
 public class TodoMap:IEntityTypeConfiguration<Todo>
 {
     public void Configure(EntityTypeBuilder<Todo> builder)

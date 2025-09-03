@@ -3,7 +3,7 @@
 public static class Configurations
 {
     public const int DefaultstatusError = 400;
-    public const int DefaultStatusCode = 200;
+    public static int Code;
     public const int defaultpagenumber = 1;
     public const int defaultpagesize = 25;
 

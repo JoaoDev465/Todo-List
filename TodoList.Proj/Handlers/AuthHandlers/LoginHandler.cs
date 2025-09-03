@@ -11,7 +11,8 @@ using TodoListCore.Uses_Cases.IHandlers;
 namespace TodoList.Proj.Handlers.AuthHandlers;
 
 [ApiController]
-public class LoginHandler(Context context, IGenerateTokenService service, IPasswordHasher<User> hasher): ILoginHandler
+public class LoginHandler(Context context, IGenerateTokenService service,
+    IPasswordHasher<User> hasher): ILoginHandler
 {
    
     
@@ -23,7 +24,8 @@ public class LoginHandler(Context context, IGenerateTokenService service, IPassw
 
         if (user is null)
         {
-            return new Responses<TokenResponse?>(null, 404, "Not Found");
+            return new Responses<TokenResponse?>(null, 404,
+                "nenhum usuário com essa senha foi encontrado");
         }
 
         var result = hasher.VerifyHashedPassword(user, user.PasswordHash, request.UserPassword);

@@ -28,7 +28,7 @@ public partial class Behind : ComponentBase
                 await _jwtSecurityProvider.MarkUserIsAuth(result.Data.Token);
                 Snackbar.Add(result.Message = "Login Feito Com Sucesso", Severity.Success);
                 await Task.Delay(200);
-                NavigationManager.NavigateTo("/home");
+                NavigationManager.NavigateTo("/home",forceLoad:true);
             }
             else
             {

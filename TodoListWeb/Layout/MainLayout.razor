@@ -5,17 +5,22 @@
 @using TodoListWeb.Security
 @inherits LayoutComponentBase
 
-<MudThemeProvider/>
+<MudThemeProvider  Theme="@_mud" IsDarkMode="@IsDarkMode"/>
 <MudPopoverProvider/>
 <MudDialogProvider/>
 <AuthorizeView>
     <Authorized>
         <MudLayout>
             <MudAppBar>
+                <MudIconButton
+                    Icon="@(IsDarkMode ? Icons.Material.Filled.WbSunny : Icons.Material.Filled.DarkMode)"
+                    Color="Color.Inherit"
+                    Edge="Edge.Start"
+                    OnClick="ToggleDarkMode"/>
                 <MudSpacer/>
                 <MudButton Color="Color.Error"
                            ButtonType="ButtonType.Button"
-                           OnClick="@(() => OnExitasync() )">Sair</MudButton>
+                           OnClick="@(() => OnExitasync())">Sair</MudButton>
             </MudAppBar>
             <MudMainContent>
                 @Body
@@ -46,6 +51,22 @@
         {
             Console.WriteLine(e);
             throw;
+        }
+    }
+
+    private MudTheme _mud = Configurations.LightTheme;
+    private bool IsDarkMode = false;
+    void ToggleDarkMode()
+    {
+        if (IsDarkMode)
+        {
+            _mud = Configurations.LightTheme;
+            IsDarkMode = false;
+        }
+        else
+        {
+            _mud = Configurations.DarkTheme;
+            IsDarkMode = true;
         }
     }
 }

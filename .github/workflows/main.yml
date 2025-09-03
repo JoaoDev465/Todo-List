@@ -8,9 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: 
-      DB_CONNECTIONS: "${{secrets.DB_CONNECTIONS}}"
-      CORS_CONNECTIONS: "${{secrets.CORS_CONNECTIONS}}"
   
     steps:
     - name: Checkout code

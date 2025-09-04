@@ -40,13 +40,49 @@ public class TestUnitRegisterHandler
         };
         
        var result = await handler.RegisterAsync(request);
-       await context.SaveChangesAsync();
+      var save = await context.SaveChangesAsync();
        
        _helper.WriteLine($"{context}" == null ? "DbContext é null": "Dbcontext Ok");   
        
        Assert.Equal("joaodesouza@gmail.com",request.UserEmail);
        Assert.NotNull(result);
        Assert.NotNull(result.Data);
+       Assert.Equal(201,result.Code);
 
+    }
+
+    [Fact]
+    public async Task TestRegister_When_Data_Is_Same()
+    {
+        var options = new DbContextOptionsBuilder<Context>()
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+        var context = new Context(options);
+
+        var handler = new RegisterHandler(context, new PasswordHasher<User?>());
+
+        var requestuserone = new UserDto
+        {
+            Id = 1,
+            UserEmail = "joao@gmail.com",
+            UserPassword = "banana",
+            Slug = "user-user"
+        };
+        var requestusertwo = new UserDto
+        {
+            Id = 1,
+            UserEmail = "joao@gmail.com",
+            UserPassword = "banana",
+            Slug = "user-user"
+        };
+        
+        var resultUserOne = await handler.RegisterAsync(requestuserone);
+        var resultUserTwo = await handler.RegisterAsync(requestusertwo);
+       var save = await context.SaveChangesAsync();
+       
+        _helper.WriteLine($"{context}" == null ? "DbContext é null": "Dbcontext Ok");   
+        
+       Assert.Equal("usuário já,existente",resultUserTwo.Message);
+       Assert.Equal(400,resultUserTwo.Code);
     }
 }

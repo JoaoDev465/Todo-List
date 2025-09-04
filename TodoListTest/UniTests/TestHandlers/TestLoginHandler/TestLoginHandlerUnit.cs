@@ -53,9 +53,45 @@ public class TestLoginHandlerUnit
             PasswordHash = password
         });
 
-        await context.SaveChangesAsync();
+     var save =   await context.SaveChangesAsync();
         var result = await handler.LoginAsync(request);
 
         Assert.NotNull(result);
+        Assert.True(save > 0);
+        Assert.Equal(200,result.Code);
     }
+
+    [Fact]
+    public async Task TestHAndler_WhenDatasRequired_IsNull()
+    {
+        var inMemorySettings = new Dictionary<string, string>()
+        {
+            { "JwtSettings:secret", "983279y9872yhudkhqbdkjasbmaslxqljdkoqmoq" }
+        };
+        IConfigurationRoot configuration = new ConfigurationManager()
+            .AddInMemoryCollection(inMemorySettings).Build();
+        var options = new DbContextOptionsBuilder<Context>()
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+        
+        var context = new Context(options);
+        var token = new GenerateTokenService(configuration);
+        var hash = new PasswordHasher<User> ();
+
+        var request = new LoginDTO()
+        {
+            UserId = 0,
+            UserEmail = null,
+            UserPassword = null
+        };
+        var handler = new LoginHandler(context, token, hash);
+
+        var result = await handler.LoginAsync(request);
+
+      var save =  await context.SaveChangesAsync();
+      
+      Xunit.Assert.True(save == 0, "nenhum usuário encontrado");
+      Xunit.Assert.Equal("nenhum usuário com essa senha foi encontrado",result.Message);
+      
+    }
+    
 }

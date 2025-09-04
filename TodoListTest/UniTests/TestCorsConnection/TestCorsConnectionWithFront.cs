@@ -11,9 +11,8 @@ public class TestCorsConnectionWithFront
     [Fact]
     public void TestConnection()
     {
-        var config = new ConfigurationBuilder().
-            AddJsonFile("appsettings.Development.tests.json").Build();
-        var connection = config.GetValue<string>("FrontUri:Secret");
+
+        var connection = "http://localhost: 5890";
 
         var services = new ServiceCollection();
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.PostHandler;
+using TodoListCore.Models;
 using TodoListCore.Uses_Cases.DTO;
 using Xunit;
 using Assert = Xunit.Assert;
@@ -21,15 +22,18 @@ public class TestTaskHandlerCreate
         var context = new Context(options);
 
         var handler = new TaskhandlerCreate(context,new HttpContextAccessor());
-        var request = new TodoDto
+        var dto = new TodoDto();
+        var request = new Todo();
+
+        var result = await handler.CreateAsync(new TodoDto
         {
-            Task = "Ir ao Supermercado"
-        };
-
-        var result = await handler.CreateAsync(request);
-
+            Task = dto.Task = "ir ao banheiro"
+        });
+        await context.AddAsync(request);
+        var save = await context.SaveChangesAsync();
         Assert.NotNull(result);
-        Assert.Equal("Ir ao Supermercado",request.Task);
+        Assert.Equal("ir ao banheiro",dto.Task);
+        Assert.True(save > 0);
     }
 
 }

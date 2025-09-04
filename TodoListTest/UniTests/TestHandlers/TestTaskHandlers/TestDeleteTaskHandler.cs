@@ -34,14 +34,39 @@ public class TestDeleteTaskHandler
          };
 
          var resultContentDeleted = await handler.DeleteAsync(deleteContent);
-         if (resultContentDeleted.IsSuccess)
-         {
-              Console.Write("deletado");
-         }
-         await context.SaveChangesAsync();
+          var save =   await context.SaveChangesAsync();
          
          await context.Todos.FirstOrDefaultAsync(x => x.Id == 1);
-         Assert.IsNotNull(resultContentDeleted);
+        Xunit.Assert.True(save == 0);
+        Xunit.Assert.Equal(200,resultContentDeleted.Code);
          
+     }
+
+     [Fact]
+     public async Task Test_HandlerDelete_When_IdIsNotSame()
+     {
+          var options = new DbContextOptionsBuilder<Context>()
+               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+          var context = new Context(options);
+
+          context.Todos.Add(new Todo
+          {
+               Id = 1,
+               Task = "ir ao mercado"
+          });
+
+          await context.SaveChangesAsync();
+
+          var handler = new DeleteTaskHandler(context);
+          var deleteContent = new TodoDto
+          {
+               Id = 0
+              
+          };
+
+          var resultContentIsNotDeleted = await handler.DeleteAsync(deleteContent);
+          
+          Xunit.Assert.Equal(404,resultContentIsNotDeleted.Code);
      }
 }

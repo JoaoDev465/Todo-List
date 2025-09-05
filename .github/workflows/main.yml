@@ -30,4 +30,8 @@ jobs:
     - name: Run Test
       run: dotnet test --verbosity normal
       
+    - name: Debug DB_CONNECTIONS
+      run: echo "DB_CONNECTIONS=${DB_CONNECTIONS}"
+
+      
       

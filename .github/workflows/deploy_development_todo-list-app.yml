@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DB_CONNECTION: ${{secrets.DB_CONNECTION}}
+     ConnectionStrings__DB_CONNECTION: ${{secrets.DB_CONNECTION}}
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -67,6 +67,7 @@ jobs:
           package: myapp
 
           
+
 
 
 

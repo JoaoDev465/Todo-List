@@ -2,7 +2,7 @@
 
 namespace TodoListCore.Uses_Cases.DTO;
 
-public class LoginDto : Request
+public class LoginDTO : Request
 {
     [Required(ErrorMessage = "o campo é obrigatório")]
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&])(?=.*[\d])([A-Za-z!@#$%&\d]){8,}$",

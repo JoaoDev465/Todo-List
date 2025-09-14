@@ -30,7 +30,7 @@ public class RegisterHandler: IRegisterHandler
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             var result = await response.Content.ReadFromJsonAsync<User>(options);
             
-            return new Responses<User?>(result,201,"usuário Cadastrado com sucesso");
+            return new Responses<User?>(null,201,"usuário Cadastrado com sucesso");
         }
         catch (Exception e)
         {

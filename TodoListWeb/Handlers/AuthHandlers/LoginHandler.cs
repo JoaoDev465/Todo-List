@@ -22,7 +22,7 @@ public class LoginHandler : ILoginHandler
         _provider = provider;
     }
 
-    public async Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request)
+    public async Task<Responses<TokenResponse?>> LoginAsync(LoginDto request)
     {
         try
         {

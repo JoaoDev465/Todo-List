@@ -2,11 +2,11 @@
 
 namespace TodoListCore.Uses_Cases.DTO;
 
-public class LoginDTO : Request
+public class LoginDto : Request
 {
     [Required(ErrorMessage = "o campo é obrigatório")]
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&])(?=.*[\d])([A-Za-z!@#$%&\d]){8,}$",
-        ErrorMessage = "o campo precisa de 8 caracteres, 1 caractere maiúsculo, minúsculo, um número e um caractere especial" )]
+        ErrorMessage = "a senha precisa conter pelo menos 1 letra maiúscula, 1 minúscula, 1 caractere especial ex: '@!$%&#' e 8 caracteres " )]
     public string UserPassword { get; set; } = string.Empty;
     
     [Required(ErrorMessage = "o campo é obrigatório")]

@@ -12,7 +12,7 @@ public class UserDto : Request
     
     [Required(ErrorMessage = "o campo senha é obrigatório")]
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%&])[A-Za-z\d!@#$%&]{8,}$",
-        ErrorMessage = "a senha precisa conter pelo menos 1 letra maiúscula, 1 minúscula, 1 caractere especial ex: '@!$%&#', e 12 caracteres ")]
+        ErrorMessage = "a senha precisa conter pelo menos 1 letra maiúscula, 1 minúscula, 1 caractere especial ex: '@!$%&#' e 8 caracteres ")]
     public string  UserPassword { get; set; } = String.Empty;
     
     public string Slug { get; set; } = string.Empty;

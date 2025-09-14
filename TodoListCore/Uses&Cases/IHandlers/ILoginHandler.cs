@@ -6,7 +6,7 @@ namespace TodoListCore.Uses_Cases.IHandlers;
 public interface ILoginHandler
 {
    
-   public Task<Responses<TokenResponse?>> LoginAsync(LoginDTO request);
+   public Task<Responses<TokenResponse?>> LoginAsync(LoginDto request);
  
    
 }

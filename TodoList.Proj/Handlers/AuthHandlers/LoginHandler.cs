@@ -19,7 +19,7 @@ public class LoginHandler(Context context, IGenerateTokenService service,
     [AllowAnonymous]
     [HttpPost]
     [Route("api/v1/login")]
-    public async Task<Responses<TokenResponse?>> LoginAsync([FromBody]LoginDTO request)
+    public async Task<Responses<TokenResponse?>> LoginAsync([FromBody]LoginDto request)
     {
         var user = await context.Users.FirstOrDefaultAsync(x=>x.Email== request.UserEmail);
 

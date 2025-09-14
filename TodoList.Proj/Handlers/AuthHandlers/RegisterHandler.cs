@@ -41,7 +41,7 @@ public class RegisterHandler(Context context, IPasswordHasher<User?> hasher) : I
         
         await context.Users.AddAsync(user);
         await context.SaveChangesAsync();
-        return new Responses<User?>(user, 201, "usuário registrado com sucesso");
+        return new Responses<User?>(null, 201, "usuário registrado com sucesso");
     }
 }
 

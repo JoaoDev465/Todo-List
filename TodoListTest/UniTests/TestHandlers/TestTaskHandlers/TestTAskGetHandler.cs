@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using TodoList.Proj.Data;
 using TodoList.Proj.Handlers.GetHandler;
 using TodoListCore.Models;
@@ -15,10 +16,10 @@ public class TestTAskGetHandler
     {
         var options = new DbContextOptionsBuilder<Context>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString() ).Options;
-
+        var acessor = new HttpContextAccessor();
         var context = new Context(options);
 
-        var handler = new TaskHandlerGet(context);
+        var handler = new TaskHandlerGet(context, acessor);
 
         context.Todos.Add(new Todo
         {
@@ -45,8 +46,9 @@ public class TestTAskGetHandler
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString() ).Options;
 
         var context = new Context(options);
+        var acessor = new HttpContextAccessor();
 
-        var handler = new TaskHandlerGet(context);
+        var handler = new TaskHandlerGet(context,acessor);
 
         context.Todos.Add(new Todo
         {

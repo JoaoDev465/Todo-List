@@ -5,7 +5,7 @@ using TodoList.Proj.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔧 Configura logging para garantir saída no console
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
@@ -43,7 +43,6 @@ try
 catch (Exception ex)
 {
     Console.WriteLine($"[ERROR] Falha ao configurar serviços: {ex}");
-    // Não derruba o container, apenas loga
 }
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
@@ -55,7 +54,6 @@ builder.WebHost.ConfigureKestrel(options =>
 
 var app = builder.Build();
 
-// 🔧 Middleware global de captura de erro
 app.Use(async (context, next) =>
 {
     try
@@ -96,7 +94,7 @@ try
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    // 🔧 Health Check para o Azure não matar o container
+
     app.MapGet("/health", () => Results.Ok("Healthy"));
 
     app.MapControllers();

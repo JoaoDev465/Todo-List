@@ -1,0 +1,30 @@
+﻿
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    <h1>Autentifique-se por favor.</h1>
+                    <div class="mt-5 mx-5 justify-content-center align-content-center">
+                        <MudButton Size="Size.Large" OnClick="@(()=> _navigationManager.NavigateTo("/Login"))">Autenticar-se</MudButton>
+                    </div>
+                </NotAuthorized>
+                <Authorizing>
+                    Autenticando...
+                </Authorizing>
+                @* <FocusOnNavigate RouteData="@routeData" Selector="h1" /> *@
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+
+@code
+{
+    [Inject] NavigationManager _navigationManager { get; set; } = null;
+}

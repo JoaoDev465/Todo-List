@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Blazor e autenticação -->
+    <PackageReference Include="blazor.heroicons" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.19" PrivateAssets="all" />
+
+    <!-- UI -->
+    <PackageReference Include="MudBlazor" Version="8.11.0" />
+
+    <!-- JWT (nome correto do pacote!) -->
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Configuração para Azure Static Web Apps -->
+    <Content Update="wwwroot\staticwebapp.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Remove="Pages\LoginBehind.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Referência ao projeto Core -->
+    <ProjectReference Include="..\TodoListCore\TodoListCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\LoginBehind.razor.cs">
+      <DependentUpon>Login.razor</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

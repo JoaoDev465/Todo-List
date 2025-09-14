@@ -1,0 +1,50 @@
+﻿@page "/home"
+@using Blazor.Heroicons
+@using Blazor.Heroicons.Outline
+@using TodoListCore.Uses_Cases.DTO
+@attribute [Authorize]
+
+<PageTitle>Home</PageTitle>
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Lista De Tarefas</MudText>
+    <MudText Align="Align.Center">Bem vindo a sua lista de tarefas.</MudText>
+    <MudGrid Justify="Justify.Center"  Class="mt-8">
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg  d-flex flex-column justify-content-center"  Style="height: 100%">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Escrever tarefas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="d-flex justify-content-center align-items-center flex-grow-1">
+                    <Heroicon Type="HeroiconType.Outline" Name="PencilSquareIcon" style="width: 250px"/>
+                </MudCardContent>
+                <MudCardActions Class=" d-flex justify-center">
+                    <MudButton OnClick="@(()=> _navigationManager.NavigateTo("/criar/tarefas"))" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Começar</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg  d-flex flex-column justify-content-center"  Style="height: 100%">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Gerenciar Tarefas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent class="d-flex justify-content-center align-items-center flex-grow-1">
+                    <Heroicon Type="HeroiconType.Outline" Name="ClipboardDocumentIcon" style="width: 250px"/>
+                </MudCardContent>
+                <MudCardActions Class=" d-flex justify-center">
+                    <MudButton OnClick="@(()=> _navigationManager.NavigateTo("/ver/tarefas"))"  Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Gerenciar</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code
+{
+    [Inject] public NavigationManager _navigationManager { get; set; }
+    public TodoDto request { get; set; } = new();
+}

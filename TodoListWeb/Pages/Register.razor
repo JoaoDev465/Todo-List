@@ -1,0 +1,64 @@
+﻿
+@page "/register"
+@attribute [AllowAnonymous]
+@using Blazor.Heroicons.Solid
+@inherits  Registrador
+
+<PageTitle>Register</PageTitle>
+
+<MudGrid Justify="Justify.Center ">
+    <MudItem xs="12"  md="4" sm="6">
+        <MudPaper Class="mt-15 mb-10 mx-5" Style="min-height: auto" >
+            <div class="d-flex align-content-center justify-content-center">
+                <h5>Registrador</h5>
+            </div>
+            <div class="d-flex justify-content-center">
+                <Heroicon Name="UserPlusIcon" Type="HeroiconType.Solid" style="width: 200px"/>
+            </div>
+
+            <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+                <DataAnnotationsValidator />
+                <MudTextField
+                    T="string"
+                    Label="Email*"
+                    Required="true"
+                    Style="width: 50%"
+                    HelperText="Email é obrigatório"
+                    @bind-Value="InputModel.UserEmail" For="@(()=> InputModel.UserEmail)"
+                    InputType="InputType.Email"/>
+                <MudTextField
+                    T="string"
+                    Label="Senha*"
+                    HelperText="Senha obrigatória"
+                    Required="true"
+                    Style="width: 50%"
+                    @bind-Value="InputModel.UserPassword" For="@(()=> InputModel.UserPassword)"
+                    InputType="@(Show ? InputType.Text : InputType.Password)"
+                    Adornment="Adornment.End"
+                    AdornmentIcon="@(Show
+                                       ? Icons.Material.Filled.Visibility
+                                       : Icons.Material.Filled.VisibilityOff)"
+                    AdornmentColor="Color.Dark"
+                    OnAdornmentClick="ShowPassword"/>
+                <div class="d-flex  mt-8">
+                    @if (Isbusy)
+                    {
+                        <MudProgressCircular Color="Color.Info" Indeterminate="true"/>
+                    }
+                    else
+                    {
+                        <MudButton  ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Cadastrar</MudButton>
+                    }
+                    <MudSpacer/>
+                    <MudButton OnClick="@(()=> _manager.NavigateTo("/Login") )">já tenho uma conta</MudButton>
+                </div>
+            </EditForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    [Inject] NavigationManager _manager { get; set; } = null;
+    
+}

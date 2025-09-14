@@ -1,0 +1,37 @@
+name: Todo-List-Proj
+
+on:
+  push:
+    branches:
+      - development
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DB_CONNECTIONS:  ${{secrets.DB_CONNECTIONS}}
+      CORS_CONNECTIONS: ${{secrets.CORS_CONNECTIONS}}
+  
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore dependencies
+      run : dotnet restore TodoList.sln
+      
+    - name: build project
+      run: dotnet build --configuration Debug
+      
+    - name: Run Test
+      run: dotnet test --verbosity normal
+      
+    - name: Debug DB_CONNECTIONS
+      run: echo "DB_CONNECTIONS=${DB_CONNECTIONS}"
+
+      
+      

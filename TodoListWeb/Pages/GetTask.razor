@@ -1,0 +1,55 @@
+﻿@page "/ver/tarefas"
+@attribute [Authorize]
+@using TodoListCore
+@using TodoListCore.Models
+@using TodoListCore.Uses_Cases.DTO
+
+<MudText Align="Align.Left" Typo="Typo.h3">Tarefas</MudText>
+<div class="justify-content-end d-flex">
+    <MudButton  
+        Variant="Variant.Filled"
+        Color="Color.Primary"
+        StartIcon="@Icons.Material.TwoTone.Add"
+        Href="/criar/tarefas">Criar tarefa
+    </MudButton>
+</div>
+<MudDataGrid Class="mt-5"
+             Items="@Tasks"
+             Filterable="true"
+             QuickFilter="Filter"
+             Hideable="true">
+    <ToolBarContent>
+        <MudText Align="Align.Center" Typo="Typo.h5">Lista de tarefas</MudText>
+        <MudSpacer/>
+        <MudTextField
+            @bind-Value="SearchItem"
+            Placeholder="filtrar"
+            Adornment="Adornment.Start"
+            AdornmentIcon="@Icons.Material.Filled.Search"
+            Immediate="true"
+            IconSize="Size.Medium"
+            Class="mt-0"/>
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x=>x.Task" />
+        <PropertyColumn Property="x=>x.Description"/>
+        <TemplateColumn  Class="d-flex justify-end align-items-center">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudIconButton
+                        Color="Color.Primary"
+                        Icon="@Icons.Material.Filled.Edit"
+                        Href=@($"/atualizar/tarefa/{context.Item.Id}")>
+                    </MudIconButton>
+                    <MudIconButton 
+                        Icon="@Icons.Material.Filled.Delete"
+                        Color="Color.Warning" 
+                        arial-label="Excluir"
+                        OnClick="()=> OnDeleteAsync(new TodoDto
+                        { Id= context.Item.Id,  Task = context.Item.Task,DescriptionOfTask = context.Item.Description})">
+                    </MudIconButton>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>

@@ -1,0 +1,9 @@
+﻿@page "/"
+@code {
+    [Inject] public NavigationManager _manager { get; set; } = null;
+
+    protected  override void OnInitialized()
+    {
+        _manager.NavigateTo("/register", forceLoad:true);
+    }
+}

@@ -1,0 +1,44 @@
+﻿@page "/criar/tarefas"
+@using Blazor.Heroicons
+@using Blazor.Heroicons.Solid
+@attribute [Authorize]
+<PageTitle>tarefas</PageTitle>
+
+<MudContainer  Class="mt-8"> 
+    <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Criar tarefas</MudText>
+    <MudText Align="Align.Center">Escreve a sua tarefa no campo abaixo</MudText>
+    <MudGrid  Justify="Justify.Center"  Class="mt-8">
+        <MudItem xs="12"  md="6">
+            <MudCard Elevation="25" Class="d-flex justify-content-center" Style="height: 100%">
+                <MudCardHeader Class="mt-7">
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Tarefas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="d-flex justify-content-center  ">
+                    <Heroicon Type="HeroiconType.Outline" Name="PencilIcon" style="width: 250px"/>
+                </MudCardContent>
+                <EditForm Model="@InputModel" OnValidSubmit="@CreateAsync">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <MudTextField T="string"
+                                  Label="Tarefa*"
+                                  HelperText="Digite a sua tarefa"
+                                  @bind-Value="InputModel.Task"
+                                  Required="true"
+                                  Immediate="true" />
+
+                    <MudTextField T="string"
+                                  Label="Descrição"
+                                  HelperText="Descrição da tarefa"
+                                  @bind-Value="InputModel.DescriptionOfTask" />
+
+                    <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">Criar</MudButton>
+                    <MudSpacer/>
+                    <MudButton OnClick="@(()=> NavigationManager.NavigateTo("/ver/tarefas"))"  ButtonType="ButtonType.Submit" Color="Color.Secondary">Inspecionar </MudButton>
+                </EditForm>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

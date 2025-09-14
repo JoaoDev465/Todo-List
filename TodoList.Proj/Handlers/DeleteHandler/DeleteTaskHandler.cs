@@ -1,0 +1,41 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TodoList.Proj.Data;
+using TodoListCore.Models;
+using TodoListCore.Response;
+using TodoListCore.Uses_Cases.DTO;
+using TodoListCore.Uses_Cases.IHandlers.IDeleteHandlers;
+
+namespace TodoList.Proj.Handlers.DeleteHandler;
+
+[ApiController]
+public class DeleteTaskHandler(Context context) : IDeleteTasksHandler
+{
+    
+    [Authorize("user")]
+    [HttpDelete]
+    [Route("api/v1/delete/{request.id}")]
+    public async Task<Responses<Todo?>> DeleteAsync([FromRoute]TodoDto request)
+    {
+       
+        var task = await  context.Todos.FirstOrDefaultAsync(x => x.Id == request.Id);
+        
+        if (task is null)
+        {
+            return new Responses<Todo?>(null,404,"tarefa não encontrada");
+        }
+
+        try
+        {
+           context.Todos.Remove(task);
+           await  context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+          return new Responses<Todo?>(null,500,"falha interna no servidor");
+        }
+
+        return new Responses<Todo?>(task, 200, "tarefa excluída com sucesso");
+    }
+}

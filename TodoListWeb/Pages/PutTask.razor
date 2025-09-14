@@ -1,0 +1,42 @@
+﻿@page "/atualizar/tarefa/{id:int}"
+@using Blazor.Heroicons
+@attribute [Authorize]
+
+<PageTitle>atualizar</PageTitle>
+
+<MudContainer  Class="mt-8"> 
+    <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Atualizar tarefas</MudText>
+    <MudText Align="Align.Center">Preencha os campos a baixo</MudText>
+    <MudGrid  Justify="Justify.Center"  Class="mt-8">
+        <MudItem xs="12"  md="6">
+            <MudCard Elevation="25" Class="d-flex justify-content-center" Style="height: 100%">
+                <MudCardHeader Class="mt-7">
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Tarefas</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="d-flex justify-content-center  ">
+                    <Heroicon Type="HeroiconType.Outline" Name="PencilIcon" style="width: 250px" class="text-gray-400"/>
+                </MudCardContent>
+                <EditForm Model="Request" OnValidSubmit="PuTAsync">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <MudTextField T="string"
+                                  Label="Tarefa"
+                                  HelperText="Digite a sua tarefa"
+                                  @bind-Value="Request.Task"
+                                  Required="true"
+                                  Immediate="true" />
+
+                    <MudTextField T="string"
+                                  Label="Descrição"
+                                  HelperText="Descrição da tarefa"
+                                  @bind-Value="Request.DescriptionOfTask" />
+
+                    <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">atualizar</MudButton>
+                </EditForm>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

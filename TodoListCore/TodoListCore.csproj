@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ControllersHandlers\IUserHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Uses&amp;Cases\" />
+  </ItemGroup>
+
+</Project>
